@@ -6,12 +6,16 @@ class Main(QtWidgets.QMainWindow):
         super(Main, self).__init__()
         var.ui = Ui_venPrincipal()
         var.ui.setupUi(self)
+        '''Coleccion de datos'''
+        var.rbtsex= (var.ui.rbtFemenino, var.ui.rbtMasculino)
 
         '''Conexión de eventos con los objetos'''
+        '''Estamos conectando el codigo con la interfaz grafica'''
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
-
+        for i in var.rbtsex:
+            i.toggled.connect(clients.Clientes.selSexo)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
