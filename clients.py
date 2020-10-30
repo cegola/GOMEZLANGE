@@ -48,3 +48,22 @@ class Clientes():
                 print('Has elegido masculino')
         except Exception as error:
             print('Error: %s' % str(error))
+
+    def selPago():
+        try:
+            if var.ui.chkEfectivo.isChecked():
+                print('Pagas con efectivo')
+            if var.ui.chkTarjeta.isChecked():
+                print('Pagas con tarjeta')
+            if var.ui.chkTransferencia.isChecked():
+                print('Pagas con transferencia')
+        except Exception as error:
+            print('Error: %s' % str(error))
+
+    def selProv(prov):
+        try:
+            print('Has seleccionado la provincia de', prov)
+            return prov
+        except Exception as error:
+            print('Error: %s' % str(error))
+
