@@ -1,5 +1,20 @@
 from ventana import *
+from venSalir import *
 import sys, var, events,clients
+
+class DialogSalir(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogSalir, self).__init__()
+        var.dialog = Ui_venSalir
+        var.dialog.setupUi(self)
+        var.dialog.btnBox.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        var.dialog.btnBox.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
+        QtWidgets.QAction(self).triggered.connect(self.close)
+
+    def closeEvent(self, event):
+        events.Eventos.Salir
+
+
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
