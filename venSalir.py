@@ -16,12 +16,12 @@ class Ui_venSalir(object):
         venSalir.setObjectName("venSalir")
         venSalir.resize(400, 142)
         venSalir.setModal(True)
-        self.btnBox = QtWidgets.QDialogButtonBox(venSalir)
-        self.btnBox.setGeometry(QtCore.QRect(210, 90, 161, 32))
-        self.btnBox.setOrientation(QtCore.Qt.Horizontal)
-        self.btnBox.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
-        self.btnBox.setCenterButtons(True)
-        self.btnBox.setObjectName("btnBox")
+        self.btnBoxSalir = QtWidgets.QDialogButtonBox(venSalir)
+        self.btnBoxSalir.setGeometry(QtCore.QRect(210, 90, 161, 32))
+        self.btnBoxSalir.setOrientation(QtCore.Qt.Horizontal)
+        self.btnBoxSalir.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
+        self.btnBoxSalir.setCenterButtons(True)
+        self.btnBoxSalir.setObjectName("btnBoxSalir")
         self.lblMenSalir = QtWidgets.QLabel(venSalir)
         self.lblMenSalir.setGeometry(QtCore.QRect(100, 50, 271, 20))
         font = QtGui.QFont()
@@ -32,17 +32,17 @@ class Ui_venSalir(object):
         self.lblImgSalir = QtWidgets.QLabel(venSalir)
         self.lblImgSalir.setGeometry(QtCore.QRect(40, 40, 41, 41))
         self.lblImgSalir.setText("")
-        self.lblImgSalir.setPixmap(QtGui.QPixmap(":/iconoSalir/iconoSalir.png"))
+        self.lblImgSalir.setPixmap(QtGui.QPixmap("img/iconoSalir.png"))
         self.lblImgSalir.setScaledContents(True)
         self.lblImgSalir.setObjectName("lblImgSalir")
 
         self.retranslateUi(venSalir)
-        self.btnBox.accepted.connect(venSalir.accept)
-        self.btnBox.rejected.connect(venSalir.reject)
+        self.btnBoxSalir.accepted.connect(venSalir.accept)
+        self.btnBoxSalir.rejected.connect(venSalir.reject)
         QtCore.QMetaObject.connectSlotsByName(venSalir)
 
     def retranslateUi(self, venSalir):
         _translate = QtCore.QCoreApplication.translate
         venSalir.setWindowTitle(_translate("venSalir", "¿Desea salir?"))
         self.lblMenSalir.setText(_translate("venSalir", "¿Está seguro que quiere salir de la aplicación?"))
-import iconoSalir_rc
+

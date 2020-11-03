@@ -135,9 +135,9 @@
    <widget class="QLabel" name="lblValidar">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>270</x>
       <y>140</y>
-      <width>47</width>
+      <width>31</width>
       <height>21</height>
      </rect>
     </property>
@@ -385,6 +385,60 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="lblCliAlta">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>140</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fecha de alta:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="editCliAlta">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>140</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCalendar">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>140</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>img/iconoCalendar.png</normaloff>img/iconoCalendar.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>24</width>
+      <height>24</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -420,6 +474,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img/calendar.qrc"/>
+ </resources>
  <connections/>
 </ui>
