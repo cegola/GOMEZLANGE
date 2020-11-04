@@ -4,19 +4,45 @@ from venCalendar import *
 from datetime import datetime
 import sys, var, events,clients
 
+
+class DialogSalir(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogSalir, self).__init__()
+        var.dlgSalir = Ui_venSalir()
+        var.dlgSalir.setupUi(self)
+        var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        #var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
+
+
+class DialogCalendar(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogCalendar, self).__init__()
+        var.dlgCalendar = Ui_dlgCalendar()
+        var.dlgCalendar.setupUi(self)
+        diaActual = datetime.now().day
+        mesActual = datetime.now().month
+        anoActual = datetime.now().year
+        var.dlgCalendar.Calendar.setSelectedDate((QtCore.QDate(anoActual,mesActual,diaActual)))
+        var.dlgCalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
+
+
+
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
         var.ui = Ui_venPrincipal()
         var.ui.setupUi(self)
+        var.dlgSalir = DialogSalir()
+        var.dlgCalendar = DialogCalendar()
+        QtWidgets.QAction(self).triggered.connect(self.close)
+
         '''Coleccion de datos'''
         var.rbtsex= (var.ui.rbtFemenino, var.ui.rbtMasculino)
         var.chkpago=(var.ui.chkEfectivo, var.ui.chkTarjeta, var.ui.chkTransferencia)
-        var.avisoSalir = DialogSalir()
-        #var.dlgCalendar =DialogCalendar()
+
         '''Conexión de eventos con los objetos'''
         '''Estamos conectando el codigo con la interfaz grafica'''
-        QtWidgets.QAction(self).triggered.connect(self.close)
+
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
@@ -29,29 +55,6 @@ class Main(QtWidgets.QMainWindow):
 
         '''Llamada a modulos iniciales'''
         events.Eventos.cargarProv();
-
-class DialogSalir(QtWidgets.QDialog):
-    def __init__(self):
-        super(DialogSalir, self).__init__()
-        var.avisoSalir = Ui_venSalir()
-        var.avisoSalir.setupUi(self)
-        var.avisoSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
-        var.avisoSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
-
-
-class DialogCalendar(QtWidgets.QDialog):
-    def __init__(self):
-        super(DialogCalendar, self).__init__()
-        var.dlgCalendar = Ui_calendar
-        var.dlgCalendar.setupUi(self)
-        mesActual = datetime.now().month
-        anoActual = datetime.now().year
-        var.dlgCalendar.Calendar.setSelectedDate(QtCore.QDate(anoActual,mesActual,1))
-        var.dlgCalendar.Calendar.clicked.connected(clients.Clientes.cargarFecha)
-
-
-
-
 
 
     def closeEvents(self, event):

@@ -4,11 +4,11 @@ class Eventos():
     def Salir(self):
         '''Evento modulo salir'''
         try:
-            var.avisoSalir.show()
-            if var.avisoSalir.exec_():
+            var.dlgSalir.show()
+            if var.dlgSalir.exec_():
                 sys.exit()
             else:
-                var.avisoSalir.close()
+                var.dlgSalir.close()
         except Exception as error:
             print('Error %s'% str(error))
 
