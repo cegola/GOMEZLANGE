@@ -47,6 +47,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
+        var.ui.btn_aceptar.clicked.connect(clients.Clientes.showClients)
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
         for i in var.chkpago:
@@ -64,5 +65,6 @@ class Main(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
+    #window.maximumSize()
     window.show()
     sys.exit(app.exec())

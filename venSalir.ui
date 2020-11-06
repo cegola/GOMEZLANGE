@@ -78,7 +78,6 @@
  </widget>
  <resources>
   <include location="img/iconoSalir.qrc"/>
-  <include location="../../.designer/backup/img/iconoSalir.qrc"/>
  </resources>
  <connections>
   <connection>

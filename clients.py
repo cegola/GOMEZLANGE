@@ -1,4 +1,5 @@
 import var
+from PyQt5 import QtWidgets
 
 class Clientes():
     '''eventos clientes'''
@@ -43,27 +44,27 @@ class Clientes():
     def selSexo():
         try:
             if var.ui.rbtFemenino.isChecked():
-                print('Has elegido femenino')
+                var.sex = 'Mujer'
             if var.ui.rbtMasculino.isChecked():
-                print('Has elegido masculino')
+                var.sex = 'Hombre'
         except Exception as error:
             print('Error: %s' % str(error))
 
     def selPago():
         try:
             if var.ui.chkEfectivo.isChecked():
-                print('Pagas con efectivo')
+                var.pay.append('Efectivo')
             if var.ui.chkTarjeta.isChecked():
-                print('Pagas con tarjeta')
+                var.pay.append('Tarjeta')
             if var.ui.chkTransferencia.isChecked():
-                print('Pagas con transferencia')
+                var.pay.append('Transferencia')
         except Exception as error:
             print('Error: %s' % str(error))
 
     def selProv(prov):
         try:
-            print('Has seleccionado la provincia de', prov)
-            return prov
+            global vpro
+            vpro = prov
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -81,5 +82,41 @@ class Clientes():
             var.dlgCalendar.hide()
         except Exception as error:
             print('Error cargar fecha: %s' % str(error))
+
+    def showClients():
+        '''cargara los clientes en la tabla'''
+        try:
+            newcli = []
+            clitab = [] #sera lo que carguemos
+            client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editDireccion, var.ui.editCliAlta]
+            k=0
+            for i in client:
+                newcli.append(i.text()) #cargamos los valores que hay en los edits
+                if k < 3:
+                    clitab.append(i.text())
+                    k += 1
+            newcli.append(vpro)
+            #elimina duplicados
+            var.pay = set(var.pay)
+            for j in var.pay:
+                newcli.append(j)
+            newcli.append(var.sex)
+            print(newcli)
+            print(clitab)
+            #como trabajar con la tableWidget
+            row = 0
+            column = 0
+            var.ui.tablaCli.insertRow(row)
+            for registro in clitab:
+                cell = QtWidgets.QTableWidgetItem(registro)
+                var.ui.tablaCli.setItem(row, column, cell)
+                column += 1
+
+        except Exception as error:
+            print('Error: %s' % str(error))
+
+
+
+
 
 
