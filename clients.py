@@ -1,5 +1,6 @@
 import var
 from PyQt5 import QtWidgets
+from ventana import *
 
 class Clientes():
     '''eventos clientes'''
@@ -112,10 +113,25 @@ class Clientes():
                 var.ui.tablaCli.setItem(row, column, cell)
                 column += 1
 
+            '''limpiamos los datos'''
+            Clientes.limpiarDatos(client, var.rbtsex, var.chkpago)
         except Exception as error:
             print('Error: %s' % str(error))
 
+    def limpiarDatos(listaEntry, listaCheck, listaRadio):
+        '''limpia los datos del formulario'''
+        try:
+            for i in range(len(listaEntry)):
+                listaEntry[i].setText('')
+            for data in listaCheck:
+                data.setChecked(False)
+            for data in listaRadio:
+                data.setChecked(False)
+            var.ui.cmbProvincia.setCurrentIndex(0)
+            var.ui.lblValidar.setText('')
 
+        except Exception as error:
+                print('Error en limpiar datos : %s' % str(error))
 
 
 

@@ -499,10 +499,10 @@
      <widget class="QTableWidget" name="tablaCli">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>671</width>
-        <height>192</height>
+        <x>0</x>
+        <y>0</y>
+        <width>691</width>
+        <height>221</height>
        </rect>
       </property>
       <column>
