@@ -8,3 +8,5 @@ global dlgCalendar
 
 global sex
 pay = []
+
+filebd= 'empresa.db'

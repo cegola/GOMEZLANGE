@@ -123,6 +123,7 @@ class Clientes():
         try:
             for i in range(len(listaEntry)):
                 listaEntry[i].setText('')
+            var.ui.grpBtnSex.setExclusive(False)
             for data in listaCheck:
                 data.setChecked(False)
             for data in listaRadio:
@@ -134,5 +135,16 @@ class Clientes():
                 print('Error en limpiar datos : %s' % str(error))
 
 
-
+    def cargarCli(self):
+        try:
+            fila = var.ui.tablaCli.selectedItems()
+            client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre]
+            if fila:
+                fila = [dato.text() for dato in fila ]#dato recorre la fila y va almacenando el texto que haya en esa fila
+            print(fila)
+            i = 0
+            for i, dato in enumerate(client):
+                dato.setText(fila[i])
+        except Exception as error:
+                print('Error cargar datos: %s' % str(error))
 
