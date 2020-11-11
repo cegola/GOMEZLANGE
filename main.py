@@ -2,7 +2,7 @@ from ventana import *
 from venSalir import *
 from venCalendar import *
 from datetime import datetime
-import sys, var, events,clients, conexion
+import sys, var, events, clients, conexion
 
 
 class DialogSalir(QtWidgets.QDialog):
@@ -47,12 +47,14 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
-        var.ui.btn_aceptar.clicked.connect(clients.Clientes.showClients)
+        var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
+        var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
         for i in var.chkpago:
             i.stateChanged.connect(clients.Clientes.selPago)
         var.ui.cmbProvincia.activated[str].connect(clients.Clientes.selProv)
+        var.ui.tablaCli.clicked.connect(clients.Clientes.cargarCli)
         var.ui.tablaCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         '''Llamada a modulos iniciales'''
@@ -60,6 +62,7 @@ class Main(QtWidgets.QMainWindow):
 
         '''modulos del principal'''
         conexion.Conexion.db_connect(var.filebd)
+        #conexion.Conexion()
 
 
     def closeEvents(self, event):

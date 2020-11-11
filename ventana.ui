@@ -43,10 +43,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>30</y>
-      <width>771</width>
-      <height>661</height>
+      <x>20</x>
+      <y>10</y>
+      <width>881</width>
+      <height>681</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -59,17 +59,38 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>300</x>
+        <x>230</x>
         <y>600</y>
-        <width>158</width>
+        <width>401</width>
         <height>26</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QPushButton" name="btn_aceptar">
+        <widget class="QPushButton" name="btnAltaCli">
          <property name="text">
-          <string>Aceptar</string>
+          <string>Grabar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBajaCli">
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnModCli">
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnLimpiarCli">
+         <property name="text">
+          <string>Limpiar</string>
          </property>
         </widget>
        </item>
@@ -85,9 +106,9 @@
      <widget class="QScrollArea" name="scrollArea">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>20</x>
         <y>280</y>
-        <width>691</width>
+        <width>831</width>
         <height>291</height>
        </rect>
       </property>
@@ -99,7 +120,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>689</width>
+         <width>829</width>
          <height>289</height>
         </rect>
        </property>
@@ -108,10 +129,13 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>691</width>
+          <width>831</width>
           <height>291</height>
          </rect>
         </property>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>200</number>
+        </attribute>
         <column>
          <property name="text">
           <string>DNI</string>
@@ -160,7 +184,7 @@
      <widget class="QLabel" name="lbl_ges_clientes">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>270</x>
         <y>20</y>
         <width>321</width>
         <height>31</height>
@@ -188,7 +212,7 @@
      <widget class="QLabel" name="lbl_ges_clientes_2">
       <property name="geometry">
        <rect>
-        <x>250</x>
+        <x>300</x>
         <y>240</y>
         <width>261</width>
         <height>21</height>
@@ -216,9 +240,9 @@
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>20</x>
         <y>60</y>
-        <width>684</width>
+        <width>831</width>
         <height>156</height>
        </rect>
       </property>
@@ -232,33 +256,36 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="4" column="6" colspan="2">
-          <widget class="QComboBox" name="cmbProvincia">
+         <item row="0" column="8">
+          <widget class="QPushButton" name="btnCalendar">
            <property name="minimumSize">
             <size>
-             <width>150</width>
-             <height>0</height>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../../.designer/backup/img/iconoCalendar.png</normaloff>../../.designer/backup/img/iconoCalendar.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
          </item>
-         <item row="3" column="3">
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>50</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="3" column="4">
+         <item row="3" column="5">
           <widget class="QLabel" name="lblNombre">
            <property name="font">
             <font>
@@ -273,7 +300,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="0" column="3">
           <widget class="QLabel" name="lblValidar">
            <property name="minimumSize">
             <size>
@@ -294,45 +321,44 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="7">
-          <widget class="QPushButton" name="btnCalendar">
+         <item row="4" column="7" colspan="2">
+          <widget class="QComboBox" name="cmbProvincia">
            <property name="minimumSize">
             <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>img/iconoCalendar.png</normaloff>img/iconoCalendar.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
+             <width>150</width>
+             <height>0</height>
             </size>
            </property>
           </widget>
          </item>
-         <item row="3" column="1" colspan="2">
-          <widget class="QLineEdit" name="editApellidos">
-           <property name="minimumSize">
+         <item row="4" column="6">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>175</width>
-             <height>0</height>
+             <width>40</width>
+             <height>20</height>
             </size>
            </property>
-           <property name="styleSheet">
-            <string notr="true">background:rgb(246, 255, 206)</string>
+          </spacer>
+         </item>
+         <item row="4" column="5">
+          <widget class="QLabel" name="lblProvincia">
+           <property name="font">
+            <font>
+             <family>MS Shell Dlg 2</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Provincia:</string>
            </property>
           </widget>
          </item>
@@ -357,7 +383,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
+         <item row="0" column="5">
           <widget class="QLabel" name="lblCliAlta">
            <property name="font">
             <font>
@@ -369,55 +395,6 @@
            </property>
            <property name="text">
             <string>Fecha de alta:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="editDni">
-           <property name="minimumSize">
-            <size>
-             <width>150</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background:rgb(246, 255, 206)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="4">
-          <widget class="QLabel" name="lblProvincia">
-           <property name="font">
-            <font>
-             <family>MS Shell Dlg 2</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Provincia:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lblDireccion">
-           <property name="minimumSize">
-            <size>
-             <width>70</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>MS Shell Dlg 2</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Dirección:</string>
            </property>
           </widget>
          </item>
@@ -442,7 +419,33 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1" colspan="3">
+         <item row="3" column="1" colspan="3">
+          <widget class="QLineEdit" name="editApellidos">
+           <property name="minimumSize">
+            <size>
+             <width>175</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(246, 255, 206)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="editDni">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(246, 255, 206)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" colspan="4">
           <widget class="QLineEdit" name="editDireccion">
            <property name="minimumSize">
             <size>
@@ -455,36 +458,28 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="5">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="6">
-          <widget class="QLineEdit" name="editCliAlta">
+         <item row="4" column="0">
+          <widget class="QLabel" name="lblDireccion">
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>70</width>
              <height>0</height>
             </size>
            </property>
-           <property name="styleSheet">
-            <string notr="true">background:rgb(246, 255, 206)</string>
+           <property name="font">
+            <font>
+             <family>MS Shell Dlg 2</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Dirección:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="5" colspan="3">
+         <item row="3" column="6" colspan="3">
           <widget class="QLineEdit" name="editNombre">
            <property name="enabled">
             <bool>true</bool>
@@ -500,6 +495,35 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="7">
+          <widget class="QLineEdit" name="editCliAlta">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(246, 255, 206)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="lblCodCli">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(215, 223, 255)</string>
+           </property>
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
@@ -553,6 +577,22 @@
              </attribute>
             </widget>
            </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Minimum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>50</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </item>
          <item>
@@ -573,10 +613,29 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Minimum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QCheckBox" name="chkEfectivo">
              <property name="text">
               <string>Efectivo</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">grpBtnPay</string>
+             </attribute>
             </widget>
            </item>
            <item>
@@ -584,6 +643,9 @@
              <property name="text">
               <string>Tarjeta</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">grpBtnPay</string>
+             </attribute>
             </widget>
            </item>
            <item>
@@ -591,6 +653,9 @@
              <property name="text">
               <string>Transferencia</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">grpBtnPay</string>
+             </attribute>
             </widget>
            </item>
           </layout>
@@ -657,5 +722,10 @@
  <connections/>
  <buttongroups>
   <buttongroup name="grpBtnSex"/>
+  <buttongroup name="grpBtnPay">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
  </buttongroups>
 </ui>

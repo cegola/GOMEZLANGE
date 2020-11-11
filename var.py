@@ -6,7 +6,10 @@ global chkpago
 global dlgSalir
 global dlgCalendar
 
+global DATABASE
+
 global sex
 pay = []
+pay2 = []
 
 filebd= 'empresa.db'
