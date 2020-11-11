@@ -53,12 +53,16 @@ class Clientes():
 
     def selPago():
         try:
-            if var.ui.chkEfectivo.isChecked():
-                var.pay.append('Efectivo')
-            if var.ui.chkTarjeta.isChecked():
-                var.pay.append('Tarjeta')
-            if var.ui.chkTransferencia.isChecked():
-                var.pay.append('Transferencia')
+            '''se llama al final, tiene la lista vacia y la llena según estén clickados los botones'''
+            var.pay = []
+            for i, data in enumerate(var.ui.grpBtnPay.buttons()):
+                if data.isChecked() and i == 0:
+                    var.pay.append('Efectivo')
+                if data.isChecked() and i == 1:
+                    var.pay.append('Tarjeta')
+                if data.isChecked() and i == 2:
+                    var.pay.append('Transferencia')
+            return var.pay
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -87,7 +91,7 @@ class Clientes():
     def showClients():
         '''cargara los clientes en la tabla'''
         try:
-            newcli = []
+            newcli = [] #donde están todos los datos
             clitab = [] #sera lo que carguemos
             client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editDireccion, var.ui.editCliAlta]
             k=0
@@ -98,21 +102,27 @@ class Clientes():
                     k += 1
             newcli.append(vpro)
             #elimina duplicados
-            var.pay = set(var.pay)
-            for j in var.pay:
-                newcli.append(j)
             newcli.append(var.sex)
+            var.pay2 = Clientes.selPago()
+            newcli.append(var.pay2)
+            '''var.pay = set(var.pay)
+            for j in var.pay:
+                newcli.append(j)'''
+
             print(newcli)
             print(clitab)
             #como trabajar con la tableWidget
-            row = 0
-            column = 0
-            var.ui.tablaCli.insertRow(row)
-            for registro in clitab:
-                cell = QtWidgets.QTableWidgetItem(registro)
-                var.ui.tablaCli.setItem(row, column, cell)
-                column += 1
-
+            if newcli:
+                row = 0
+                column = 0
+                var.ui.tablaCli.insertRow(row)
+                for registro in clitab:
+                    cell = QtWidgets.QTableWidgetItem(registro)
+                    var.ui.tablaCli.setItem(row, column, cell)
+                    column += 1
+                #conexion.Conexio.cargarCli(newcli)
+            else:
+                print('Faltan datos')
             '''limpiamos los datos'''
             Clientes.limpiarDatos(client, var.rbtsex, var.chkpago)
         except Exception as error:

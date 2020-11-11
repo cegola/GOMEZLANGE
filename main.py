@@ -53,6 +53,7 @@ class Main(QtWidgets.QMainWindow):
         for i in var.chkpago:
             i.stateChanged.connect(clients.Clientes.selPago)
         var.ui.cmbProvincia.activated[str].connect(clients.Clientes.selProv)
+        var.ui.tablaCli.clicked.connect(clients.Clientes.cargarCli)
         var.ui.tablaCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         '''Llamada a modulos iniciales'''

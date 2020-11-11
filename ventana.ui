@@ -313,7 +313,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/iconoCalendar.png</normaloff>img/iconoCalendar.png</iconset>
+             <normaloff>../../.designer/backup/img/iconoCalendar.png</normaloff>../../.designer/backup/img/iconoCalendar.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -577,6 +577,9 @@
              <property name="text">
               <string>Efectivo</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">grpBtnPay</string>
+             </attribute>
             </widget>
            </item>
            <item>
@@ -584,6 +587,9 @@
              <property name="text">
               <string>Tarjeta</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">grpBtnPay</string>
+             </attribute>
             </widget>
            </item>
            <item>
@@ -591,6 +597,9 @@
              <property name="text">
               <string>Transferencia</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">grpBtnPay</string>
+             </attribute>
             </widget>
            </item>
           </layout>
@@ -657,5 +666,10 @@
  <connections/>
  <buttongroups>
   <buttongroup name="grpBtnSex"/>
+  <buttongroup name="grpBtnPay">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
  </buttongroups>
 </ui>
