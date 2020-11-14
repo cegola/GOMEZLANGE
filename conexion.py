@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtSql
-import  pymongo,var
+#import  pymongo
+import var
 
 class Conexion():
     def db_connect(filename):
@@ -27,10 +28,37 @@ class Conexion():
         query.bindValue(':sexo', str(cliente[6]))
         query.bindValue(':formasPago', str(cliente[7]))
         if query.exec_():
-            # Conexion.mostarClientes()
+            Conexion.mostarClientes()
             print('Insercion correcta')
         else:
             print("Error: ", query.lastError().text())
+
+    def mostrarClientes(self):
+        index = 0
+        query = QtSql.QSqlQuery()
+        query.prepare('select dni, apellidos, nombre from clientes')
+        if query.exec_():
+            while query.next():
+                dni = query.value(0)
+                apellidos = query.value(1)
+                nombre = query.value(2)
+                var.ui.tablaCli.setRowCount(index+1) #crea la fila y a continuacion mete los datos
+                var.ui.tablaCli.setItem(index, 0, QtWidgets.QTableWidgetItem(dni))
+                var.ui.tablaCli.setItem(index, 1, QtWidgets.QTableWidgetItem(apellidos))
+                var.ui.tablaCli.setItem(index, 2, QtWidgets.QTableWidgetItem(nombre))
+                index += 1
+        else:
+            print('Error mostrar clientes: '+query.lastError().text())
+
+    def bajaCli(dni):
+        query = QtSql.QSqlQuery()
+        query.prepare('delete from clientes where dni = :dni')
+        query.bindValue(':dni', dni)
+        if query.exec_():
+            print('Baja cliente')
+           # var.ui.lblstatus.setText('Cliente con dni '+dni+' dado de baja')
+        else:
+            print("Error mostrar clientes: ", query.lastError().text())
 
 # class Conexion():
 #     HOST =  'localhost'

@@ -162,3 +162,13 @@ class Clientes():
         except Exception as error:
                 print('Error cargar datos: %s' % str(error))
 
+    def bajaCli(self):
+        try:
+            dni = var.ui.editDni.text()
+            conexion.Conexion.bajaCli(dni)
+            conexion.Conexion.mostrarClientes(self)
+            Clientes.limpiarDatos()
+        except Exception as error:
+            print('Error cargar clientes: %s ' % str(error))
+
+
