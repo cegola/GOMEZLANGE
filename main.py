@@ -46,20 +46,25 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
+        '''botones'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
         var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
         var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
+        var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
+        var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
+
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
         for i in var.chkpago:
             i.stateChanged.connect(clients.Clientes.selPago)
+
         var.ui.cmbProvincia.activated[str].connect(clients.Clientes.selProv)
         var.ui.tablaCli.clicked.connect(clients.Clientes.cargarCli)
         var.ui.tablaCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         '''Llamada a modulos iniciales'''
-        events.Eventos.cargarProv();
+        events.Eventos.cargarProv()
 
         '''modulos del principal'''
         conexion.Conexion.db_connect(var.filebd)
@@ -73,6 +78,6 @@ class Main(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
-    #window.maximumSize()
+    window.maximumSize()
     window.show()
     sys.exit(app.exec())

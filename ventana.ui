@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>924</width>
-    <height>776</height>
+    <width>918</width>
+    <height>799</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -263,7 +263,7 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -273,6 +273,43 @@
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="lblCodCli">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background:rgb(215, 223, 255)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QLabel" name="lblDni">
          <property name="minimumSize">
@@ -296,10 +333,25 @@
        </item>
        <item>
         <widget class="QLineEdit" name="editDni">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
+           <width>25</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -311,7 +363,7 @@
         <widget class="QLabel" name="lblValidar">
          <property name="minimumSize">
           <size>
-           <width>30</width>
+           <width>20</width>
            <height>0</height>
           </size>
          </property>
@@ -329,27 +381,24 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="lblCodCli">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>70</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background:rgb(215, 223, 255)</string>
-         </property>
+        <widget class="QPushButton" name="btnBuscar">
          <property name="text">
           <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="img/buscar.qrc">
+           <normaloff>:/newPrefix/lupa.png</normaloff>:/newPrefix/lupa.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnRecargar">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="img/recargar.qrc">
+           <normaloff>:/newPrefix/recargar.png</normaloff>:/newPrefix/recargar.png</iconset>
          </property>
         </widget>
        </item>
@@ -383,14 +432,29 @@
        </item>
        <item>
         <widget class="QLineEdit" name="editCliAlta">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>80</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="styleSheet">
           <string notr="true">background:rgb(246, 255, 206)</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -425,7 +489,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>12</x>
@@ -505,7 +569,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>12</x>
@@ -592,7 +656,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>12</x>
@@ -659,7 +723,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>90</width>
+           <width>200</width>
            <height>20</height>
           </size>
          </property>
@@ -679,22 +743,6 @@
           <string>Métodos de pago:</string>
          </property>
         </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item>
         <widget class="QCheckBox" name="chkEfectivo">
@@ -740,13 +788,38 @@
      </attribute>
     </widget>
    </widget>
+   <widget class="QLabel" name="lblstatus">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>740</y>
+      <width>921</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:rgb(213, 227, 255)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>924</width>
+     <width>918</width>
      <height>20</height>
     </rect>
    </property>
@@ -777,6 +850,8 @@
  </widget>
  <resources>
   <include location="img/calendar.qrc"/>
+  <include location="img/buscar.qrc"/>
+  <include location="img/recargar.qrc"/>
  </resources>
  <connections/>
  <buttongroups>

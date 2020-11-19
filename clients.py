@@ -28,7 +28,7 @@ class Clientes():
             return None
 
 
-    def validoDni():
+    def validoDni(self):
         try:
             dni = var.ui.editDni.text()
             if Clientes.validarDni(dni):
@@ -43,7 +43,7 @@ class Clientes():
             print('Error modulo valido DNI')
             return None
 
-    def selSexo():
+    def selSexo(self):
         try:
             if var.ui.rbtFemenino.isChecked():
                 var.sex = 'Mujer'
@@ -52,7 +52,7 @@ class Clientes():
         except Exception as error:
             print('Error: %s' % str(error))
 
-    def selPago():
+    def selPago(self):
         try:
             '''se llama al final, tiene la lista vacia y la llena según estén clickados los botones'''
             var.pay = []
@@ -75,7 +75,7 @@ class Clientes():
             print('Error: %s' % str(error))
 
 
-    def abrirCalendar():
+    def abrirCalendar(self):
         try:
             var.dlgCalendar.show()
         except Exception as error:
@@ -89,12 +89,12 @@ class Clientes():
         except Exception as error:
             print('Error cargar fecha: %s' % str(error))
 
-    def altaCliente():
+    def altaCliente(self):
         '''cargara los clientes en la tabla'''
         try:
             newcli = [] #donde están todos los datos
             clitab = [] #sera lo que carguemos
-            client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editDireccion, var.ui.editCliAlta]
+            client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editCliAlta, var.ui.editDireccion]
             k=0
             for i in client:
                 newcli.append(i.text()) #cargamos los valores que hay en los edits
@@ -129,7 +129,7 @@ class Clientes():
         except Exception as error:
             print('Error: %s' % str(error))
 
-    def limpiarDatos():
+    def limpiarDatos(self):
         '''limpia los datos del formulario'''
         try:
             #client son todas las cajas de texto
@@ -159,16 +159,48 @@ class Clientes():
             i = 0
             for i, dato in enumerate(client):
                 dato.setText(fila[i])
+
+            conexion.Conexion.cargarCliente(None)
         except Exception as error:
                 print('Error cargar datos: %s' % str(error))
+
 
     def bajaCli(self):
         try:
             dni = var.ui.editDni.text()
-            conexion.Conexion.bajaCli(dni)
+            conexion.Conexion.bajaCliente(dni)
             conexion.Conexion.mostrarClientes(self)
             Clientes.limpiarDatos()
         except Exception as error:
             print('Error cargar clientes: %s ' % str(error))
 
+    def modCli(self):
+        try:
+            newdata = []
+            client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editCliAlta, var.ui.editDireccion]
+            for i in client:
+                newdata.append(i.text())
+            newdata.append(var.ui.cmbProvincia.currentText())
+            newdata.append(var.sex)
+            var.pay = Clientes.selPago(None)
+            newdata.append(var.pay)
+            cod = var.ui.lblCodCli.text()
+            conexion.Conexion.modCliente(cod, newdata)
+            conexion.Conexion.mostrarClientes(self)
+        except Exception as error:
+            print('Error cargar clientes: %s ' % str(error))
 
+
+    def reloadCli(self):
+        try:
+            Clientes.limpiarDatos(None)
+            conexion.Conexion.mostrarClientes(None)
+        except  Exception as error:
+            print('Error recargar clientes: %s ' % str(error))
+
+    def buscarClie(self):
+        try:
+            dni = var.ui.editDni.text()
+            cliente = conexion.Conexion.buscarCliente(dni)
+        except  Exception as error:
+            print('Error recargar clientes: %s ' % str(error))
