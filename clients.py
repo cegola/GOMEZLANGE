@@ -50,7 +50,7 @@ class Clientes():
             if var.ui.rbtMasculino.isChecked():
                 var.sex = 'Hombre'
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error sexo: %s' % str(error))
 
     def selPago(self):
         try:
@@ -65,21 +65,29 @@ class Clientes():
                     var.pay.append('Transferencia')
             return var.pay
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error pago: %s' % str(error))
+
+
+    def valoresSpin(self):
+        try:
+            var.ui.spinEdad.setValue(18)
+            print('Done')
+        except Exception as error:
+            print('Error valores spin: %s' % str(error))
 
     def selProv(prov):
         try:
             global vpro
             vpro = prov
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error sel prov: %s' % str(error))
 
 
     def abrirCalendar(self):
         try:
             var.dlgCalendar.show()
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error cal: %s' % str(error))
 
     def cargarFecha(qDate):
         try:
@@ -104,6 +112,7 @@ class Clientes():
             newcli.append(vpro)
             #elimina duplicados
             newcli.append(var.sex)
+            #newcli.append(var.ui.spinEdad.value())
             var.pay2 = Clientes.selPago()
             newcli.append(var.pay2)
             '''var.pay = set(var.pay)
@@ -127,7 +136,7 @@ class Clientes():
             '''limpiamos los datos'''
             Clientes.limpiarDatos()
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error alta cli: %s' % str(error))
 
     def limpiarDatos(self):
         '''limpia los datos del formulario'''

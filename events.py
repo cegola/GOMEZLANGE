@@ -21,3 +21,5 @@ class Eventos():
                 var.ui.cmbProvincia.addItem(i)
         except Exception as error:
             print('Error %s' % str(error))
+
+

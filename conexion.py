@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtSql
 #import  pymongo
-import var
+import var, time
 
 class Conexion():
     def db_connect(filename):
@@ -29,9 +29,10 @@ class Conexion():
         query.bindValue(':formasPago', str(cliente[7]))
         if query.exec_():
             Conexion.mostarClientes(None)
+            var.ui.lblstatus.setText('Cliente con dni ' + str(cliente[0]) + ' dado de alta, dia '+time.strftime("%x"))
             print('Insercion correcta')
         else:
-            print("Error: ", query.lastError().text())
+            print("Error alta: ", query.lastError().text())
 
     def mostrarClientes(self):
         index = 0
@@ -83,7 +84,7 @@ class Conexion():
         query.bindValue(':dni', dni)
         if query.exec_():
             print('Baja cliente')
-           # var.ui.lblstatus.setText('Cliente con dni '+dni+' dado de baja')
+            var.ui.lblstatus.setText('Cliente con dni '+dni+' dado de baja, dia'+time.strftime("%x"))
         else:
             print("Error mostrar clientes: ", query.lastError().text())
 
@@ -106,7 +107,7 @@ class Conexion():
         query.bindValue(':formasPago', str(newdata[7]))
         if query.exec_():
             print('Cliente modificado')
-            var.ui.lblstatus.setText('Cliente con dni '+str(newdata[0])+' modificado')
+            var.ui.lblstatus.setText('Cliente con dni '+str(newdata[0])+' modificado, dia '+time.strftime("%x"))
         else:
             print('Error modificar cliente: ', query.lastError().text())
 

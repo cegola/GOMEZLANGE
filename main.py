@@ -53,6 +53,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
         var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
         var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
+        clients.Clientes.valoresSpin(None)
 
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
@@ -66,6 +67,9 @@ class Main(QtWidgets.QMainWindow):
         '''Llamada a modulos iniciales'''
         events.Eventos.cargarProv()
 
+        var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 1)
+        var.ui.lblstatus.setText('Bienvenido a 2º DAM')
+
         '''modulos del principal'''
         conexion.Conexion.db_connect(var.filebd)
         conexion.Conexion.mostrarClientes(self)
@@ -78,6 +82,6 @@ class Main(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
-    window.maximumSize()
-    window.show()
+    window.showMaximized()
+    #window.show()
     sys.exit(app.exec())
