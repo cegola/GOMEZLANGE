@@ -45,6 +45,7 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
+        #var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         '''botones'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)

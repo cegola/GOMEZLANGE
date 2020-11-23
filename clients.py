@@ -28,9 +28,10 @@ class Clientes():
             return None
 
 
-    def validoDni(self):
+    def validoDni():
         try:
             dni = var.ui.editDni.text()
+            print(dni)
             if Clientes.validarDni(dni):
                 var.ui.lblValidar.setStyleSheet('QLabel {color:green;}')
                 var.ui.lblValidar.setText('V')
@@ -112,7 +113,7 @@ class Clientes():
             newcli.append(vpro)
             #elimina duplicados
             newcli.append(var.sex)
-            #newcli.append(var.ui.spinEdad.value())
+            newcli.append(var.ui.spinEdad.value())
             var.pay2 = Clientes.selPago()
             newcli.append(var.pay2)
             '''var.pay = set(var.pay)
@@ -153,6 +154,7 @@ class Clientes():
             var.ui.cmbProvincia.setCurrentIndex(0)
             var.ui.lblValidar.setText('')
             var.ui.lblCodCli.setText('')
+            var.ui.spinEdad.value(18)
 
         except Exception as error:
                 print('Error en limpiar datos : %s' % str(error))
