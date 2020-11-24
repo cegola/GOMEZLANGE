@@ -53,7 +53,7 @@ class Clientes():
         except Exception as error:
             print('Error sexo: %s' % str(error))
 
-    def selPago(self):
+    def selPago():
         try:
             '''se llama al final, tiene la lista vacia y la llena según estén clickados los botones'''
             var.pay = []
@@ -113,7 +113,8 @@ class Clientes():
             newcli.append(vpro)
             #elimina duplicados
             newcli.append(var.sex)
-            newcli.append(var.ui.spinEdad.value())
+            edad = var.ui.spinEdad.value()
+            newcli.append(edad)
             var.pay2 = Clientes.selPago()
             newcli.append(var.pay2)
             '''var.pay = set(var.pay)
@@ -135,11 +136,11 @@ class Clientes():
             else:
                 print('Faltan datos')
             '''limpiamos los datos'''
-            Clientes.limpiarDatos()
+            Clientes.limpiarDatos(self)
         except Exception as error:
             print('Error alta cli: %s' % str(error))
 
-    def limpiarDatos(self):
+    def limpiarDatos():
         '''limpia los datos del formulario'''
         try:
             #client son todas las cajas de texto
@@ -154,13 +155,13 @@ class Clientes():
             var.ui.cmbProvincia.setCurrentIndex(0)
             var.ui.lblValidar.setText('')
             var.ui.lblCodCli.setText('')
-            var.ui.spinEdad.value(18)
+            var.ui.spinEdad.setValue(18)
 
         except Exception as error:
                 print('Error en limpiar datos : %s' % str(error))
 
 
-    def cargarCli(self):
+    def cargarCli():
         try:
             fila = var.ui.tablaCli.selectedItems()
             client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre]
@@ -170,7 +171,6 @@ class Clientes():
             i = 0
             for i, dato in enumerate(client):
                 dato.setText(fila[i])
-
             conexion.Conexion.cargarCliente(None)
         except Exception as error:
                 print('Error cargar datos: %s' % str(error))
@@ -193,7 +193,9 @@ class Clientes():
                 newdata.append(i.text())
             newdata.append(var.ui.cmbProvincia.currentText())
             newdata.append(var.sex)
-            var.pay = Clientes.selPago(None)
+            edad= var.ui.spinEdad.value()
+            newdata.append(edad)
+            var.pay = Clientes.selPago()
             newdata.append(var.pay)
             cod = var.ui.lblCodCli.text()
             conexion.Conexion.modCliente(cod, newdata)
@@ -204,7 +206,7 @@ class Clientes():
 
     def reloadCli(self):
         try:
-            Clientes.limpiarDatos(None)
+            Clientes.limpiarDatos()
             conexion.Conexion.mostrarClientes(None)
         except  Exception as error:
             print('Error recargar clientes: %s ' % str(error))

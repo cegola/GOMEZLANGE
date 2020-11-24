@@ -10,7 +10,14 @@ class Eventos():
             else:
                 var.dlgSalir.close()
         except Exception as error:
-            print('Error %s'% str(error))
+            print('Error salir %s'% str(error))
+
+    def Backup(self):
+        try:
+            print('Backup')
+        except Exception as error:
+            print('Error backup %s' % str(error))
+
 
 
     def cargarProv():

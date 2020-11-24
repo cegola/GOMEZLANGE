@@ -64,21 +64,21 @@ class Conexion():
                 var.ui.editCliAlta.setText(query.value(4))
                 var.ui.editDireccion.setText(str(query.value(5)))
                 var.ui.cmbProvincia.setCurrentText(str(query.value(6)))
-                if str(query.value(7)=='Mujer'):
+                if str(query.value(7))=='Mujer':
                     var.ui.rbtFemenino.setChecked(True)
                     var.ui.rbtMasculino.setChecked(False)
                 else:
                     var.ui.rbtFemenino.setChecked(False)
                     var.ui.rbtMasculino.setChecked(True)
-                var.ui.spinEdad.setText(str(query.value(8)))
                 for data in var.chkpago:
                     data.setChecked(False)
-                if 'Efectivo' in query.value(8):
+                if 'Efectivo' in query.value(9):
                     var.chkpago[0].setChecked(True)
-                if 'Tarjeta' in query.value(8):
+                if 'Tarjeta' in query.value(9):
                     var.chkpago[1].setChecked(True)
-                if 'Transferencia' in query.value(8):
+                if 'Transferencia' in query.value(9):
                     var.chkpago[2].setChecked(True)
+                var.ui.spinEdad.setValue(int(query.value(8)))
 
     def bajaCliente(dni):
         query = QtSql.QSqlQuery()
@@ -106,7 +106,7 @@ class Conexion():
         query.bindValue(':direccion', str(newdata[4]))
         query.bindValue(':provincia', str(newdata[5]))
         query.bindValue(':sexo', str(newdata[6]))
-        query.bindValue(':edad', str(newdata[7]))
+        query.bindValue(':edad', int(newdata[7]))
         query.bindValue(':formasPago', str(newdata[8]))
         if query.exec_():
             print('Cliente modificado')
@@ -115,9 +115,40 @@ class Conexion():
             print('Error modificar cliente: ', query.lastError().text())
 
     def buscarCliente(dni):
+        index = 0
         query = QtSql.QSqlQuery()
         query.prepare('select * from clientes where dni = :dni')
         query.bindValue(':dni', dni)
+        if query.exec_():
+            while query.next():
+                var.ui.lblCodCli.setText(str(query.value(0)))
+                var.ui.editApellidos.setText(str(query.value(2)))
+                var.ui.editNombre.setText(str(query.value(3)))
+                var.ui.editCliAlta.setText(query.value(4))
+                var.ui.editDireccion.setText(str(query.value(5)))
+                var.ui.cmbProvincia.setCurrentText(str(query.value(6)))
+                if str(query.value(7))=='Mujer':
+                    var.ui.rbtFemenino.setChecked(True)
+                    var.ui.rbtMasculino.setChecked(False)
+                else:
+                    var.ui.rbtFemenino.setChecked(False)
+                    var.ui.rbtMasculino.setChecked(True)
+                for data in var.chkpago:
+                    data.setChecked(False)
+                if 'Efectivo' in query.value(9):
+                    var.chkpago[0].setChecked(True)
+                if 'Tarjeta' in query.value(9):
+                    var.chkpago[1].setChecked(True)
+                if 'Transferencia' in query.value(9):
+                    var.chkpago[2].setChecked(True)
+                var.ui.spinEdad.setValue(int(query.value(8)))
+
+
+                var.ui.tablaCli.setRowCount(index+1) #crea la fila y a continuacion mete los datos
+                var.ui.tablaCli.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(1))))
+                var.ui.tablaCli.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(2))))
+                var.ui.tablaCli.setItem(index, 2, QtWidgets.QTableWidgetItem(str(query.value(3))))
+
 
 # class Conexion():
 #     HOST =  'localhost'

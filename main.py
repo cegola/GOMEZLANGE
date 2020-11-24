@@ -45,7 +45,8 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
-        #var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
+        var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.actiontoolBarSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         '''botones'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
@@ -54,6 +55,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
         var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
         var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
+        var.ui.btnBuscar.clicked.connect(clients.Clientes.buscarClie)
         clients.Clientes.valoresSpin(None)
 
         for i in var.rbtsex:

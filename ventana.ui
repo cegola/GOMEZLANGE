@@ -695,7 +695,7 @@
              <x>0</x>
              <y>0</y>
              <width>879</width>
-             <height>466</height>
+             <height>432</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -842,6 +842,20 @@
     <string notr="true">background:rgb(196, 238, 255)</string>
    </property>
   </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionBackup"/>
+   <addaction name="separator"/>
+   <addaction name="actiontoolBarSalir"/>
+  </widget>
   <action name="actionSalir">
    <property name="text">
     <string>Salir</string>
@@ -850,10 +864,41 @@
     <string>Ctrl+S</string>
    </property>
   </action>
+  <action name="actionBackup">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <activeon>:/newPrefix/backup.png</activeon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Backup</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/backup.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actiontoolBarSalir">
+   <property name="icon">
+    <iconset>
+     <activeon>:/newPrefix/iconsalir.png</activeon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>toolBarSalir</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/iconsalir.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="img/calendar.qrc"/>
+  <include location="img/toolBarSalir.qrc"/>
   <include location="img/buscar.qrc"/>
+  <include location="img/tooBarBackup.qrc"/>
   <include location="img/recargar.qrc"/>
  </resources>
  <connections/>
