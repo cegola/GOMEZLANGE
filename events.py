@@ -18,6 +18,20 @@ class Eventos():
         except Exception as error:
             print('Error backup %s' % str(error))
 
+    def AbrirDir(self):
+        try:
+            var.filedlgAbrir.setWindowTitle('Abrir archivo')
+            var.filedlgAbrir.setModal(True)
+            var.filedlgAbrir.show()
+        except Exception as error:
+            print('Error abrir dir: %d' % str(error))
+
+    def Imprimir(self):
+        try:
+            var.dglImprimir.setModal(True)
+            var.dglImprimir.show()
+        except Exception as error:
+            print('Error abrir dir: %d' % str(error))
 
 
     def cargarProv():

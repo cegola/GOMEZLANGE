@@ -156,6 +156,9 @@
             <property name="styleSheet">
              <string notr="true">background:rgb(246, 255, 206)</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item row="0" column="3">
@@ -811,6 +814,16 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="2">
+     <widget class="QLabel" name="lblfecha">
+      <property name="styleSheet">
+       <string notr="true">color:rgb(0, 85, 255);</string>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -833,6 +846,9 @@
     <property name="title">
      <string>Archivo</string>
     </property>
+    <addaction name="actionAbrir"/>
+    <addaction name="actionImprimir"/>
+    <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
    <addaction name="menuArchivo"/>
@@ -852,6 +868,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="toolBarAbrirCarpeta"/>
+   <addaction name="toolBarImpresora"/>
    <addaction name="actionBackup"/>
    <addaction name="separator"/>
    <addaction name="actiontoolBarSalir"/>
@@ -865,9 +883,6 @@
    </property>
   </action>
   <action name="actionBackup">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset>
      <activeon>:/newPrefix/backup.png</activeon>
@@ -893,21 +908,65 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/iconsalir.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
+  <action name="toolBarAbrirCarpeta">
+   <property name="icon">
+    <iconset>
+     <activeon>:/newPrefix/iconAbrirCarpeta.png</activeon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>abrirCarpeta</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/iconAbrirCarpeta.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="toolBarImpresora">
+   <property name="icon">
+    <iconset>
+     <activeon>:/newPrefix/iconoImpresora.png</activeon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Impresora</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/iconoImpresora.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionImprimir">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="img/calendar.qrc"/>
+  <include location="img/toolBarImpresora.qrc"/>
   <include location="img/toolBarSalir.qrc"/>
+  <include location="img/toolBarAbrirCarpeta.qrc"/>
   <include location="img/buscar.qrc"/>
   <include location="img/tooBarBackup.qrc"/>
   <include location="img/recargar.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="grpBtnSex"/>
   <buttongroup name="grpBtnPay">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="grpBtnSex"/>
  </buttongroups>
 </ui>

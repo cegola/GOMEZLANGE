@@ -5,6 +5,9 @@ global chkpago
 #ventanas de dialogo
 global dlgSalir
 global dlgCalendar
+global filedlgAbrir
+global dglImprimir
+global dlgDni
 
 global DATABASE
 

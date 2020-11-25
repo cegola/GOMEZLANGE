@@ -1,8 +1,12 @@
 from ventana import *
 from venSalir import *
 from venCalendar import *
-from datetime import datetime
+from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
 import sys, var, events, clients, conexion
+from datetime import datetime, date
+import locale
+
+locale.setlocale(locale.LC_ALL, 'es-ES')
 
 
 class DialogSalir(QtWidgets.QDialog):
@@ -12,6 +16,13 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgSalir.setupUi(self)
         var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
         #var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
+
+class DialogAvisoDni(QtWidgets.QDialog):
+        def __init__(self):
+            super(DialogAvisoDni, self).__init__()
+            var.dlgDni = Ui_venDni()
+
+
 
 
 class DialogCalendar(QtWidgets.QDialog):
@@ -25,6 +36,14 @@ class DialogCalendar(QtWidgets.QDialog):
         var.dlgCalendar.Calendar.setSelectedDate((QtCore.QDate(anoActual,mesActual,diaActual)))
         var.dlgCalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
 
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __init__(self):
+        super(FileDialogAbrir, self).__init__()
+
+class DialogImprimir(QPrintDialog):
+    def __init__(self):
+        super(DialogImprimir, self).__init__()
+
 
 
 class Main(QtWidgets.QMainWindow):
@@ -34,7 +53,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         var.dlgSalir = DialogSalir()
         var.dlgCalendar = DialogCalendar()
+        var.filedlgAbrir = FileDialogAbrir()
+        var.dglImprimir = DialogImprimir()
         QtWidgets.QAction(self).triggered.connect(self.close)
+
 
         '''Coleccion de datos'''
         var.rbtsex= (var.ui.rbtFemenino, var.ui.rbtMasculino)
@@ -47,6 +69,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
         var.ui.actiontoolBarSalir.triggered.connect(events.Eventos.Salir)
+        var.ui.toolBarAbrirCarpeta.triggered.connect(events.Eventos.AbrirDir)
+        var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
+        var.ui.toolBarImpresora.triggered.connect(events.Eventos.Imprimir)
+        var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
+
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         '''botones'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
@@ -70,8 +97,10 @@ class Main(QtWidgets.QMainWindow):
         '''Llamada a modulos iniciales'''
         events.Eventos.cargarProv()
 
-        var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 1)
+        var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 5)
+        var.ui.statusbar.addPermanentWidget(var.ui.lblfecha, 1)
         var.ui.lblstatus.setText('Bienvenido a 2º DAM')
+        var.ui.lblfecha.setText(str(datetime.now()))
 
         '''modulos del principal'''
         conexion.Conexion.db_connect(var.filebd)

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>iconsalir.png</file>
+  </qresource>
+</RCC>

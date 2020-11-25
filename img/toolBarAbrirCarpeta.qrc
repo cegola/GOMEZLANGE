@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>iconAbrirCarpeta.png</file>
+  </qresource>
+</RCC>
