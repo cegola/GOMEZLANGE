@@ -1,5 +1,5 @@
 
-import var, conexion
+import var, conexion, events
 from PyQt5 import QtWidgets
 from ventana import *
 
@@ -37,9 +37,14 @@ class Clientes():
                 var.ui.lblValidar.setText('V')
                 var.ui.editDni.setText(dni.upper())
             else:
+
                 var.ui.lblValidar.setStyleSheet('QLabel {color:red;}')
                 var.ui.lblValidar.setText('X')
                 var.ui.editDni.setText(dni.upper())
+                mensaje = 'DNI ERRONEO'
+                events.Eventos.AbrirAviso(mensaje)
+                Clientes.limpiarDatos()
+                dniOk=False
         except:
             print('Error modulo valido DNI')
             return None

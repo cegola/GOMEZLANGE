@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>venSalir</class>
- <widget class="QDialog" name="venSalir">
+ <class>venAviso</class>
+ <widget class="QDialog" name="venAviso">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,7 +35,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="lblMenSalir">
+  <widget class="QLabel" name="lblMensaje">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -83,7 +83,7 @@
   <connection>
    <sender>btnBoxSalir</sender>
    <signal>accepted()</signal>
-   <receiver>venSalir</receiver>
+   <receiver>venAviso</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -99,7 +99,7 @@
   <connection>
    <sender>btnBoxSalir</sender>
    <signal>rejected()</signal>
-   <receiver>venSalir</receiver>
+   <receiver>venAviso</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

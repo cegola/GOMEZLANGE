@@ -9,20 +9,13 @@ import locale
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
 
-class DialogSalir(QtWidgets.QDialog):
+class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
-        super(DialogSalir, self).__init__()
-        var.dlgSalir = Ui_venSalir()
-        var.dlgSalir.setupUi(self)
-        var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        super(DialogAviso, self).__init__()
+        var.dlgAviso = Ui_venAviso()
+        var.dlgAviso.setupUi(self)
+        var.dlgAviso.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
         #var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
-
-class DialogAvisoDni(QtWidgets.QDialog):
-        def __init__(self):
-            super(DialogAvisoDni, self).__init__()
-            var.dlgDni = Ui_venDni()
-
-
 
 
 class DialogCalendar(QtWidgets.QDialog):
@@ -51,7 +44,7 @@ class Main(QtWidgets.QMainWindow):
         super(Main, self).__init__()
         var.ui = Ui_venPrincipal()
         var.ui.setupUi(self)
-        var.dlgSalir = DialogSalir()
+        var.dlgAviso = DialogAviso()
         var.dlgCalendar = DialogCalendar()
         var.filedlgAbrir = FileDialogAbrir()
         var.dglImprimir = DialogImprimir()
@@ -109,6 +102,7 @@ class Main(QtWidgets.QMainWindow):
 
     def closeEvents(self, event):
         event.Eventos.Salir()
+        salir = True
 
 
 if __name__ == '__main__':

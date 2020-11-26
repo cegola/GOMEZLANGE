@@ -3,11 +3,12 @@ global ui
 global rbtsex #va a manejar los dos radio buttons
 global chkpago
 #ventanas de dialogo
-global dlgSalir
+global dlgAviso
 global dlgCalendar
 global filedlgAbrir
 global dglImprimir
-global dlgDni
+global lblMensaje
+global salir
 
 global DATABASE
 

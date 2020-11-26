@@ -4,11 +4,12 @@ class Eventos():
     def Salir(self):
         '''Evento modulo salir'''
         try:
-            var.dlgSalir.show()
-            if var.dlgSalir.exec_():
+            var.lblMensaje.setText('¿Está seguro que quiere salir de la aplicación?')
+            var.dlgAviso.show()
+            if var.dlgAviso.exec_() and var.Salir:
                 sys.exit()
             else:
-                var.dlgSalir.close()
+                var.dlgAviso.close()
         except Exception as error:
             print('Error salir %s'% str(error))
 
@@ -25,6 +26,14 @@ class Eventos():
             var.filedlgAbrir.show()
         except Exception as error:
             print('Error abrir dir: %d' % str(error))
+
+    def AbrirAviso(mensaje):
+        try:
+            var.lblMensaje.setText(mensaje)
+            var.dlgAviso.show()
+        except Exception as error:
+            print('Error salir %s' % str(error))
+
 
     def Imprimir(self):
         try:

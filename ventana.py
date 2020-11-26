@@ -363,7 +363,7 @@ class Ui_venPrincipal(object):
         font.setWeight(75)
         item.setFont(font)
         self.tablaCli.setHorizontalHeaderItem(2, item)
-        self.tablaCli.horizontalHeader().setDefaultSectionSize(200)
+        self.tablaCli.horizontalHeader().setDefaultSectionSize(300)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.gridLayout.addWidget(self.scrollArea, 8, 1, 1, 1)
         self.tabWidget.addTab(self.tabCli, "")
