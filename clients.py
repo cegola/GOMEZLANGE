@@ -184,9 +184,12 @@ class Clientes():
     def bajaCli(self):
         try:
             dni = var.ui.editDni.text()
-            conexion.Conexion.bajaCliente(dni)
-            conexion.Conexion.mostrarClientes(self)
-            Clientes.limpiarDatos()
+            mensaje='¿Seguro que desea dar de baja a este cliente?'
+            borrar = events.Eventos.AbrirAviso(mensaje)
+            if borrar == True:
+                conexion.Conexion.bajaCliente(dni)
+                conexion.Conexion.mostrarClientes(self)
+                Clientes.limpiarDatos()
         except Exception as error:
             print('Error cargar clientes: %s ' % str(error))
 
@@ -203,10 +206,15 @@ class Clientes():
             var.pay = Clientes.selPago()
             newdata.append(var.pay)
             cod = var.ui.lblCodCli.text()
-            conexion.Conexion.modCliente(cod, newdata)
-            conexion.Conexion.mostrarClientes(self)
+            mensaje = 'Seguro que desea modificar este cliente'
+            mod = events.Eventos.AbrirAviso(mensaje)
+            if mod == True:
+                conexion.Conexion.modCliente(cod, newdata)
+                conexion.Conexion.mostrarClientes(self)
+            else:
+                Clientes.limpiarDatos()
         except Exception as error:
-            print('Error cargar clientes: %s ' % str(error))
+            print('Error modificar clientes: %s ' % str(error))
 
 
     def reloadCli(self):

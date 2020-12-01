@@ -9,40 +9,40 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import var
 
-class Ui_venAviso(object):
-    def setupUi(self, venAviso):
-        venAviso.setObjectName("venAviso")
-        venAviso.resize(400, 142)
-        venAviso.setModal(True)
-        self.btnBoxSalir = QtWidgets.QDialogButtonBox(venAviso)
+
+class Ui_venSalir(object):
+    def setupUi(self, venSalir):
+        venSalir.setObjectName("venSalir")
+        venSalir.resize(400, 127)
+        venSalir.setModal(True)
+        self.btnBoxSalir = QtWidgets.QDialogButtonBox(venSalir)
         self.btnBoxSalir.setGeometry(QtCore.QRect(210, 90, 161, 32))
         self.btnBoxSalir.setOrientation(QtCore.Qt.Horizontal)
         self.btnBoxSalir.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
         self.btnBoxSalir.setCenterButtons(True)
         self.btnBoxSalir.setObjectName("btnBoxSalir")
-        var.lblMensaje = QtWidgets.QLabel(venAviso)
-        var.lblMensaje.setGeometry(QtCore.QRect(100, 50, 271, 20))
+        self.lblMensajeSalir = QtWidgets.QLabel(venSalir)
+        self.lblMensajeSalir.setGeometry(QtCore.QRect(100, 50, 271, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        var.lblMensaje.setFont(font)
-        var.lblMensaje.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        var.lblMensaje.setObjectName("lblMensaje")
-        self.lblImgSalir = QtWidgets.QLabel(venAviso)
+        self.lblMensajeSalir.setFont(font)
+        self.lblMensajeSalir.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.lblMensajeSalir.setObjectName("lblMensajeSalir")
+        self.lblImgSalir = QtWidgets.QLabel(venSalir)
         self.lblImgSalir.setGeometry(QtCore.QRect(40, 40, 41, 41))
         self.lblImgSalir.setText("")
         self.lblImgSalir.setPixmap(QtGui.QPixmap("img/iconoSalir.png"))
         self.lblImgSalir.setScaledContents(True)
         self.lblImgSalir.setObjectName("lblImgSalir")
 
-        self.retranslateUi(venAviso)
-        self.btnBoxSalir.accepted.connect(venAviso.accept)
-        self.btnBoxSalir.rejected.connect(venAviso.reject)
-        QtCore.QMetaObject.connectSlotsByName(venAviso)
+        self.retranslateUi(venSalir)
+        self.btnBoxSalir.accepted.connect(venSalir.accept)
+        self.btnBoxSalir.rejected.connect(venSalir.reject)
+        QtCore.QMetaObject.connectSlotsByName(venSalir)
 
-    def retranslateUi(self, venAviso):
+    def retranslateUi(self, venSalir):
         _translate = QtCore.QCoreApplication.translate
-        venAviso.setWindowTitle(_translate("venAviso", "¿Desea salir?"))
-        var.lblMensaje.setText(_translate("venAviso", "¿Está seguro que quiere salir de la aplicación?"))
+        venSalir.setWindowTitle(_translate("venSalir", "¿Desea salir?"))
+        self.lblMensajeSalir.setText(_translate("venSalir", "¿Está seguro que quiere salir de la aplicación?"))
 import iconoSalir_rc

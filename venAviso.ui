@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>venSalir</class>
- <widget class="QDialog" name="venSalir">
+ <class>venAviso</class>
+ <widget class="QDialog" name="venAviso">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>127</height>
+    <height>142</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>¿Desea salir?</string>
+   <string>Aviso</string>
   </property>
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="btnBoxSalir">
+  <widget class="QDialogButtonBox" name="btnBoxAviso">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -29,13 +29,13 @@
     <enum>Qt::Horizontal</enum>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::No|QDialogButtonBox::Yes</set>
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
    <property name="centerButtons">
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="lblMensajeSalir">
+  <widget class="QLabel" name="lblMensaje">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -81,9 +81,9 @@
  </resources>
  <connections>
   <connection>
-   <sender>btnBoxSalir</sender>
+   <sender>btnBoxAviso</sender>
    <signal>accepted()</signal>
-   <receiver>venSalir</receiver>
+   <receiver>venAviso</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -97,9 +97,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnBoxSalir</sender>
+   <sender>btnBoxAviso</sender>
    <signal>rejected()</signal>
-   <receiver>venSalir</receiver>
+   <receiver>venAviso</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

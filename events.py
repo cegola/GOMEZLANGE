@@ -3,13 +3,13 @@ import sys, var
 class Eventos():
     def Salir(self):
         '''Evento modulo salir'''
+
         try:
-            var.lblMensaje.setText('¿Está seguro que quiere salir de la aplicación?')
-            var.dlgAviso.show()
-            if var.dlgAviso.exec_() and var.Salir:
+            var.dlgSalir.show()
+            if var.dlgSalir.exec_():
                 sys.exit()
             else:
-                var.dlgAviso.close()
+                var.dlgSalir.close()
         except Exception as error:
             print('Error salir %s'% str(error))
 
@@ -31,6 +31,11 @@ class Eventos():
         try:
             var.lblMensaje.setText(mensaje)
             var.dlgAviso.show()
+            if var.dlgAviso.exec_():
+                return True
+            else:
+                var.dlgSalir.close()
+                return False
         except Exception as error:
             print('Error salir %s' % str(error))
 

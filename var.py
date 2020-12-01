@@ -4,6 +4,7 @@ global rbtsex #va a manejar los dos radio buttons
 global chkpago
 #ventanas de dialogo
 global dlgAviso
+global dlgSalir
 global dlgCalendar
 global filedlgAbrir
 global dglImprimir

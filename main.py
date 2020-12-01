@@ -1,6 +1,7 @@
 from ventana import *
 from venSalir import *
 from venCalendar import *
+from venAviso import *
 from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
 import sys, var, events, clients, conexion
 from datetime import datetime, date
@@ -8,14 +9,20 @@ import locale
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
+class DialogSalir(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogSalir, self).__init__()
+        var.dlgSalir = Ui_venSalir()
+        var.dlgSalir.setupUi(self)
+        var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        # var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
 
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
         super(DialogAviso, self).__init__()
         var.dlgAviso = Ui_venAviso()
         var.dlgAviso.setupUi(self)
-        var.dlgAviso.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
-        #var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
+
 
 
 class DialogCalendar(QtWidgets.QDialog):
@@ -44,6 +51,7 @@ class Main(QtWidgets.QMainWindow):
         super(Main, self).__init__()
         var.ui = Ui_venPrincipal()
         var.ui.setupUi(self)
+        var.dlgSalir = DialogSalir()
         var.dlgAviso = DialogAviso()
         var.dlgCalendar = DialogCalendar()
         var.filedlgAbrir = FileDialogAbrir()
@@ -93,7 +101,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 5)
         var.ui.statusbar.addPermanentWidget(var.ui.lblfecha, 1)
         var.ui.lblstatus.setText('Bienvenido a 2º DAM')
-        var.ui.lblfecha.setText(str(datetime.now()))
+        fecha= date.today()
+        var.ui.lblfecha.setText(fecha.strftime('%A %d de %B del %Y'))
 
         '''modulos del principal'''
         conexion.Conexion.db_connect(var.filebd)
@@ -101,8 +110,9 @@ class Main(QtWidgets.QMainWindow):
 
 
     def closeEvents(self, event):
-        event.Eventos.Salir()
-        salir = True
+        if event:
+            event.Eventos.Salir()
+
 
 
 if __name__ == '__main__':
