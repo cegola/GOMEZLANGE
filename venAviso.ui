@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>142</height>
+    <height>167</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
   <widget class="QDialogButtonBox" name="btnBoxAviso">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>90</y>
+     <x>120</x>
+     <y>110</y>
      <width>161</width>
      <height>32</height>
     </rect>
@@ -38,8 +38,8 @@
   <widget class="QLabel" name="lblMensaje">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>50</y>
+     <x>60</x>
+     <y>80</y>
      <width>271</width>
      <height>20</height>
     </rect>
@@ -59,8 +59,8 @@
   <widget class="QLabel" name="lblImgSalir">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>40</y>
+     <x>180</x>
+     <y>20</y>
      <width>41</width>
      <height>41</height>
     </rect>

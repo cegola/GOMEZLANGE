@@ -44,6 +44,22 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_7">
+    <item row="1" column="3">
+     <spacer name="horizontalSpacer_5">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Expanding</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="2" column="0">
      <widget class="QLabel" name="lblstatus">
       <property name="sizePolicy">
@@ -63,8 +79,18 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="3">
-     <spacer name="horizontalSpacer_5">
+    <item row="2" column="3">
+     <widget class="QLabel" name="lblfecha">
+      <property name="styleSheet">
+       <string notr="true">color:rgb(0, 85, 255);</string>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_4">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -79,13 +105,19 @@
       </property>
      </spacer>
     </item>
-    <item row="2" column="3">
-     <widget class="QLabel" name="lblfecha">
+    <item row="0" column="2">
+     <widget class="QLabel" name="lblLogo">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(0, 85, 255);</string>
+       <string notr="true">font: 14pt &quot;Snap ITC&quot;;color:rgb(103, 105, 255)</string>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>LOGO</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
@@ -146,7 +178,7 @@
              <x>0</x>
              <y>0</y>
              <width>879</width>
-             <height>382</height>
+             <height>384</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -161,7 +193,7 @@
               <x>0</x>
               <y>0</y>
               <width>881</width>
-              <height>461</height>
+              <height>641</height>
              </rect>
             </property>
             <attribute name="horizontalHeaderDefaultSectionSize">
@@ -808,38 +840,6 @@
       </widget>
      </widget>
     </item>
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Expanding</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="lblLogo">
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 14pt &quot;Snap ITC&quot;;color:rgb(104, 34, 255)</string>
-      </property>
-      <property name="text">
-       <string>LOGO</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -978,11 +978,11 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="grpBtnSex"/>
   <buttongroup name="grpBtnPay">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="grpBtnSex"/>
  </buttongroups>
 </ui>

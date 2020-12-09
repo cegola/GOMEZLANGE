@@ -41,7 +41,7 @@ class Clientes():
                 var.ui.lblValidar.setStyleSheet('QLabel {color:red;}')
                 var.ui.lblValidar.setText('X')
                 var.ui.editDni.setText(dni.upper())
-                mensaje = 'DNI ERRONEO'
+                mensaje = 'Ese DNI es erróneo'
                 events.Eventos.AbrirAviso(mensaje)
                 Clientes.limpiarDatos()
                 dniOk=False

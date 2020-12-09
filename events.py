@@ -1,23 +1,39 @@
-import sys, var
+import sys, var, datetime
+import os, zipfile
 
 class Eventos():
-    def Salir(self):
+    def Salir(event):
         '''Evento modulo salir'''
 
         try:
+            #var.dlgSalir.show()
             var.dlgSalir.show()
             if var.dlgSalir.exec_():
                 sys.exit()
             else:
                 var.dlgSalir.close()
+                event.ignore()
         except Exception as error:
             print('Error salir %s'% str(error))
+
+    def closeSalir(event):
+        try:
+            if var.dlgSalir.exec_():
+                var.dlgSalir.hide()
+        except Exception as error:
+            print('Error salir %s' % str(error))
 
     def Backup(self):
         try:
             print('Backup')
+            fecha = datetime.now()
+            ficheroZip = zipfile.Zipefile(str(self.fecha)+'_backup.zip','w')
+            ficheroZip.write(var.filebd, os.path.basename(var.filebd), zipfile.ZIP_DEFLATED)
+
         except Exception as error:
             print('Error backup %s' % str(error))
+
+
 
     def AbrirDir(self):
         try:

@@ -14,7 +14,8 @@ class DialogSalir(QtWidgets.QDialog):
         super(DialogSalir, self).__init__()
         var.dlgSalir = Ui_venSalir()
         var.dlgSalir.setupUi(self)
-        var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        var.dlgSalir.btnAceptar.clicked.connect(events.Eventos.Salir)
+        var.dlgSalir.btnCancelar.clicked.connect(events.Eventos.closeSalir)
         # var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
 
 class DialogAviso(QtWidgets.QDialog):
@@ -68,8 +69,8 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
-        var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
         var.ui.actiontoolBarSalir.triggered.connect(events.Eventos.Salir)
+        var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
         var.ui.toolBarAbrirCarpeta.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.toolBarImpresora.triggered.connect(events.Eventos.Imprimir)
@@ -109,9 +110,9 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.mostrarClientes(self)
 
 
-    def closeEvents(self, event):
+    def closeEvent(self, event):
         if event:
-            event.Eventos.Salir()
+            events.Eventos.Salir(event)
 
 
 
