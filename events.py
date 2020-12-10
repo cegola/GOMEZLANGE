@@ -1,4 +1,5 @@
-import sys, var, datetime
+import sys, var
+from datetime import date
 import os, zipfile
 
 class Eventos():
@@ -26,8 +27,8 @@ class Eventos():
     def Backup(self):
         try:
             print('Backup')
-            fecha = datetime.now()
-            ficheroZip = zipfile.Zipefile(str(self.fecha)+'_backup.zip','w')
+            fecha = date.today()
+            ficheroZip = zipfile.ZipFile(fecha.strftime('%d_%m_%Y')+'_backup.zip','w')
             ficheroZip.write(var.filebd, os.path.basename(var.filebd), zipfile.ZIP_DEFLATED)
 
         except Exception as error:

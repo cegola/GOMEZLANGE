@@ -41,6 +41,7 @@ class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         super(FileDialogAbrir, self).__init__()
 
+
 class DialogImprimir(QPrintDialog):
     def __init__(self):
         super(DialogImprimir, self).__init__()
