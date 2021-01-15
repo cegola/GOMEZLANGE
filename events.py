@@ -1,5 +1,6 @@
-import sys, var
+import sys, var, shutil
 from datetime import date
+from PyQt5 import QtWidgets
 import os, zipfile
 
 class Eventos():
@@ -28,8 +29,16 @@ class Eventos():
         try:
             print('Backup')
             fecha = date.today()
-            ficheroZip = zipfile.ZipFile(fecha.strftime('%d_%m_%Y')+'_backup.zip','w')
-            ficheroZip.write(var.filebd, os.path.basename(var.filebd), zipfile.ZIP_DEFLATED)
+            var.copia = (fecha.strftime('%d_%m_%Y')+'_backup.zip')
+            option = QtWidgets.QFileDialog.Options()
+            print(option)
+            directorio, filename = var.filedlgAbrir.getSaveFileName(None, 'Guardar copia', var.copia, '.zip', options=option)
+            if var.filedlgAbrir.Accepted and filename != '':
+                ficheroZip = zipfile.ZipFile(var.copia,'w')
+                ficheroZip.write(var.filebd, os.path.basename(var.filebd), zipfile.ZIP_DEFLATED)
+                ficheroZip.close()
+                var.ui.lblstatus.setText('Backup realizada')
+                shutil.move(str(var.copia), str(directorio))
 
         except Exception as error:
             print('Error backup %s' % str(error))
@@ -56,6 +65,15 @@ class Eventos():
         except Exception as error:
             print('Error salir %s' % str(error))
 
+    def AbrirAcercaDe(self):
+        try:
+            # var.dlgSalir.show()
+            var.dlgAcercaDe.show()
+            if var.dlgAcercaDe.exec_():
+                var.dlgAcercaDe.close()
+        except Exception as error:
+            print('Error acerca de %s' % str(error))
+
 
     def Imprimir(self):
         try:
@@ -73,5 +91,7 @@ class Eventos():
                 var.ui.cmbProvincia.addItem(i)
         except Exception as error:
             print('Error %s' % str(error))
+
+
 
 

@@ -5,12 +5,15 @@ global chkpago
 #ventanas de dialogo
 global dlgAviso
 global dlgSalir
+global dlgAcercaDe
 global dlgCalendar
 global filedlgAbrir
 global dglImprimir
 global lblMensaje
 global salir
+global copia
 
+global cmbventa
 global DATABASE
 
 global sex

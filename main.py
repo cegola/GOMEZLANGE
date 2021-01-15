@@ -2,8 +2,9 @@ from ventana import *
 from venSalir import *
 from venCalendar import *
 from venAviso import *
+from venAcercaDe import *
 from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
-import sys, var, events, clients, conexion
+import sys, var, events, clients, conexion, products, printer
 from datetime import datetime, date
 import locale
 
@@ -23,6 +24,13 @@ class DialogAviso(QtWidgets.QDialog):
         super(DialogAviso, self).__init__()
         var.dlgAviso = Ui_venAviso()
         var.dlgAviso.setupUi(self)
+
+class DialogAcercaDe(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogAcercaDe, self).__init__()
+        var.dlgAcercaDe = Ui_venAcercaDe()
+        var.dlgAcercaDe.setupUi(self)
+        var.dlgAcercaDe.btnSalir.clicked.connect(events.Eventos.AbrirAcercaDe)
 
 
 
@@ -55,6 +63,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         var.dlgSalir = DialogSalir()
         var.dlgAviso = DialogAviso()
+        var.dlgAcercaDe = DialogAcercaDe()
         var.dlgCalendar = DialogCalendar()
         var.filedlgAbrir = FileDialogAbrir()
         var.dglImprimir = DialogImprimir()
@@ -69,6 +78,7 @@ class Main(QtWidgets.QMainWindow):
         '''Estamos conectando el codigo con la interfaz grafica'''
 
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
+        var.ui.btnSalirPro.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actiontoolBarSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
@@ -77,13 +87,21 @@ class Main(QtWidgets.QMainWindow):
         var.ui.toolBarImpresora.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
 
+        var.ui.actionAbout.triggered.connect(events.Eventos.AbrirAcercaDe)
+
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
+        var.ui.editPrecio.editingFinished.connect(products.Productos.validoPrecio)
         '''botones'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
+        var.ui.btnCalendarFac.clicked.connect(clients.Clientes.abrirCalendar)
         var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
+        var.ui.btnAltaPro.clicked.connect(products.Productos.altaProducto)
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
+        var.ui.btnBajaPro.clicked.connect(products.Productos.bajaPro)
         var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
+        var.ui.btnLimpiarPro.clicked.connect(products.Productos.limpiarDatos)
         var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
+        var.ui.btnModPro.clicked.connect(products.Productos.modPro)
         var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
         var.ui.btnBuscar.clicked.connect(clients.Clientes.buscarClie)
         clients.Clientes.valoresSpin(None)
@@ -96,6 +114,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.cmbProvincia.activated[str].connect(clients.Clientes.selProv)
         var.ui.tablaCli.clicked.connect(clients.Clientes.cargarCli)
         var.ui.tablaCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tablaPro.clicked.connect(products.Productos.cargarPro)
+        var.ui.tablaPro.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        #var.ui.tabVenta.clicked.connect(ventas.Ventas.cargarVentas)
+        var.ui.tabVenta.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         '''Llamada a modulos iniciales'''
         events.Eventos.cargarProv()
@@ -106,9 +128,15 @@ class Main(QtWidgets.QMainWindow):
         fecha= date.today()
         var.ui.lblfecha.setText(fecha.strftime('%A %d de %B del %Y'))
 
+        '''modulos de impresion'''
+        var.ui.actionListado_clientes.triggered.connect(printer.Printer.reportCli)
+        var.ui.actionListado_productos.triggered.connect(printer.Printer.reportPro)
+
+
         '''modulos del principal'''
         conexion.Conexion.db_connect(var.filebd)
         conexion.Conexion.mostrarClientes(self)
+        conexion.Conexion.mostrarProductos(self)
 
 
     def closeEvent(self, event):
