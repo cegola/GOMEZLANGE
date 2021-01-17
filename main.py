@@ -4,7 +4,7 @@ from venCalendar import *
 from venAviso import *
 from venAcercaDe import *
 from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
-import sys, var, events, clients, conexion, products, printer
+import sys, var, events, clients, conexion, products, printer, ventas
 from datetime import datetime, date
 import locale
 
@@ -44,6 +44,7 @@ class DialogCalendar(QtWidgets.QDialog):
         anoActual = datetime.now().year
         var.dlgCalendar.Calendar.setSelectedDate((QtCore.QDate(anoActual,mesActual,diaActual)))
         var.dlgCalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
+        var.dlgCalendar.Calendar.clicked.connect(ventas.Ventas.cargarFecha)
 
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
@@ -91,20 +92,28 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         var.ui.editPrecio.editingFinished.connect(products.Productos.validoPrecio)
-        '''botones'''
+        '''botones Cli'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
-        var.ui.btnCalendarFac.clicked.connect(clients.Clientes.abrirCalendar)
         var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
         var.ui.btnAltaPro.clicked.connect(products.Productos.altaProducto)
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
+        var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
+        var.ui.btnBuscar.clicked.connect(clients.Clientes.buscarClie)
+        '''Botones Pro'''
         var.ui.btnBajaPro.clicked.connect(products.Productos.bajaPro)
         var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
         var.ui.btnLimpiarPro.clicked.connect(products.Productos.limpiarDatos)
         var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
         var.ui.btnModPro.clicked.connect(products.Productos.modPro)
-        var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
-        var.ui.btnBuscar.clicked.connect(clients.Clientes.buscarClie)
         clients.Clientes.valoresSpin(None)
+        '''Botones Fac'''
+        var.ui.btnFacturar.clicked.connect(ventas.Ventas.altaFactura)
+        var.ui.btnCalendarFac.clicked.connect(ventas.Ventas.abrirCalendar)
+        var.ui.btnAnular.clicked.connect(ventas.Ventas.borrarFac)
+        var.ui.btnBuscarCli.clicked.connect(conexion.Conexion.mostrarFacturasCli)
+        var.ui.btnRecargarCli.clicked.connect(conexion.Conexion.mostrarFacturas)
+        var.ui.btnAceptarVenta.clicked.connect(ventas.Ventas.procesoVenta)
+        var.ui.btnBorrarVenta.clicked.connect(ventas.Ventas.anularVenta)
 
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
@@ -116,7 +125,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tablaCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tablaPro.clicked.connect(products.Productos.cargarPro)
         var.ui.tablaPro.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        #var.ui.tabVenta.clicked.connect(ventas.Ventas.cargarVentas)
+        var.ui.tabFactura.clicked.connect(ventas.Ventas.cargarFac)
+        var.ui.tabFactura.clicked.connect(ventas.Ventas.mostrarVentasFac)
+        var.ui.tabFactura.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabVenta.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         '''Llamada a modulos iniciales'''

@@ -14,10 +14,14 @@ global salir
 global copia
 
 global cmbventa
+global subfac
+global fac
+global iva
 global DATABASE
 
 global sex
 pay = []
 pay2 = []
+venta = []
 
 filebd= 'empresa.db'
