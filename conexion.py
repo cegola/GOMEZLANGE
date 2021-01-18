@@ -255,14 +255,14 @@ class Conexion():
     def mostrarFacturas(self):
         index = 0
         query = QtSql.QSqlQuery()
-        query.prepare('select numFac, fechaFactura from facturas order by numFac desc)')
+        query.prepare('select numFactura, fechaFactura from facturas order by numFactura desc')
         if query.exec_():
             while query.next():
                 # creamos fila
                 var.ui.tabFactura.setRowCount(index + 1)
                 # vamos metiendo los datos en cada celda de la fila
-                var.ui.tabFactura.setIndex(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
-                var.ui.tabFactura.setIndex(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
+                var.ui.tabFactura.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
+                var.ui.tabFactura.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
                 index += 1
             Conexion.limpiarFac(self)
             var.ui.tabFactura.selectRow(0)
@@ -272,12 +272,12 @@ class Conexion():
         if index == 0:
             var.ui.tabFactura.clearContents()
 
-    def mostrarFacturasCli(self):
+    def mostrarFacturasCli():
         index = 0
         cont = 0
         dni = var.ui.editDniFac.text()
         query = QtSql.QSqlQuery()
-        query.prepare('select numFac, fechaFactura from facturas where dniCliente = :dni order by numFac desc)')
+        query.prepare('select numFactura, fechaFactura from facturas where dniCliente = :dni order by fechaFactura desc')
         query.bindValue(':dni', str(dni))
         if query.exec_():
             while query.next():
@@ -288,8 +288,8 @@ class Conexion():
                 # crear fila
                 var.ui.tabFactura.setRowCount(index + 1)
                 # vamos metiendo los datos en cada celda de la fila
-                var.ui.tabFactura.setIndex(index, 0, QtWidgets.QTableWidgetItem(str(codFac)))
-                var.ui.tabFactura.setIndex(index, 1, QtWidgets.QTableWidgetItem(str(fecha)))
+                var.ui.tabFactura.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codFac)))
+                var.ui.tabFactura.setItem(index, 1, QtWidgets.QTableWidgetItem(str(fecha)))
                 index += 1
             if cont == 0:
                 var.ui.tabFactura.selectRow(0)

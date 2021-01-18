@@ -177,6 +177,7 @@ class Clientes():
             for i, dato in enumerate(client):
                 dato.setText(fila[i])
             conexion.Conexion.cargarCliente(None)
+            conexion.Conexion.mostrarFacturasCli()
         except Exception as error:
                 print('Error cargar datos: %s' % str(error))
 
