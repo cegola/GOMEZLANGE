@@ -56,8 +56,9 @@ class Ventas():
             fila = var.ui.tabFactura.selectedItems()
             if fila:
                 fila = [dato.text() for dato in fila]
+            print(fila)
             codF = fila[0]
-            var.ui.lblCodFac.setText(str(codF[1]))
+            var.ui.lblCodFac.setText(str(codF[0]))
             var.ui.editFechaFac.setText(str(fila[1]))
             conexion.Conexion.cargarFacturas(str(codF))
         except Exception as error:
@@ -111,7 +112,7 @@ class Ventas():
         try:
             var.cmbventa = QtWidgets.QComboBox()
             codfac = var.ui.lblCodFac.text()
-            conexion.Conexion.listadoVentasFacturas(codfac)
+            conexion.Conexion.listadoVentasFacturas(int(codfac))
             conexion.Conexion.cargarCmbVentas(var.cmbventa)
         except Exception as error:
             print('Error mostrar venta fac %s' % str(error))

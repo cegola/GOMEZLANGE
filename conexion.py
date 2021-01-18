@@ -391,6 +391,7 @@ class Conexion():
             var.subfac = 0.00
             query = QtSql.QSqlQuery()
             query1 = QtSql.QSqlQuery()
+            print(codFac)
             query.prepare('select codFacVenta, codArtVenta, cantidad from ventas where codFacVenta = :codFac')
             query.bindValue(':codFac', int(codFac))
             if query.exec_():
