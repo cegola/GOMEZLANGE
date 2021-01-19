@@ -101,7 +101,7 @@
              <x>0</x>
              <y>0</y>
              <width>879</width>
-             <height>411</height>
+             <height>413</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -118,6 +118,9 @@
               <width>881</width>
               <height>641</height>
              </rect>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="alternatingRowColors">
              <bool>true</bool>
@@ -841,6 +844,9 @@
             <width>211</width>
             <height>681</height>
            </rect>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <column>
            <property name="text">
@@ -1886,7 +1892,7 @@
              <x>0</x>
              <y>0</y>
              <width>879</width>
-             <height>483</height>
+             <height>485</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -1903,6 +1909,9 @@
               <width>881</width>
               <height>731</height>
              </rect>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="alternatingRowColors">
              <bool>true</bool>
@@ -2278,11 +2287,11 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="grpBtnSex"/>
   <buttongroup name="grpBtnPay">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="grpBtnSex"/>
  </buttongroups>
 </ui>

@@ -275,7 +275,9 @@ class Conexion():
     def mostrarFacturasCli():
         index = 0
         cont = 0
+        var.ui.tabFactura.clearContents()
         dni = var.ui.editDniFac.text()
+        print(str(dni))
         query = QtSql.QSqlQuery()
         query.prepare('select numFactura, fechaFactura from facturas where dniCliente = :dni order by fechaFactura desc')
         query.bindValue(':dni', str(dni))
@@ -305,7 +307,8 @@ class Conexion():
 
     def cargarFacturas(cod):
         query = QtSql.QSqlQuery()
-        query.prepare('select dniCliente, apellidos from facturas where numFac = :numFac)')
+        print(cod)
+        query.prepare('select dniCliente, apellidos from facturas where numFactura = :numFac')
         query.bindValue(':numFac', int(cod))
         if query.exec_():
             while query.next():
@@ -351,9 +354,9 @@ class Conexion():
     def altaVenta(self):
         # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
         query = QtSql.QSqlQuery()
-        query.prepare(
-            'insert into ventas (codFacVenta, codArtVenta, cantidad, precio) VALUES (:codFacVenta, :codArtVenta, :cantidad, :precio)')
+        query.prepare('insert into ventas (codFacVenta, codArtVenta, cantidad, precio) VALUES (:codFacVenta, :codArtVenta, :cantidad, :precio')
         query.bindValue(':codFacVenta', int(var.venta[0]))
+        query.bindValue(':codArtVenta', int(var.venta[1]))
         query.bindValue(':codArtVenta', int(var.venta[1]))
         query.bindValue(':cantidad', int(var.venta[3]))
         query.bindValue(':precio', float(var.venta[4]))
@@ -388,11 +391,13 @@ class Conexion():
         En excepciones se recoge cualquier error que se produzca en la ejecución del módulo.
         '''
         try:
+            var.ui.tabVenta.clearContents()
             var.subfac = 0.00
+            subtotal = 0.00
             query = QtSql.QSqlQuery()
             query1 = QtSql.QSqlQuery()
             print(codFac)
-            query.prepare('select codFacVenta, codArtVenta, cantidad from ventas where codFacVenta = :codFac')
+            query.prepare('select codVenta, codArtVenta, cantidad from ventas where codFacVenta = :codFac')
             query.bindValue(':codFac', int(codFac))
             if query.exec_():
                 index = 0
@@ -417,11 +422,11 @@ class Conexion():
                     var.subfac = round(float(subtotal) + float(var.subfac), 2)
 
             if int(index) > 0:
-                ventas.Ventas.prepararTablaventas(index)
+                ventas.Ventas.tablaVentas(index)
             else:
-                print(index)
+                #print(index)
                 var.ui.tabVenta.setRowCount(0)
-                ventas.Ventas.TablaVentas(0)
+                ventas.Ventas.tablaVentas(0)
             var.ui.lblSubtotal.setText(str(var.subfac))
             var.iva = round(float(var.subfac) * 0.21, 2)
             var.ui.lblIva.setText(str(var.iva))

@@ -79,7 +79,7 @@ class Ventas():
             # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
             codFac = var.ui.lblCodFac.text()
             var.venta.append(int(codFac))
-            articulo = var.ui.cmbventa.currentText()
+            articulo = var.cmbventa.currentText()
             dato = conexion.Conexion.obtenerCodPrecio(articulo)
             print(dato)
             var.venta.append(int(dato[0]))  # codigo del producto
@@ -93,15 +93,17 @@ class Ventas():
             subtotal = round(float(cantidad) * float(dato[1]), 2)
             var.venta.append(subtotal)
             var.venta.append(row)
+            print(var.venta)
             if codFac != '' and articulo != '' and cantidad != '':
-                conexion.Conexion.altaVenta()
+                print(var.venta)
+                conexion.Conexion.altaVenta(self)
                 var.subfac = round(float(subtotal) + float(var.subfac), 2)
                 var.ui.lblSubtotal.setText(str(var.subfac))
                 var.iva = round(float(var.subfac) * 0.21, 2)
                 var.ui.lblIva.setText(str(var.iva))
                 var.fac = round(float(var.iva) + float(var.subfac), 2)
                 var.ui.lblTotal.setText(str(var.fac))
-                Ventas.mostrarVentasfac()
+                Ventas.mostrarVentasFac(self)
             else:
                var.ui.lblstatus.setText('Faltan Datos de la Factura')
         except Exception as error:
@@ -115,7 +117,7 @@ class Ventas():
             conexion.Conexion.listadoVentasFacturas(int(codfac))
             conexion.Conexion.cargarCmbVentas(var.cmbventa)
         except Exception as error:
-            print('Error mostrar venta fac %s' % str(error))
+            print('Error mostrar ventas de facturas %s' % str(error))
 
     def anularVenta(self):
         try:
@@ -124,7 +126,7 @@ class Ventas():
                 fila = [dato.text() for dato in fila]
             codventa = int(fila[0])
             conexion.Conexion.anulaVenta(codventa)
-            Ventas.mostrarVentasFac()
+            Ventas.mostrarVentasFac(self)
 
         except Exception as error:
             print('Error proceso anular venta de una factura: %s' % str(error))
