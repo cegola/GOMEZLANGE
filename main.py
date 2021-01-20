@@ -138,6 +138,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.lblstatus.setText('Bienvenido a 2º DAM')
         fecha= date.today()
         var.ui.lblfecha.setText(fecha.strftime('%A %d de %B del %Y'))
+        var.ui.tabWidget.setCurrentIndex(0)
 
         '''modulos de impresion'''
         var.ui.actionListado_clientes.triggered.connect(printer.Printer.reportCli)

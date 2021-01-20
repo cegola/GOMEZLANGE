@@ -47,7 +47,7 @@
     <item row="1" column="2">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabCli">
        <attribute name="title">
@@ -839,15 +839,18 @@
          <widget class="QTableWidget" name="tabFactura">
           <property name="geometry">
            <rect>
-            <x>-10</x>
+            <x>0</x>
             <y>0</y>
-            <width>211</width>
+            <width>201</width>
             <height>681</height>
            </rect>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>90</number>
+          </attribute>
           <column>
            <property name="text">
             <string>Nº Factura</string>
@@ -2287,11 +2290,11 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="grpBtnSex"/>
   <buttongroup name="grpBtnPay">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="grpBtnSex"/>
  </buttongroups>
 </ui>

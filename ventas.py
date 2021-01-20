@@ -56,7 +56,6 @@ class Ventas():
             fila = var.ui.tabFactura.selectedItems()
             if fila:
                 fila = [dato.text() for dato in fila]
-            print(fila)
             codF = fila[0]
             var.ui.lblCodFac.setText(str(codF[0]))
             var.ui.editFechaFac.setText(str(fila[1]))
@@ -75,13 +74,13 @@ class Ventas():
     def procesoVenta(self):
         try:
             var.subfac = 0.00
-            var.venta = []
+            #var.venta = []
             # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
             codFac = var.ui.lblCodFac.text()
             var.venta.append(int(codFac))
             articulo = var.cmbventa.currentText()
             dato = conexion.Conexion.obtenerCodPrecio(articulo)
-            print(dato)
+
             var.venta.append(int(dato[0]))  # codigo del producto
             var.venta.append(articulo)
             row = var.ui.tabVenta.currentRow()
@@ -93,10 +92,10 @@ class Ventas():
             subtotal = round(float(cantidad) * float(dato[1]), 2)
             var.venta.append(subtotal)
             var.venta.append(row)
-            print(var.venta)
+            #print(var.venta)
             if codFac != '' and articulo != '' and cantidad != '':
+                conexion.Conexion.altaVenta()
                 print(var.venta)
-                conexion.Conexion.altaVenta(self)
                 var.subfac = round(float(subtotal) + float(var.subfac), 2)
                 var.ui.lblSubtotal.setText(str(var.subfac))
                 var.iva = round(float(var.subfac) * 0.21, 2)

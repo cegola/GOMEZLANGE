@@ -390,7 +390,7 @@ class Ui_venPrincipal(object):
         self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 199, 439))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.tabFactura = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_3)
-        self.tabFactura.setGeometry(QtCore.QRect(-10, 0, 211, 681))
+        self.tabFactura.setGeometry(QtCore.QRect(0, 0, 201, 681))
         self.tabFactura.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tabFactura.setObjectName("tabFactura")
         self.tabFactura.setColumnCount(2)
@@ -407,6 +407,7 @@ class Ui_venPrincipal(object):
         font.setWeight(75)
         item.setFont(font)
         self.tabFactura.setHorizontalHeaderItem(1, item)
+        self.tabFactura.horizontalHeader().setDefaultSectionSize(90)
         self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_3)
         self.scrollArea_4 = QtWidgets.QScrollArea(self.tabFac)
         self.scrollArea_4.setGeometry(QtCore.QRect(240, 120, 641, 441))
@@ -992,7 +993,7 @@ class Ui_venPrincipal(object):
         self.toolBar.addAction(self.actiontoolBarSalir)
 
         self.retranslateUi(venPrincipal)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(venPrincipal)
 
     def retranslateUi(self, venPrincipal):

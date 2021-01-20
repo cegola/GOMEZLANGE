@@ -307,7 +307,7 @@ class Conexion():
 
     def cargarFacturas(cod):
         query = QtSql.QSqlQuery()
-        print(cod)
+        #print(cod)
         query.prepare('select dniCliente, apellidos from facturas where numFactura = :numFac')
         query.bindValue(':numFac', int(cod))
         if query.exec_():
@@ -351,17 +351,22 @@ class Conexion():
                 dato = [str(query.value(0)), str(query.value(1))]
         return dato
 
-    def altaVenta(self):
+    def altaVenta():
         # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
         query = QtSql.QSqlQuery()
-        query.prepare('insert into ventas (codFacVenta, codArtVenta, cantidad, precio) VALUES (:codFacVenta, :codArtVenta, :cantidad, :precio')
+        query.prepare('insert into ventas (codFacVenta, codArtVenta, cantidad, precio) VALUES'
+                      '(:codFacVenta, :codArtVenta, :cantidad, :precio)')
+
         query.bindValue(':codFacVenta', int(var.venta[0]))
-        query.bindValue(':codArtVenta', int(var.venta[1]))
         query.bindValue(':codArtVenta', int(var.venta[1]))
         query.bindValue(':cantidad', int(var.venta[3]))
         query.bindValue(':precio', float(var.venta[4]))
+
+
         row = var.ui.tabVenta.currentRow()
+        #print(var.venta)
         if query.exec_():
+            print('hola')
             var.ui.lblstatus.setText('Venta Realizada')
             var.ui.tabVenta.setItem(row, 1, QtWidgets.QTableWidgetItem(str(var.venta[2])))
             var.ui.tabVenta.setItem(row, 2, QtWidgets.QTableWidgetItem(str(var.venta[3])))
@@ -396,7 +401,7 @@ class Conexion():
             subtotal = 0.00
             query = QtSql.QSqlQuery()
             query1 = QtSql.QSqlQuery()
-            print(codFac)
+            #print(codFac)
             query.prepare('select codVenta, codArtVenta, cantidad from ventas where codFacVenta = :codFac')
             query.bindValue(':codFac', int(codFac))
             if query.exec_():
@@ -405,14 +410,16 @@ class Conexion():
                     codVenta = query.value(0)
                     codArtVenta = query.value(1)
                     cantidad = query.value(2)
+                    print(codVenta, codArtVenta, cantidad)
                     var.ui.tabVenta.setRowCount(index + 1)
                     var.ui.tabVenta.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codVenta)))
-                    query1.prepare('select articulo, precio from articulos where codigo = :codArtVenta')
+                    query1.prepare('select nombre, precio from articulos where codigo = :codArtVenta')
                     query1.bindValue(':codArtVenta', int(codArtVenta))
                     if query1.exec_():
                         while query1.next():
                             articulo = query1.value(0)
                             precio = query1.value(1)
+                            print(articulo, precio)
                             var.ui.tabVenta.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
                             var.ui.tabVenta.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
                             subtotal = round(float(cantidad) * float(precio), 2)
