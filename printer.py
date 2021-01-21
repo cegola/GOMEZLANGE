@@ -3,7 +3,7 @@ from reportlab.lib.pagesizes import A4
 from datetime import datetime
 from PyQt5 import QtSql
 import os,var
-
+'''query1.value(4).strip('[]').replace('\'','').replace('',' -')))'''
 class Printer():
     def cabecera(self):
         try:

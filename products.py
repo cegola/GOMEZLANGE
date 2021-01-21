@@ -68,7 +68,7 @@ class Productos():
                         cell = QtWidgets.QTableWidgetItem(registro)
                         var.ui.tablaPro.setItem(row, column, cell)
                         column += 1
-
+                    print(newpro)
                     conexion.Conexion.altaPro(newpro)
 
                 else:

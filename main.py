@@ -92,6 +92,7 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         var.ui.editPrecio.editingFinished.connect(products.Productos.validoPrecio)
+
         '''botones Cli'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
         var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)

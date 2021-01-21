@@ -161,7 +161,7 @@ class Conexion():
         query.bindValue(':precio', round(float(producto[1]), 2))
         query.bindValue(':stock', int(producto[2]))
         if query.exec_():
-            Conexion.mostarProductos(None)
+            Conexion.mostrarProductos(None)
             var.ui.lblstatus.setText(
                 'Producto con nombre ' + str(producto[0]) + ' dado de alta, dia ' + time.strftime("%x"))
             print('Insercion correcta')
@@ -180,7 +180,7 @@ class Conexion():
                 var.ui.tablaPro.setRowCount(index + 1)  # crea la fila y a continuacion mete los datos
                 var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                 var.ui.tablaPro.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
-                var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem(str(precio)))
+                var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio))+' €'))
                 index += 1
         else:
             print('Error mostrar producto ddd: ' + query.lastError().text())
@@ -272,7 +272,7 @@ class Conexion():
         if index == 0:
             var.ui.tabFactura.clearContents()
 
-    def mostrarFacturasCli():
+    def mostrarFacturasCli(self):
         index = 0
         cont = 0
         var.ui.tabFactura.clearContents()

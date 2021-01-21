@@ -74,7 +74,7 @@ class Ventas():
     def procesoVenta(self):
         try:
             var.subfac = 0.00
-            #var.venta = []
+            var.venta = []
             # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
             codFac = var.ui.lblCodFac.text()
             var.venta.append(int(codFac))
