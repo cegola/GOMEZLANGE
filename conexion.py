@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtSql
+from PyQt5 import QtWidgets, QtSql, QtCore
 # import  pymongo
 import var, time
 import ventas
@@ -36,7 +36,7 @@ class Conexion():
             var.ui.lblstatus.setText('Cliente con dni ' + str(cliente[0]) + ' dado de alta, dia ' + time.strftime("%x"))
             print('Insercion correcta')
         else:
-            print("Error alta: ", query.lastError().text())
+            print("Error conexion: alta: ", query.lastError().text())
 
     def mostrarClientes(self):
         index = 0
@@ -53,7 +53,7 @@ class Conexion():
                 var.ui.tablaCli.setItem(index, 2, QtWidgets.QTableWidgetItem(nombre))
                 index += 1
         else:
-            print('Error mostrar clientes: ' + query.lastError().text())
+            print('Error conexion: mostrar clientes: ' + query.lastError().text())
 
     def cargarCliente(self):
         dni = var.ui.editDni.text()
@@ -92,7 +92,7 @@ class Conexion():
             print('Baja cliente')
             var.ui.lblstatus.setText('Cliente con dni ' + dni + ' dado de baja, dia' + time.strftime("%x"))
         else:
-            print("Error mostrar clientes: ", query.lastError().text())
+            print("Error conexion: mostrar clientes: ", query.lastError().text())
 
     def modCliente(codigo, newdata):
         print(newdata)
@@ -115,7 +115,7 @@ class Conexion():
             print('Cliente modificado')
             var.ui.lblstatus.setText('Cliente con dni ' + str(newdata[0]) + ' modificado, dia ' + time.strftime("%x"))
         else:
-            print('Error modificar cliente: ', query.lastError().text())
+            print('Error conexion: modificar cliente: ', query.lastError().text())
 
     def buscarCliente(dni):
         index = 0
@@ -166,7 +166,7 @@ class Conexion():
                 'Producto con nombre ' + str(producto[0]) + ' dado de alta, dia ' + time.strftime("%x"))
             print('Insercion correcta')
         else:
-            print("Error producto: ", query.lastError().text())
+            print("Error conexion: alta producto: ", query.lastError().text())
 
     def mostrarProductos(self):
         index = 0
@@ -178,12 +178,12 @@ class Conexion():
                 nombre = query.value(1)
                 precio = query.value(2)
                 var.ui.tablaPro.setRowCount(index + 1)  # crea la fila y a continuacion mete los datos
-                var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
+                var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)).setTextAlignment(QtCore.Qt.AlignCenter))
                 var.ui.tablaPro.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
                 var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio))+' €'))
                 index += 1
         else:
-            print('Error mostrar producto ddd: ' + query.lastError().text())
+            print('Error conexion: mostrar producto: ' + query.lastError().text())
 
     def cargarProducto(self):
         nombre = var.ui.editNombrePro.text()
@@ -206,7 +206,7 @@ class Conexion():
             print('Baja producto')
             var.ui.lblstatus.setText('Producto con nombre ' + nombre + ' dado de baja, dia' + time.strftime("%x"))
         else:
-            print("Error eliminar producto: ", query.lastError().text())
+            print("Error conexion: eliminar producto: ", query.lastError().text())
 
     def modProducto(codigo, newdata):
         print(newdata)
@@ -224,7 +224,7 @@ class Conexion():
             var.ui.lblstatus.setText(
                 'Producto con nombre ' + str(newdata[0]) + ' modificado, dia ' + time.strftime("%x"))
         else:
-            print('Error modificar producto: ', query.lastError().text())
+            print('Error conexion: modificar producto: ', query.lastError().text())
 
     '''FACTURACION'''
 
@@ -247,10 +247,10 @@ class Conexion():
         if query.exec_():
             var.ui.lblstatus.setText('Factura creada')
         query1 = QtSql.QSqlQuery()
-        query1.prepare('select max(numFac) from facturas')
+        query1.prepare('select max(numFactura) from facturas')
         if query1.exec_():
             while query1.next():
-                var.ui.lblCodFac.setText(str(query1.value(0)))
+                var.ui.lblCodFac.setText(int(query1.value(0)))
 
     def mostrarFacturas(self):
         index = 0
@@ -268,7 +268,7 @@ class Conexion():
             var.ui.tabFactura.selectRow(0)
             var.ui.tabFactura.setFocus()
         else:
-            print("Error mostrar facturas: ", query.lastError().text())
+            print("Error conexion: mostrar facturas: ", query.lastError().text())
         if index == 0:
             var.ui.tabFactura.clearContents()
 
@@ -284,7 +284,7 @@ class Conexion():
         if query.exec_():
             while query.next():
                 # cojo valores
-                cont =+ 1
+                cont += 1
                 codFac = query.value(0)
                 fecha = query.value(1)
                 # crear fila
@@ -297,7 +297,7 @@ class Conexion():
                 var.ui.tabFactura.selectRow(0)
                 var.ui.lblstatus.setText('Cliente sin facturas')
         else:
-            print("Error mostrar facturas cliente: ", query.lastError().text())
+            print("Error conexion: mostrar facturas cliente: ", query.lastError().text())
 
 
     def limpiarFac(self):
@@ -333,7 +333,7 @@ class Conexion():
             var.ui.lblstatus.setText('Factura anulada')
             Conexion.mostrarFacturas()
         else:
-            print('Error anular factura en borrarFactura ', query.lastError().text())
+            print('Error conexion: anular factura en borrarFactura ', query.lastError().text())
 
         query1 = QtSql.QSqlQuery()
         query1.prepare('delete from ventas where codFacVenta = :numFac)')
@@ -378,7 +378,7 @@ class Conexion():
             var.ui.tabVenta.scrollToBottom()
             Conexion.cargarCmbVentas(var.cmbventa)
         else:
-            print('Error alta venta: ', query.lastError().text())
+            print('Error conexion: alta venta: ', query.lastError().text())
 
 
     def listadoVentasFacturas(codFac):
@@ -440,7 +440,7 @@ class Conexion():
             var.fac = round(float(var.iva) + float(var.subfac), 2)
             var.ui.lblTotal.setText(str(var.fac))
         except Exception as error:
-            print('Error Listado de la tabla de ventas: %s ' % str(error))
+            print('Error conexion: Listado de la tabla de ventas: %s ' % str(error))
 
 
     def anulaVenta(codVenta):
@@ -450,7 +450,7 @@ class Conexion():
         if query.exec_():
             var.ui.lblstatus.setText('Venta Anulada')
         else:
-            print("Error baja venta: ", query.lastError().text())
+            print("Error conexion: baja venta: ", query.lastError().text())
 
 # class Conexion():
 #     HOST =  'localhost'

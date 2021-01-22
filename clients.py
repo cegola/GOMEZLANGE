@@ -24,7 +24,7 @@ class Clientes():
                 '''Comprueba que la letra del dni corresponde con la de la tabla'''
             return False
         except:
-            print('Error modulo validar DNI')
+            print('Error clients: modulo validar DNI')
             return None
 
 
@@ -46,7 +46,7 @@ class Clientes():
                 Clientes.limpiarDatos()
                 dniOk=False
         except:
-            print('Error modulo valido DNI')
+            print('Error clients: modulo valido DNI')
             return None
 
     def selSexo(self):
@@ -56,7 +56,7 @@ class Clientes():
             if var.ui.rbtMasculino.isChecked():
                 var.sex = 'Hombre'
         except Exception as error:
-            print('Error sexo: %s' % str(error))
+            print('Error clients: sexo: %s' % str(error))
 
     def selPago():
         try:
@@ -71,7 +71,7 @@ class Clientes():
                     var.pay.append('Transferencia')
             return var.pay
         except Exception as error:
-            print('Error pago: %s' % str(error))
+            print('Error clients: pago: %s' % str(error))
 
 
     def valoresSpin(self):
@@ -79,21 +79,21 @@ class Clientes():
             var.ui.spinEdad.setValue(18)
             print('Done')
         except Exception as error:
-            print('Error valores spin: %s' % str(error))
+            print('Error clients: valores spin: %s' % str(error))
 
     def selProv(prov):
         try:
             global vpro
             vpro = prov
         except Exception as error:
-            print('Error sel prov: %s' % str(error))
+            print('Error clients: sel prov: %s' % str(error))
 
 
     def abrirCalendar(self):
         try:
             var.dlgCalendar.show()
         except Exception as error:
-            print('Error cal: %s' % str(error))
+            print('Error clients: cal: %s' % str(error))
 
     def cargarFecha(qDate):
         try:
@@ -101,7 +101,7 @@ class Clientes():
             var.ui.editCliAlta.setText(str(data))
             var.dlgCalendar.hide()
         except Exception as error:
-            print('Error cargar fecha: %s' % str(error))
+            print('Error clients: cargar fecha: %s' % str(error))
 
     def altaCliente(self):
         '''cargara los clientes en la tabla'''
@@ -143,7 +143,7 @@ class Clientes():
             '''limpiamos los datos'''
             Clientes.limpiarDatos(self)
         except Exception as error:
-            print('Error alta cli: %s' % str(error))
+            print('Error clients: alta cli: %s' % str(error))
 
     def limpiarDatos():
         '''limpia los datos del formulario'''
@@ -163,10 +163,10 @@ class Clientes():
             var.ui.spinEdad.setValue(18)
 
         except Exception as error:
-                print('Error en limpiar datos : %s' % str(error))
+                print('Error clients: en limpiar datos : %s' % str(error))
 
 
-    def cargarCli():
+    def cargarCli(self):
         try:
             fila = var.ui.tablaCli.selectedItems()
             client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre]
@@ -179,7 +179,7 @@ class Clientes():
             conexion.Conexion.cargarCliente(None)
             conexion.Conexion.mostrarFacturasCli(self)
         except Exception as error:
-                print('Error cargar datos: %s' % str(error))
+                print('Error clients: cargar datos: %s' % str(error))
 
 
     def bajaCli(self):
@@ -192,7 +192,7 @@ class Clientes():
                 conexion.Conexion.mostrarClientes(self)
                 Clientes.limpiarDatos()
         except Exception as error:
-            print('Error cargar clientes: %s ' % str(error))
+            print('Error clients: cargar clientes: %s ' % str(error))
 
     def modCli(self):
         try:
@@ -215,7 +215,7 @@ class Clientes():
             else:
                 Clientes.limpiarDatos()
         except Exception as error:
-            print('Error modificar clientes: %s ' % str(error))
+            print('Error clients: modificar clientes: %s ' % str(error))
 
 
     def reloadCli(self):
@@ -223,11 +223,11 @@ class Clientes():
             Clientes.limpiarDatos()
             conexion.Conexion.mostrarClientes(None)
         except  Exception as error:
-            print('Error recargar clientes: %s ' % str(error))
+            print('Error clients: recargar clientes: %s ' % str(error))
 
     def buscarClie(self):
         try:
             dni = var.ui.editDni.text()
             cliente = conexion.Conexion.buscarCliente(dni)
         except  Exception as error:
-            print('Error recargar clientes: %s ' % str(error))
+            print('Error clients: recargar clientes: %s ' % str(error))

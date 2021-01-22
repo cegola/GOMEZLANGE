@@ -1,4 +1,4 @@
-import var, conexion, events
+import var, conexion, events, products
 from PyQt5 import QtWidgets
 from ventana import *
 
@@ -45,7 +45,7 @@ class Ventas():
             var.ui.tablaPro.setItem(index, 3, QtWidgets.QTableWidgetItem())
             var.ui.tablaPro.setItem(index, 4, QtWidgets.QTableWidgetItem())
         except Exception as error:
-            print('Error Preparar tabla ventas %s' % str(error))
+            print('Error ventas: Preparar tabla ventas %s' % str(error))
 
     def cargarFac(self):
         '''modulo que carga los datos de la factura y cliente'''
@@ -60,8 +60,11 @@ class Ventas():
             var.ui.lblCodFac.setText(str(codF[0]))
             var.ui.editFechaFac.setText(str(fila[1]))
             conexion.Conexion.cargarFacturas(str(codF))
+            Ventas.mostrarVentasFac(self)
+            conexion.Conexion.mostrarProductos(self)
+
         except Exception as error:
-            print('Error cargar fac %s' % str(error))
+            print('Error ventas: cargar fac %s' % str(error))
 
     def borrarFac(self):
         try:
@@ -69,7 +72,24 @@ class Ventas():
             conexion.Conexion.borrarFac(cod)
             Ventas.tablaVentas(0)
         except Exception as error:
-            print('Error borrar fac %s' % str(error))
+            print('Error ventas: borrar fac %s' % str(error))
+
+    # def buscarCliVenta(self):
+    #     try:
+    #         dni = var.ui.editDniFac
+    #         if Clientes.validarDni(dni):
+    #             var.ui.editDni.setText(dni.upper())
+    #         else:
+    #
+    #             var.ui.lblValidar.setStyleSheet('QLabel {color:red;}')
+    #             var.ui.lblValidar.setText('X')
+    #             var.ui.editDni.setText(dni.upper())
+    #             mensaje = 'Ese DNI es erróneo'
+    #             events.Eventos.AbrirAviso(mensaje)
+    #             Clientes.limpiarDatos()
+    #             dniOk=False
+    #     except Exception as error:
+    #         print('Error ventas: bucar cliente venta %s' % str(error))
 
     def procesoVenta(self):
         try:
@@ -103,10 +123,11 @@ class Ventas():
                 var.fac = round(float(var.iva) + float(var.subfac), 2)
                 var.ui.lblTotal.setText(str(var.fac))
                 Ventas.mostrarVentasFac(self)
+                conexion.Conexion.mostrarProductos(self)
             else:
                var.ui.lblstatus.setText('Faltan Datos de la Factura')
         except Exception as error:
-            print('Error proceso venta fac %s' % str(error))
+            print('Error ventas: proceso venta fac %s' % str(error))
 
 
     def mostrarVentasFac(self):
@@ -116,7 +137,7 @@ class Ventas():
             conexion.Conexion.listadoVentasFacturas(int(codfac))
             conexion.Conexion.cargarCmbVentas(var.cmbventa)
         except Exception as error:
-            print('Error mostrar ventas de facturas %s' % str(error))
+            print('Error ventas: mostrar ventas de facturas %s' % str(error))
 
     def anularVenta(self):
         try:
@@ -128,4 +149,4 @@ class Ventas():
             Ventas.mostrarVentasFac(self)
 
         except Exception as error:
-            print('Error proceso anular venta de una factura: %s' % str(error))
+            print('Error ventas: proceso anular venta de una factura: %s' % str(error))

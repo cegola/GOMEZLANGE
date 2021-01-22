@@ -76,7 +76,7 @@ class Productos():
                 '''limpiamos los datos'''
                 Productos.limpiarDatos(self)
         except Exception as error:
-            print('Error alta pro: %s' % str(error))
+            print('Error products: alta pro: %s' % str(error))
 
     def limpiarDatos(self):
         '''limpia los datos del formulario'''
@@ -87,7 +87,7 @@ class Productos():
                 product[i].setText('')
             var.ui.lblCodPro.setText('')
         except Exception as error:
-            print('Error en limpiar datos : %s' % str(error))
+            print('Error products: en limpiar datos : %s' % str(error))
 
     def cargarPro():
         try:
@@ -102,7 +102,7 @@ class Productos():
                 dato.setText(fila[i])
             conexion.Conexion.cargarProducto(None)
         except Exception as error:
-            print('Error cargar datos producto: %s' % str(error))
+            print('Error products: cargar datos producto: %s' % str(error))
 
     def bajaPro(self):
         try:
@@ -114,7 +114,7 @@ class Productos():
                 conexion.Conexion.mostrarProductos(self)
                 Productos.limpiarDatos()
         except Exception as error:
-            print('Error baja producto: %s ' % str(error))
+            print('Error products: baja producto: %s ' % str(error))
 
     def modPro(self):
         try:
@@ -131,4 +131,4 @@ class Productos():
             else:
                 Productos.limpiarDatos()
         except Exception as error:
-            print('Error modificar producto: %s ' % str(error))
+            print('Error products: modificar producto: %s ' % str(error))

@@ -127,7 +127,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tablaPro.clicked.connect(products.Productos.cargarPro)
         var.ui.tablaPro.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabFactura.clicked.connect(ventas.Ventas.cargarFac)
-        var.ui.tabFactura.clicked.connect(ventas.Ventas.mostrarVentasFac)
+        #var.ui.tabFactura.clicked.connect(ventas.Ventas.mostrarVentasFac)
         var.ui.tabFactura.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabVenta.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
