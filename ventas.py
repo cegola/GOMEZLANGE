@@ -10,15 +10,14 @@ class Ventas():
             dni = var.ui.editDniFac.text()
             fecha = var.ui.editFechaFac.text()
             apel = var.ui.editApellidosFac.text()
-
             if dni != '' and fecha != '':
-                conexion.Conexion.altaFac(dni, fecha, apel)
+                conexion.Conexion.altaFac(str(dni), str(fecha), str(apel))
             conexion.Conexion.mostrarFacturas(self)
             conexion.Conexion.cargarFacturas2(self)
             Ventas.tablaVentas(0)
 
         except Exception as error:
-            print('Error alta factura: %s' % str(error))
+            print('Error ventas: alta factura 333: %s' % str(error))
 
     def abrirCalendar(self):
         try:
@@ -32,7 +31,7 @@ class Ventas():
             var.ui.editFechaFac.setText(str(data))
             var.dlgCalendar.hide()
         except Exception as error:
-            print('Error cargar fecha factura: %s' % str(error))
+            print('Error ventas: cargar fecha factura: %s' % str(error))
 
     def tablaVentas(index):
         try:
@@ -56,10 +55,9 @@ class Ventas():
             fila = var.ui.tabFactura.selectedItems()
             if fila:
                 fila = [dato.text() for dato in fila]
-            codF = fila[0]
-            var.ui.lblCodFac.setText(str(codF[0]))
+            var.ui.lblCodFac.setText(str(fila[0]))
             var.ui.editFechaFac.setText(str(fila[1]))
-            conexion.Conexion.cargarFacturas(str(codF))
+            conexion.Conexion.cargarFacturas(str(fila[0]))
             Ventas.mostrarVentasFac(self)
             conexion.Conexion.mostrarProductos(self)
 
@@ -69,27 +67,11 @@ class Ventas():
     def borrarFac(self):
         try:
             cod = var.ui.lblCodFac.text()
-            conexion.Conexion.borrarFac(cod)
+            conexion.Conexion.borrarFactura(self, cod)
             Ventas.tablaVentas(0)
         except Exception as error:
             print('Error ventas: borrar fac %s' % str(error))
 
-    # def buscarCliVenta(self):
-    #     try:
-    #         dni = var.ui.editDniFac
-    #         if Clientes.validarDni(dni):
-    #             var.ui.editDni.setText(dni.upper())
-    #         else:
-    #
-    #             var.ui.lblValidar.setStyleSheet('QLabel {color:red;}')
-    #             var.ui.lblValidar.setText('X')
-    #             var.ui.editDni.setText(dni.upper())
-    #             mensaje = 'Ese DNI es erróneo'
-    #             events.Eventos.AbrirAviso(mensaje)
-    #             Clientes.limpiarDatos()
-    #             dniOk=False
-    #     except Exception as error:
-    #         print('Error ventas: bucar cliente venta %s' % str(error))
 
     def procesoVenta(self):
         try:
@@ -97,6 +79,7 @@ class Ventas():
             var.venta = []
             # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
             codFac = var.ui.lblCodFac.text()
+            #print(int(codFac))
             var.venta.append(int(codFac))
             articulo = var.cmbventa.currentText()
             dato = conexion.Conexion.obtenerCodPrecio(articulo)
@@ -114,8 +97,8 @@ class Ventas():
             var.venta.append(row)
             #print(var.venta)
             if codFac != '' and articulo != '' and cantidad != '':
-                conexion.Conexion.altaVenta()
-                print(var.venta)
+                conexion.Conexion.altaVenta(self)
+                #print(var.venta)
                 var.subfac = round(float(subtotal) + float(var.subfac), 2)
                 var.ui.lblSubtotal.setText(str(var.subfac))
                 var.iva = round(float(var.subfac) * 0.21, 2)

@@ -31,7 +31,7 @@ class Clientes():
     def validoDni():
         try:
             dni = var.ui.editDni.text()
-            print(dni)
+            #print(dni)
             if Clientes.validarDni(dni):
                 var.ui.lblValidar.setStyleSheet('QLabel {color:green;}')
                 var.ui.lblValidar.setText('V')
@@ -126,8 +126,8 @@ class Clientes():
             for j in var.pay:
                 newcli.append(j)'''
 
-            print(newcli)
-            print(clitab)
+            #print(newcli)
+            #print(clitab)
             #como trabajar con la tableWidget
             if newcli:
                 row = 0
@@ -145,7 +145,7 @@ class Clientes():
         except Exception as error:
             print('Error clients: alta cli: %s' % str(error))
 
-    def limpiarDatos():
+    def limpiarDatos(self):
         '''limpia los datos del formulario'''
         try:
             #client son todas las cajas de texto
@@ -172,7 +172,7 @@ class Clientes():
             client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre]
             if fila:
                 fila = [dato.text() for dato in fila ]#dato recorre la fila y va almacenando el texto que haya en esa fila
-            print(fila)
+            #print(fila)
             i = 0
             for i, dato in enumerate(client):
                 dato.setText(fila[i])

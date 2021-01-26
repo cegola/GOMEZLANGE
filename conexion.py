@@ -32,7 +32,7 @@ class Conexion():
         query.bindValue(':edad', str(cliente[7]))
         query.bindValue(':formasPago', str(cliente[8]))
         if query.exec_():
-            Conexion.mostarClientes(None)
+            Conexion.mostrarClientes(None)
             var.ui.lblstatus.setText('Cliente con dni ' + str(cliente[0]) + ' dado de alta, dia ' + time.strftime("%x"))
             print('Insercion correcta')
         else:
@@ -178,9 +178,12 @@ class Conexion():
                 nombre = query.value(1)
                 precio = query.value(2)
                 var.ui.tablaPro.setRowCount(index + 1)  # crea la fila y a continuacion mete los datos
-                var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)).setTextAlignment(QtCore.Qt.AlignCenter))
+                var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                 var.ui.tablaPro.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
                 var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio))+' €'))
+
+                var.ui.tablaPro.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                var.ui.tablaPro.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
                 index += 1
         else:
             print('Error conexion: mostrar producto: ' + query.lastError().text())
@@ -197,6 +200,18 @@ class Conexion():
                 var.ui.editNombrePro.setText(nombre)
                 var.ui.editPrecio.setText(str(query.value(1)))
                 var.ui.editStock.setText(str(query.value(2)))
+
+
+    def nombreProducto(cod):
+        query = QtSql.QSqlQuery()
+        query.prepare('select nombre from articulos where codigo = :codigo')
+        query.bindValue(':codigo', int(cod))
+        if query.exec_():
+            while query.next():
+                nombre = query.value(0)
+                return str(nombre)
+
+
 
     def bajaProducto(nombre):
         query = QtSql.QSqlQuery()
@@ -239,18 +254,23 @@ class Conexion():
 
     def altaFac(dni, fecha, apel):
         query = QtSql.QSqlQuery()
-        query.prepare(
-            'insert into facturas (dniCliente, fechaFactura, apellidos) VALUES (:dniCliente, :fechaFactura, :apellidos)')
+        query.prepare('insert into facturas (dniCliente, fechaFactura, apellidos) VALUES (:dniCliente, :fechaFactura, :apellidos)')
         query.bindValue(':dniCliente', str(dni))
         query.bindValue(':fechaFactura', str(fecha))
         query.bindValue(':apellidos', str(apel))
         if query.exec_():
             var.ui.lblstatus.setText('Factura creada')
+        else:
+            print("Error conexion: alta facturas: ", query.lastError().text())
         query1 = QtSql.QSqlQuery()
         query1.prepare('select max(numFactura) from facturas')
         if query1.exec_():
             while query1.next():
-                var.ui.lblCodFac.setText(int(query1.value(0)))
+                var.ui.lblCodFac.setText(str(query1.value(0)))
+                print(query1.value(0))
+        else:
+            print("Error conexion: alta facturas codFac ", query.lastError().text())
+
 
     def mostrarFacturas(self):
         index = 0
@@ -277,7 +297,7 @@ class Conexion():
         cont = 0
         var.ui.tabFactura.clearContents()
         dni = var.ui.editDniFac.text()
-        print(str(dni))
+        #print(str(dni))
         query = QtSql.QSqlQuery()
         query.prepare('select numFactura, fechaFactura from facturas where dniCliente = :dni order by fechaFactura desc')
         query.bindValue(':dni', str(dni))
@@ -325,15 +345,16 @@ class Conexion():
                 var.ui.editFechaFac.setText(str(query.value(2)))
                 var.ui.editApellidosFac.setText(query.value(3))
 
-    def borrarFactura(cod):
+    def borrarFactura(self, cod):
         query = QtSql.QSqlQuery()
-        query.prepare('delete from facturas where numFac = :numFac)')
-        query.bindValue(':numFac', int(cod))
+        #print(int(cod))
+        query.prepare('delete from facturas where numFactura = :codfac')
+        query.bindValue(':codfac', int(cod))
         if query.exec_():
             var.ui.lblstatus.setText('Factura anulada')
-            Conexion.mostrarFacturas()
+            Conexion.mostrarFacturas(self)
         else:
-            print('Error conexion: anular factura en borrarFactura ', query.lastError().text())
+            print('Error conexion: borrar factura en borrarFactura ', query.lastError().text())
 
         query1 = QtSql.QSqlQuery()
         query1.prepare('delete from ventas where codFacVenta = :numFac)')
@@ -351,7 +372,7 @@ class Conexion():
                 dato = [str(query.value(0)), str(query.value(1))]
         return dato
 
-    def altaVenta():
+    def altaVenta(self):
         # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
         query = QtSql.QSqlQuery()
         query.prepare('insert into ventas (codFacVenta, codArtVenta, cantidad, precio) VALUES'
@@ -366,7 +387,7 @@ class Conexion():
         row = var.ui.tabVenta.currentRow()
         #print(var.venta)
         if query.exec_():
-            print('hola')
+            #print('hola')
             var.ui.lblstatus.setText('Venta Realizada')
             var.ui.tabVenta.setItem(row, 1, QtWidgets.QTableWidgetItem(str(var.venta[2])))
             var.ui.tabVenta.setItem(row, 2, QtWidgets.QTableWidgetItem(str(var.venta[3])))
@@ -410,7 +431,7 @@ class Conexion():
                     codVenta = query.value(0)
                     codArtVenta = query.value(1)
                     cantidad = query.value(2)
-                    print(codVenta, codArtVenta, cantidad)
+                    #print(codVenta, codArtVenta, cantidad)
                     var.ui.tabVenta.setRowCount(index + 1)
                     var.ui.tabVenta.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codVenta)))
                     query1.prepare('select nombre, precio from articulos where codigo = :codArtVenta')
@@ -419,12 +440,18 @@ class Conexion():
                         while query1.next():
                             articulo = query1.value(0)
                             precio = query1.value(1)
-                            print(articulo, precio)
+                            #print(articulo, precio)
                             var.ui.tabVenta.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
                             var.ui.tabVenta.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
                             subtotal = round(float(cantidad) * float(precio), 2)
-                            var.ui.tabVenta.setItem(index, 3, QtWidgets.QTableWidgetItem(str(precio)))
-                            var.ui.tabVenta.setItem(index, 4, QtWidgets.QTableWidgetItem(str(subtotal)))
+                            var.ui.tabVenta.setItem(index, 3, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio))+' €'))
+                            var.ui.tabVenta.setItem(index, 4, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(subtotal))+' €'))
+                            var.ui.tabVenta.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                            var.ui.tabVenta.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+                            var.ui.tabVenta.item(index, 3).setTextAlignment(QtCore.Qt.AlignRight)
+                            var.ui.tabVenta.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
+
+
                     index += 1
                     var.subfac = round(float(subtotal) + float(var.subfac), 2)
 

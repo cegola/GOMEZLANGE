@@ -144,6 +144,7 @@ class Main(QtWidgets.QMainWindow):
         '''modulos de impresion'''
         var.ui.actionListado_clientes.triggered.connect(printer.Printer.reportCli)
         var.ui.actionListado_productos.triggered.connect(printer.Printer.reportPro)
+        var.ui.actionImprimir_factura.triggered.connect(printer.Printer.reportFac)
 
 
         '''modulos del principal'''
