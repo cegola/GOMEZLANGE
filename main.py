@@ -87,6 +87,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.toolBarImpresora.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
+        var.ui.actionRestaurarBD.triggered.connect(events.Eventos.restaurarBD)
 
         var.ui.actionAbout.triggered.connect(events.Eventos.AbrirAcercaDe)
 
@@ -148,10 +149,11 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''modulos del principal'''
-        conexion.Conexion.db_connect(var.filebd)
-        conexion.Conexion.mostrarClientes(self)
-        conexion.Conexion.mostrarProductos(self)
-        conexion.Conexion.mostrarFacturas(self)
+        # conexion.Conexion.db_connect(var.filebd)
+        # conexion.Conexion.mostrarClientes(self)
+        # conexion.Conexion.mostrarProductos(self)
+        # conexion.Conexion.mostrarFacturas(self)
+        conexion.Conexion.cargarDatos(self)
 
 
     def closeEvent(self, event):

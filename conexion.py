@@ -38,6 +38,12 @@ class Conexion():
         else:
             print("Error conexion: alta: ", query.lastError().text())
 
+    def cargarDatos(self):
+        Conexion.db_connect(var.filebd)
+        Conexion.mostrarClientes(self)
+        Conexion.mostrarProductos(self)
+        Conexion.mostrarFacturas(self)
+
     def mostrarClientes(self):
         index = 0
         query = QtSql.QSqlQuery()

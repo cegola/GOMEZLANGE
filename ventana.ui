@@ -1955,7 +1955,7 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
            <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>280</number>
+           <number>273</number>
           </attribute>
           <column>
            <property name="text">
@@ -2070,6 +2070,7 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
    <addaction name="actionBackup"/>
    <addaction name="separator"/>
    <addaction name="actiontoolBarSalir"/>
+   <addaction name="actionRestaurarBD"/>
   </widget>
   <action name="actionSalir">
    <property name="text">
@@ -2107,9 +2108,8 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
   </action>
   <action name="toolBarAbrirCarpeta">
    <property name="icon">
-    <iconset>
-     <activeon>:/newPrefix/iconAbrirCarpeta.png</activeon>
-    </iconset>
+    <iconset resource="img/toolBarAbrirCarpeta.qrc">
+     <normaloff>:/newPrefix/iconAbrirCarpeta.png</normaloff>:/newPrefix/iconAbrirCarpeta.png</iconset>
    </property>
    <property name="text">
     <string>abrirCarpeta</string>
@@ -2167,9 +2167,23 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
     <string>Listado productos</string>
    </property>
   </action>
+  <action name="actionRestaurarBD">
+   <property name="icon">
+    <iconset>
+     <normalon>:/newPrefix/iconRestaurar.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>actionRestaurarBD</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/iconRestaurar.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="img/calendar.qrc"/>
+  <include location="img/tooBarRestaurar.qrc"/>
   <include location="img/borrar.qrc"/>
   <include location="img/crear.qrc"/>
   <include location="img/toolBarImpresora.qrc"/>

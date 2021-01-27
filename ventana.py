@@ -871,7 +871,7 @@ class Ui_venPrincipal(object):
         font.setWeight(75)
         item.setFont(font)
         self.tablaPro.setHorizontalHeaderItem(2, item)
-        self.tablaPro.horizontalHeader().setDefaultSectionSize(280)
+        self.tablaPro.horizontalHeader().setDefaultSectionSize(273)
         self.gridLayout_10.addWidget(self.tablaPro, 5, 0, 1, 3)
         self.tabWidget.addTab(self.tabPro, "")
         self.gridLayout_7.addWidget(self.tabWidget, 1, 2, 1, 1)
@@ -912,7 +912,7 @@ class Ui_venPrincipal(object):
         self.actiontoolBarSalir.setObjectName("actiontoolBarSalir")
         self.toolBarAbrirCarpeta = QtWidgets.QAction(venPrincipal)
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(":/newPrefix/iconAbrirCarpeta.png"), QtGui.QIcon.Active, QtGui.QIcon.On)
+        icon7.addPixmap(QtGui.QPixmap(":/newPrefix/iconAbrirCarpeta.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolBarAbrirCarpeta.setIcon(icon7)
         self.toolBarAbrirCarpeta.setObjectName("toolBarAbrirCarpeta")
         self.actionAbrir = QtWidgets.QAction(venPrincipal)
@@ -932,6 +932,11 @@ class Ui_venPrincipal(object):
         self.actionImprimir_factura.setObjectName("actionImprimir_factura")
         self.actionListado_productos = QtWidgets.QAction(venPrincipal)
         self.actionListado_productos.setObjectName("actionListado_productos")
+        self.actionRestaurarBD = QtWidgets.QAction(venPrincipal)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/newPrefix/iconRestaurar.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.actionRestaurarBD.setIcon(icon9)
+        self.actionRestaurarBD.setObjectName("actionRestaurarBD")
         self.menuArchivo.addAction(self.actionAbrir)
         self.menuArchivo.addAction(self.actionImprimir)
         self.menuArchivo.addSeparator()
@@ -948,6 +953,7 @@ class Ui_venPrincipal(object):
         self.toolBar.addAction(self.actionBackup)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.actiontoolBarSalir)
+        self.toolBar.addAction(self.actionRestaurarBD)
 
         self.retranslateUi(venPrincipal)
         self.tabWidget.setCurrentIndex(2)
@@ -1054,12 +1060,15 @@ class Ui_venPrincipal(object):
         self.actionListado_clientes.setText(_translate("venPrincipal", "Listado clientes"))
         self.actionImprimir_factura.setText(_translate("venPrincipal", "Imprimir factura"))
         self.actionListado_productos.setText(_translate("venPrincipal", "Listado productos"))
+        self.actionRestaurarBD.setText(_translate("venPrincipal", "actionRestaurarBD"))
+        self.actionRestaurarBD.setToolTip(_translate("venPrincipal", "<html><head/><body><p><img src=\":/newPrefix/iconRestaurar.png\"/></p></body></html>"))
 import borrar_rc
 import buscar_rc
 import calendar_rc
 import crear_rc
 import recargar_rc
 import tooBarBackup_rc
+import tooBarRestaurar_rc
 import toolBarAbrirCarpeta_rc
 import toolBarImpresora_rc
 import toolBarSalir_rc

@@ -1,14 +1,17 @@
 import sys, var, shutil
-from datetime import date
+from datetime import datetime
 from PyQt5 import QtWidgets
 import os, zipfile
+
+import conexion
+
 
 class Eventos():
     def Salir(event):
         '''Evento modulo salir'''
 
         try:
-            #var.dlgSalir.show()
+            # var.dlgSalir.show()
             var.dlgSalir.show()
             if var.dlgSalir.exec_():
                 sys.exit()
@@ -16,7 +19,7 @@ class Eventos():
                 var.dlgSalir.close()
                 event.ignore()
         except Exception as error:
-            print('Error salir %s'% str(error))
+            print('Error salir %s' % str(error))
 
     def closeSalir(event):
         try:
@@ -28,13 +31,14 @@ class Eventos():
     def Backup(self):
         try:
             print('Backup')
-            fecha = date.today()
-            var.copia = (fecha.strftime('%d_%m_%Y')+'_backup.zip')
+            fecha = datetime.now()
+            var.copia = (fecha.strftime('%d_%m_%Y_%H-%M') + '_backup.zip')
             option = QtWidgets.QFileDialog.Options()
             print(option)
-            directorio, filename = var.filedlgAbrir.getSaveFileName(None, 'Guardar copia', var.copia, '.zip', options=option)
+            directorio, filename = var.filedlgAbrir.getSaveFileName(None, 'Guardar copia', var.copia, '.zip',
+                                                                    options=option)
             if var.filedlgAbrir.Accepted and filename != '':
-                ficheroZip = zipfile.ZipFile(var.copia,'w')
+                ficheroZip = zipfile.ZipFile(var.copia, 'w')
                 ficheroZip.write(var.filebd, os.path.basename(var.filebd), zipfile.ZIP_DEFLATED)
                 ficheroZip.close()
                 var.ui.lblstatus.setText('Backup realizada')
@@ -43,6 +47,20 @@ class Eventos():
         except Exception as error:
             print('Error backup %s' % str(error))
 
+    def restaurarBD(self):
+        try:
+            option = QtWidgets.QFileDialog.Options()
+            filename = var.filedlgAbrir.getOpenFileName(None, 'Restaurar copia de seguridad','','*.zip', options=option)
+            if var.filedlgAbrir.Accepted and filename != '':
+                print(str(filename[0]))
+                bd = zipfile.ZipFile(str(filename[0]),'r')
+                bd.extractall()
+                bd.close()
+            conexion.Conexion.cargarDatos(self)
+            var.ui.lblstatus.setText('Copia de seguridad restaurada')
+
+        except Exception as error:
+            print('Error restaurar BD %s' % str(error))
 
 
     def AbrirDir(self):
@@ -52,6 +70,7 @@ class Eventos():
             var.filedlgAbrir.show()
         except Exception as error:
             print('Error abrir dir: %d' % str(error))
+
 
     def AbrirAviso(mensaje):
         try:
@@ -64,6 +83,7 @@ class Eventos():
                 return False
         except Exception as error:
             print('Error salir %s' % str(error))
+
 
     def AbrirAcercaDe(self):
         try:
@@ -91,7 +111,3 @@ class Eventos():
                 var.ui.cmbProvincia.addItem(i)
         except Exception as error:
             print('Error %s' % str(error))
-
-
-
-
