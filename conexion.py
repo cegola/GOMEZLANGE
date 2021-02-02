@@ -5,7 +5,7 @@ import ventas
 
 
 class Conexion():
-    def db_connect(filename):
+    def db_connect(self, filename):
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(filename)
         if not db.open():
@@ -39,7 +39,7 @@ class Conexion():
             print("Error conexion: alta: ", query.lastError().text())
 
     def cargarDatos(self):
-        Conexion.db_connect(var.filebd)
+        Conexion.db_connect(self, var.filebd)
         Conexion.mostrarClientes(self)
         Conexion.mostrarProductos(self)
         Conexion.mostrarFacturas(self)

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1194</width>
-    <height>828</height>
+    <height>831</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -2169,15 +2169,14 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
   </action>
   <action name="actionRestaurarBD">
    <property name="icon">
-    <iconset>
-     <normalon>:/newPrefix/iconRestaurar.png</normalon>
-    </iconset>
+    <iconset resource="img/tooBarRestaurar.qrc">
+     <normaloff>:/newPrefix/restaurar.jpg</normaloff>:/newPrefix/restaurar.jpg</iconset>
    </property>
    <property name="text">
     <string>actionRestaurarBD</string>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/iconRestaurar.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/restaurar.jpg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
  </widget>

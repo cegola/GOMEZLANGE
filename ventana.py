@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_venPrincipal(object):
     def setupUi(self, venPrincipal):
         venPrincipal.setObjectName("venPrincipal")
-        venPrincipal.resize(1194, 828)
+        venPrincipal.resize(1194, 831)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -934,7 +934,7 @@ class Ui_venPrincipal(object):
         self.actionListado_productos.setObjectName("actionListado_productos")
         self.actionRestaurarBD = QtWidgets.QAction(venPrincipal)
         icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap(":/newPrefix/iconRestaurar.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon9.addPixmap(QtGui.QPixmap(":/newPrefix/restaurar.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionRestaurarBD.setIcon(icon9)
         self.actionRestaurarBD.setObjectName("actionRestaurarBD")
         self.menuArchivo.addAction(self.actionAbrir)
@@ -1061,7 +1061,7 @@ class Ui_venPrincipal(object):
         self.actionImprimir_factura.setText(_translate("venPrincipal", "Imprimir factura"))
         self.actionListado_productos.setText(_translate("venPrincipal", "Listado productos"))
         self.actionRestaurarBD.setText(_translate("venPrincipal", "actionRestaurarBD"))
-        self.actionRestaurarBD.setToolTip(_translate("venPrincipal", "<html><head/><body><p><img src=\":/newPrefix/iconRestaurar.png\"/></p></body></html>"))
+        self.actionRestaurarBD.setToolTip(_translate("venPrincipal", "<html><head/><body><p><img src=\":/newPrefix/restaurar.jpg\"/></p></body></html>"))
 import borrar_rc
 import buscar_rc
 import calendar_rc
