@@ -5,7 +5,7 @@ from ventana import *
 
 class Clientes():
 
-    def validarDni(self, dni):
+    def validarDni(dni):
         """
 
         Módulo que valida que la letra del dni sea nacional o extranjera
@@ -40,7 +40,7 @@ class Clientes():
             return None
 
 
-    def validoDni(self):
+    def validoDni():
         """
 
         Módulo que según sea valido o no muestra imagen distinta
@@ -53,7 +53,6 @@ class Clientes():
         """
         try:
             dni = var.ui.editDni.text()
-            #print(dni)
             if Clientes.validarDni(dni):
                 var.ui.lblValidar.setStyleSheet('QLabel {color:green;}')
                 var.ui.lblValidar.setText('V')
@@ -71,7 +70,7 @@ class Clientes():
             print('Error clients: modulo valido DNI')
             return None
 
-    def selSexo(self):
+    def selSexo():
         """
 
         Módulo que según checkeemos el rtb fem/masc carga el texto correspondiente de mujer o hombre a la variable
@@ -89,7 +88,7 @@ class Clientes():
         except Exception as error:
             print('Error clients: sexo: %s' % str(error))
 
-    def selPago(self):
+    def selPago():
         """
 
         Módulo que checkea que valores de pago se seleccionan el el checkbox y los añade a una variable lista var.pay
@@ -114,7 +113,7 @@ class Clientes():
             print('Error clients: pago: %s' % str(error))
 
 
-    def selProv(self, prov):
+    def selProv(prov):
         """
 
         Al seleccionar una provincia en el combo de provincias llama al evento  cmbProv.activated
@@ -132,7 +131,7 @@ class Clientes():
             print('Error clients: sel prov: %s' % str(error))
 
 
-    def abrirCalendar(self):
+    def abrirCalendar():
         """
 
         Módulo que abre la ventana calendario
@@ -204,7 +203,7 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(registro)
                     var.ui.tablaCli.setItem(row, column, cell)
                     column += 1
-                conexion.Conexion.altaCli(newcli)
+                conexion.Conexion.altaCli(self,newcli)
             else:
                 print('Faltan datos')
             Clientes.limpiarDatos(self)
@@ -286,7 +285,7 @@ class Clientes():
             mensaje='¿Seguro que desea dar de baja a este cliente?'
             borrar = events.Eventos.AbrirAviso(mensaje)
             if borrar == True:
-                conexion.Conexion.bajaCliente(dni)
+                conexion.Conexion.bajaCliente(self, dni)
                 conexion.Conexion.mostrarClientes(self)
                 Clientes.limpiarDatos()
         except Exception as error:
@@ -319,7 +318,7 @@ class Clientes():
             mensaje = 'Seguro que desea modificar este cliente'
             mod = events.Eventos.AbrirAviso(mensaje)
             if mod == True:
-                conexion.Conexion.modCliente(cod, newdata)
+                conexion.Conexion.modCliente(self, cod, newdata)
                 conexion.Conexion.mostrarClientes(self)
             else:
                 Clientes.limpiarDatos()
@@ -335,8 +334,8 @@ class Clientes():
         :rtype: None
         """
         try:
-            Clientes.limpiarDatos()
-            conexion.Conexion.mostrarClientes(None)
+            Clientes.limpiarDatos(self)
+            conexion.Conexion.mostrarClientes(self)
         except  Exception as error:
             print('Error clients: recargar clientes: %s ' % str(error))
 
@@ -353,7 +352,7 @@ class Clientes():
         """
         try:
             dni = var.ui.editDni.text()
-            cliente = conexion.Conexion.buscarCliente(dni)
+            cliente = conexion.Conexion.buscarCliente(self, dni)
         except  Exception as error:
             print('Error clients: recargar clientes: %s ' % str(error))
 

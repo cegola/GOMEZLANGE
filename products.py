@@ -69,7 +69,7 @@ class Productos():
                         var.ui.tablaPro.setItem(row, column, cell)
                         column += 1
                     print(newpro)
-                    conexion.Conexion.altaPro(newpro)
+                    conexion.Conexion.altaPro(self, newpro)
 
                 else:
                     print('Faltan datos')
@@ -110,7 +110,7 @@ class Productos():
             mensaje='¿Seguro que desea dar de baja a este producto?'
             borrar = events.Eventos.AbrirAviso(mensaje)
             if borrar == True:
-                conexion.Conexion.bajaProducto(nombre)
+                conexion.Conexion.bajaProducto(self, nombre)
                 conexion.Conexion.mostrarProductos(self)
                 Productos.limpiarDatos()
         except Exception as error:
@@ -126,7 +126,7 @@ class Productos():
             mensaje = 'Seguro que desea modificar este producto'
             mod = events.Eventos.AbrirAviso(mensaje)
             if mod == True:
-                conexion.Conexion.modProducto(cod, newdata)
+                conexion.Conexion.modProducto(self, cod, newdata)
                 conexion.Conexion.mostrarProductos(self)
             else:
                 Productos.limpiarDatos()

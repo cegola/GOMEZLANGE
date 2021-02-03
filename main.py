@@ -107,7 +107,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiarPro.clicked.connect(products.Productos.limpiarDatos)
         var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
         var.ui.btnModPro.clicked.connect(products.Productos.modPro)
-        clients.Clientes.valoresSpin(None)
+        clients.Clientes.valoresSpin(self)
         '''Botones Fac'''
         var.ui.btnFacturar.clicked.connect(ventas.Ventas.altaFactura)
         var.ui.btnCalendarFac.clicked.connect(ventas.Ventas.abrirCalendar)

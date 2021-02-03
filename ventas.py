@@ -1,5 +1,4 @@
-import var, conexion, events, products
-from PyQt5 import QtWidgets
+import var, conexion
 from ventana import *
 
 
@@ -11,9 +10,9 @@ class Ventas():
             fecha = var.ui.editFechaFac.text()
             apel = var.ui.editApellidosFac.text()
             if dni != '' and fecha != '':
-                conexion.Conexion.altaFac(str(dni), str(fecha), str(apel))
+                conexion.Conexion.altaFac(self, str(dni), str(fecha), str(apel))
             conexion.Conexion.mostrarFacturas(self)
-            conexion.Conexion.cargarFacturas2(self)
+            #conexion.Conexion.cargarFacturas(self)
             Ventas.tablaVentas(0)
 
         except Exception as error:
@@ -57,7 +56,7 @@ class Ventas():
                 fila = [dato.text() for dato in fila]
             var.ui.lblCodFac.setText(str(fila[0]))
             var.ui.editFechaFac.setText(str(fila[1]))
-            conexion.Conexion.cargarFacturas(str(fila[0]))
+            conexion.Conexion.cargarDatosClienteFactura(self, str(fila[0]))
             Ventas.mostrarVentasFac(self)
             conexion.Conexion.mostrarProductos(self)
 
@@ -82,7 +81,7 @@ class Ventas():
             #print(int(codFac))
             var.venta.append(int(codFac))
             articulo = var.cmbventa.currentText()
-            dato = conexion.Conexion.obtenerCodPrecio(articulo)
+            dato = conexion.Conexion.obtenerCodPrecio(self, articulo)
 
             var.venta.append(int(dato[0]))  # codigo del producto
             var.venta.append(articulo)
@@ -117,7 +116,7 @@ class Ventas():
         try:
             var.cmbventa = QtWidgets.QComboBox()
             codfac = var.ui.lblCodFac.text()
-            conexion.Conexion.listadoVentasFacturas(int(codfac))
+            conexion.Conexion.listadoVentasFacturas(self, int(codfac))
             conexion.Conexion.cargarCmbVentas(var.cmbventa)
         except Exception as error:
             print('Error ventas: mostrar ventas de facturas %s' % str(error))
@@ -128,7 +127,7 @@ class Ventas():
             if fila:
                 fila = [dato.text() for dato in fila]
             codventa = int(fila[0])
-            conexion.Conexion.anulaVenta(codventa)
+            conexion.Conexion.anulaVenta(self, codventa)
             Ventas.mostrarVentasFac(self)
 
         except Exception as error:

@@ -231,7 +231,7 @@ class Printer():
                     var.rep.setFont('Helvetica', size=10)
                     var.rep.drawString(i, j, str(query.value(0)))
                     codArt = query.value(1)
-                    nombreArticulo = conexion.Conexion.nombreProducto(int(codArt))
+                    nombreArticulo = conexion.Conexion.nombreProducto(self, int(codArt))
                     #var.rep.drawString(i + 90, j, str(codArt))
                     var.rep.drawString(i + 87, j, str(nombreArticulo))
                     var.rep.drawRightString(i + 245, j, str(query.value(2)))
