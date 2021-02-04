@@ -6,14 +6,19 @@ import os, var
 
 import conexion
 
-'''query1.value(4).strip('[]').replace('\'','').replace('',' -')))'''
-
 
 class Printer():
     def cabecera(self):
+        """
+
+        Módulo que carga la cabecera de todos los informes de la empresa
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             logo = ".\\img\logo.jpg"
-            # var.rep.drawImage(logo, 540,752)
             var.rep.setTitle('INFORMES')
             var.rep.setAuthor('Administracion Teis')
             var.rep.setFont('Helvetica', size=10)
@@ -31,7 +36,18 @@ class Printer():
         except Exception as error:
             print('error en el cabecera de informe: %s' % str(error))
 
-    def pie(textlistado):
+    def pie(self, textlistado):
+        """
+
+        Módulo que carga el pie. Igual para todos excepto el nombre del informe, que se pasa por
+        la variable textlistado.
+
+        :param textlistado: según el contenido del informe
+        :type textlistado: string
+        :return: None
+        :rtype: None
+
+        """
         try:
             var.rep.line(50, 50, 525, 50)
             fecha = datetime.today()
@@ -44,6 +60,14 @@ class Printer():
             print('error en el pie de informe: %s' % str(error))
 
     def cabeceraCli(self):
+        """
+
+        Módulo que carga la cabecera de página del informe del cliente
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             var.rep.setFont('Helvetica-Bold', size=9)
             textlistado = 'LISTADO DE CLIENTES'
@@ -60,6 +84,14 @@ class Printer():
             print('error en el cabecera cli de informe: %s' % str(error))
 
     def cabeceraPro(self):
+        """
+
+        Módulo que carga la cabecera de página del informe de productos
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             var.rep.setFont('Helvetica-Bold', size=9)
             textlistado = 'LISTADO DE PRODUCTOS'
@@ -74,7 +106,20 @@ class Printer():
         except Exception as error:
             print('error en el cabecera pro de informe: %s' % str(error))
 
-    def cabecerafac(self, cod):
+    def cabeceraFac(self, cod):
+        """
+
+        Módulo que carga la cabecera de página del informe de facturación
+
+        :param cod: codigo de la factura
+        :type cod: entero
+        :return: None
+        :rtype: None
+
+        Toma datos de dos tablas: las del cliente, al que está asociado el código de la factura; y de la tabla factura,
+        de la que toma los datos de dni y fecha.
+
+        """
         try:
             var.rep.setFont('Helvetica-Bold', size=11)
             var.rep.drawString(55, 725, 'Cliente: ')
@@ -125,24 +170,38 @@ class Printer():
             print('Error cabecera factura informe %s' % str(error))
 
     def reportCli(self):
+        """
+
+        Módulo que llama a la base de datos, captura datos de los clientes ordenados alfabéticamente y los va mostrando
+        en el informe
+
+        :return:None
+        :rtype: None
+
+        La variable i representa los valores del eje X
+        La variable j representa los valores del eje Y
+        Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista
+        por defecto en el sistema
+
+        """
         try:
             textlistado = 'LISTADO DE CLIENTES'
             var.rep = canvas.Canvas('informes/listadoClientes.pdf')
             Printer.cabecera(self)
             Printer.cabeceraCli(self)
-            Printer.pie(textlistado)
+            Printer.pie(self, textlistado)
             query = QtSql.QSqlQuery()
             query.prepare('select codigo, dni, apellidos, nombre, fechaAlta from clientes order by apellidos, nombre')
             var.rep.setFont('Helvetica', size=10)
             if query.exec_():
-                i = 50  # valores eje X
-                j = 690  # valores eje Y
+                i = 50
+                j = 690
                 while query.next():
                     if j <= 80:
                         var.rep.drawString(440, 70, 'Página siguiente...')
                         var.rep.showPage()
                         Printer.cabecera(self)
-                        Printer.pie(textlistado)
+                        Printer.pie(self, textlistado)
                         Printer.cabeceraCli(self)
                         i = 50
                         j = 690
@@ -166,24 +225,38 @@ class Printer():
             print('Error reportcli %s' % str(error))
 
     def reportPro(self):
+        """
+
+        Módulo que llama a la base de datos, captura datos de los productos ordenados alfabéticamente y los va mostrando
+        en el informe
+
+        :return:None
+        :rtype: None
+
+        La variable i representa los valores del eje X
+        La variable j representa los valores del eje Y
+        Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista
+        por defecto en el sistema
+
+        """
         try:
             textlistado = 'LISTADO DE PRODUCTOS'
             var.rep = canvas.Canvas('informes/listadoProductos.pdf')
             Printer.cabecera(self)
             Printer.cabeceraPro(self)
-            Printer.pie(textlistado)
+            Printer.pie(self, textlistado)
             query = QtSql.QSqlQuery()
             query.prepare('select codigo, nombre, precio, stock from articulos order by nombre')
             var.rep.setFont('Helvetica', size=10)
             if query.exec_():
-                i = 50  # valores eje X
-                j = 690  # valores eje Y
+                i = 50
+                j = 690
                 while query.next():
                     if j <= 80:
                         var.rep.drawString(440, 70, 'Página siguiente...')
                         var.rep.showPage()
                         Printer.cabecera(self)
-                        Printer.pie(textlistado)
+                        Printer.pie(self, textlistado)
                         Printer.cabeceraPro(self)
                         i = 50
                         j = 690
@@ -206,33 +279,47 @@ class Printer():
             print('Error reportpro %s' % str(error))
 
     def reportFac(self):
+        """
+
+        Módulo que carga el cuerpo del informe de la factura
+
+        :return:None
+        :rtype: None
+
+        Selecciona todas las ventas de esa factura y las va anotando linea a linea.
+        La variable i representa los valores del eje X
+        La variable j representa los valores del eje Y
+        Además tiene un pie de informe para mostrar los subtotales IVA y total
+        Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista
+        por defecto en el sistema
+
+        """
         try:
             textlistado = 'FACTURA'
             var.rep = canvas.Canvas('informes/factura.pdf', pagesize=A4)
             Printer.cabecera(self)
-            Printer.pie(textlistado)
+            Printer.pie(self, textlistado)
             codfac = var.ui.lblCodFac.text()
-            Printer.cabecerafac(self, codfac)
+            Printer.cabeceraFac(self, codfac)
             query = QtSql.QSqlQuery()
             query.prepare('select codVenta, codArtVenta, cantidad, precio from ventas where codFacVenta = :codfac')
             query.bindValue(':codfac', int(codfac))
             if query.exec_():
-                i = 55  # valores del eje X
-                j = 600  # valores del eje Y
+                i = 55
+                j = 600
                 while query.next():
                     if j <= 100:
                         var.rep.drawString(440, 110, 'Página siguiente...')
                         var.rep.showPage()
                         Printer.cabecera(self)
-                        Printer.pie(textlistado)
-                        Printer.cabecerafac(self)
+                        Printer.pie(self, textlistado)
+                        Printer.cabeceraFac(self)
                         i = 50
                         j = 600
                     var.rep.setFont('Helvetica', size=10)
                     var.rep.drawString(i, j, str(query.value(0)))
                     codArt = query.value(1)
                     nombreArticulo = conexion.Conexion.nombreProducto(self, int(codArt))
-                    #var.rep.drawString(i + 90, j, str(codArt))
                     var.rep.drawString(i + 87, j, str(nombreArticulo))
                     var.rep.drawRightString(i + 245, j, str(query.value(2)))
                     var.rep.drawRightString(i + 365, j, "{0:.2f}".format(float(query.value(3))) + ' €')

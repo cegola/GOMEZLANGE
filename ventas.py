@@ -5,6 +5,16 @@ from ventana import *
 class Ventas():
 
     def altaFactura(self):
+        """
+
+        Módulo que graba una factura previa al proceso de ventas
+
+        :return: None
+        :rtype: None
+
+        Una vez grabada prepara la tabla factura y recarga la tabla ventas
+
+        """
         try:
             dni = var.ui.editDniFac.text()
             fecha = var.ui.editFechaFac.text()
@@ -19,12 +29,32 @@ class Ventas():
             print('Error ventas: alta factura 333: %s' % str(error))
 
     def abrirCalendar(self):
+        """
+
+        Módulo que abre la ventana calendario para cargar la fecha
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             var.dlgCalendar.show()
         except Exception as error:
             print('Error cal: %s' % str(error))
 
     def cargarFecha(qDate):
+        """
+
+        Módulo que se ejecuta cuando clickamos en un dia en el calendat
+
+        :param qDate: fecha de la factura
+        :type qDate: QtCore.QDate
+        :return: None
+        :rtype: None
+
+        Cuando clickamos en el calendario carga la fecha en el editFechaFac
+
+        """
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
             var.ui.editFechaFac.setText(str(data))
@@ -33,6 +63,18 @@ class Ventas():
             print('Error ventas: cargar fecha factura: %s' % str(error))
 
     def tablaVentas(index):
+        """
+
+        Módulo prepara la tabla ventas
+
+        :param index: fila de la tabla en la que insertar
+        :type index: entero
+        :return: None
+        :rtype: None
+
+        Carga la venta en la venta
+
+        """
         try:
             var.cmbventa = QtWidgets.QComboBox()
             conexion.Conexion.cargarCmbVentas(var.cmbventa)

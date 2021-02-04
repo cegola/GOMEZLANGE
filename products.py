@@ -3,44 +3,19 @@ from PyQt5 import QtWidgets
 from ventana import *
 
 class Productos():
-    def validarPrecio(precio):
-        try:
-            print(precio)
-            #AQUI DEBERIA ESTAR LA VALIDACION DEL PRECIO PERO NO ME SALE
-            # i=0
-            # print(len(precio))
-            # partes=[]
-            # dig_ext = ','
-            # numeros = '0123456789'
-            # for n in precio:
-            #     if n in dig_ext:
-            #         partes.append(precio[:i])
-            #         partes.append(precio[(i+1):])
-            #     i += 1
-            # print(partes)
-            # if (partes[1])>2:
-            #     partes[1][:2]
-            # print(partes)
-        except:
-            print('Error modulo validar precio')
-            return None
-
-    def validoPrecio():
-        try:
-            precio = var.ui.editPrecio.text()
-            print(precio)
-            if Productos.validarPrecio(precio) == False:
-                mensaje = 'Ese precio es erróneo'
-                events.Eventos.AbrirAviso(mensaje)
-                Productos.limpiarDatos()
-                dniOk = False
-        except:
-            print('Error modulo valido DNI')
-            return None
-
-
 
     def altaProducto(self):
+        """
+
+        Módulo que da de alta un producto
+
+        :return: None
+        :rtype: None
+
+        Recoge los datos de los widgets. Cuando conecta con el modúlo conexion.altaPro manda un mensaje para asegurar
+        que quiere continuar la operación.
+
+        """
         '''cargara los clientes en la tabla'''
         try:
             newpro = [] #donde están todos los datos
