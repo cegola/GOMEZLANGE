@@ -17,7 +17,6 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgSalir.setupUi(self)
         var.dlgSalir.btnAceptar.clicked.connect(events.Eventos.Salir)
         var.dlgSalir.btnCancelar.clicked.connect(events.Eventos.closeSalir)
-        # var.dlgSalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
 
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
@@ -133,7 +132,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabVenta.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         '''Llamada a modulos iniciales'''
-        events.Eventos.cargarProv()
+        events.Eventos.cargarProv(self)
 
         var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 5)
         var.ui.statusbar.addPermanentWidget(var.ui.lblfecha, 1)
@@ -158,7 +157,7 @@ class Main(QtWidgets.QMainWindow):
 
     def closeEvent(self, event):
         if event:
-            events.Eventos.Salir(event)
+            events.Eventos.Salir(self, event)
 
 
 
