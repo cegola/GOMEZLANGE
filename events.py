@@ -8,7 +8,18 @@ import conexion
 
 class Eventos():
     def Salir(event):
-        '''Evento modulo salir'''
+        """
+
+        Método que cierra el programa
+
+        :param event: evento salir
+        :type event: event
+        :return: None
+        :rtype: None
+
+        Abre la ventana salir y cierra el programa si se clicka el botón aceptar
+
+        """
 
         try:
             # var.dlgSalir.show()
@@ -22,6 +33,14 @@ class Eventos():
             print('Error salir %s' % str(error))
 
     def closeSalir(event):
+        """
+
+        Módulo que cierra la ventana salir
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             if var.dlgSalir.exec_():
                 var.dlgSalir.hide()
@@ -29,6 +48,17 @@ class Eventos():
             print('Error salir %s' % str(error))
 
     def Backup(self):
+        """
+
+        Módulo que realiza una copia de seguridad de la base de datos
+
+        :return: None
+        :rtype: None
+
+        Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
+        en un archivo zip. Muestra un mensaje en la barra de estado.
+
+        """
         try:
             print('Backup')
             fecha = datetime.now()
@@ -48,12 +78,25 @@ class Eventos():
             print('Error backup %s' % str(error))
 
     def restaurarBD(self):
+        """
+
+        Módulo que restaura una copia de seguridad de la base de datos
+
+        :return: None
+        :rtype: None
+
+        Abre una ventana para elegir el archivo tipo zip donde está la base de datos.
+        Descomprime el archivo. Recarga los datos llamando al método conexio.cargarDatos.
+        Muestra un mensaje en la barra de estado.
+
+        """
         try:
             option = QtWidgets.QFileDialog.Options()
-            filename = var.filedlgAbrir.getOpenFileName(None, 'Restaurar copia de seguridad','','*.zip', options=option)
+            filename = var.filedlgAbrir.getOpenFileName(None, 'Restaurar copia de seguridad', '', '*.zip',
+                                                        options=option)
             if var.filedlgAbrir.Accepted and filename != '':
                 print(str(filename[0]))
-                bd = zipfile.ZipFile(str(filename[0]),'r')
+                bd = zipfile.ZipFile(str(filename[0]), 'r')
                 bd.extractall()
                 bd.close()
             conexion.Conexion.cargarDatos(self)
@@ -61,7 +104,6 @@ class Eventos():
 
         except Exception as error:
             print('Error restaurar BD %s' % str(error))
-
 
     def AbrirDir(self):
         try:
@@ -71,8 +113,15 @@ class Eventos():
         except Exception as error:
             print('Error abrir dir: %d' % str(error))
 
-
     def AbrirAviso(mensaje):
+        """
+
+        Módulo que abre una ventana para elegir directorio
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             var.lblMensaje.setText(mensaje)
             var.dlgAviso.show()
@@ -84,27 +133,53 @@ class Eventos():
         except Exception as error:
             print('Error salir %s' % str(error))
 
-
     def AbrirAcercaDe(self):
+        """
+
+        Módulo que abre una ventana de aviso
+
+        :param mensaje: mensaje que muestra la ventana
+        :type mensaje: string
+        :return: bool
+        :rtype: True/False
+
+        Abre una ventada de aviso con el mensaje pasado por parámetro. Devuelve un booleano dependiendo de si se ejecuta
+        o no.
+
+        """
         try:
-            # var.dlgSalir.show()
             var.dlgAcercaDe.show()
             if var.dlgAcercaDe.exec_():
                 var.dlgAcercaDe.close()
         except Exception as error:
             print('Error acerca de %s' % str(error))
 
-
     def Imprimir(self):
+        """
+
+        Método que abre una ventada de Acerca De
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             var.dglImprimir.setModal(True)
             var.dglImprimir.show()
         except Exception as error:
             print('Error abrir dir: %d' % str(error))
 
+    def cargarProv(self):
+        """
 
-    def cargarProv():
-        '''Carga las provincias al iniciar el programa'''
+        Módulo que carga las provincias al iniciar el programa
+
+        :return: None
+        :rtype: None
+
+        Carga el comboBox de provincias en la pestaña clientes
+
+        """
         try:
             prov = ['', 'A Coruña', 'Lugo', 'Ourense', 'Pontevedra', 'Vigo']
             for i in prov:

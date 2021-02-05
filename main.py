@@ -181,7 +181,7 @@ class Main(QtWidgets.QMainWindow):
         Llamada a modulos iniciales
         
         '''
-        events.Eventos.cargarProv()
+        events.Eventos.cargarProv(self)
 
         var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 5)
         var.ui.statusbar.addPermanentWidget(var.ui.lblfecha, 1)

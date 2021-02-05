@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clients &#8212; documentación de Proyecto Celia - v0.0.1</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para clients</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">var</span><span class="o">,</span> <span class="nn">conexion</span><span class="o">,</span> <span class="nn">events</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
+<span class="kn">from</span> <span class="nn">ventana</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="Clientes"><a class="viewcode-back" href="../src/clients.html#clients.Clientes">[documentos]</a><span class="k">class</span> <span class="nc">Clientes</span><span class="p">():</span>
+
+<div class="viewcode-block" id="Clientes.validarDni"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.validarDni">[documentos]</a>    <span class="k">def</span> <span class="nf">validarDni</span><span class="p">(</span><span class="n">dni</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que valida que la letra del dni sea nacional o extranjera</span>
+
+<span class="sd">        :param dni: formato texto</span>
+<span class="sd">        :type dni: string</span>
+<span class="sd">        :return: bool</span>
+<span class="sd">        :rtype: bool</span>
+
+<span class="sd">        Pone la letra en mayuscula, comprueba que son caracteres. Toma los 8 primeros, si es extranjero</span>
+<span class="sd">        cambia la letra por el numero, y aplica el algoritmo de comprobación de la letra basado en la normativa.</span>
+<span class="sd">        Si es correcto--&gt; true, falso--&gt;False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tabla</span> <span class="o">=</span> <span class="s1">&#39;TRWAGMYFPDXBNJZSQVHLCKE&#39;</span>
+            <span class="n">dig_ext</span> <span class="o">=</span> <span class="s1">&#39;XYZ&#39;</span>
+            <span class="n">reemp_dig_ext</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">}</span>
+            <span class="n">numeros</span> <span class="o">=</span> <span class="s1">&#39;0123456789&#39;</span>
+            <span class="n">dni</span><span class="o">=</span><span class="n">dni</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+                <span class="n">dig_control</span> <span class="o">=</span> <span class="n">dni</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+                <span class="n">dni</span> <span class="o">=</span> <span class="n">dni</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">dni</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">dig_ext</span><span class="p">:</span>
+                    <span class="n">dni</span> <span class="o">=</span> <span class="n">dni</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">dni</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reemp_dig_ext</span><span class="p">[</span><span class="n">dni</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">dni</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numeros</span><span class="p">])</span> <span class="ow">and</span> <span class="n">tabla</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span> <span class="o">%</span> <span class="mi">23</span><span class="p">]</span> <span class="o">==</span> <span class="n">dig_control</span>
+                <span class="sd">&#39;&#39;&#39;Va construyendo una lista, almacena el dato en ella si es un numero, al final comprueba que la lista creada tenga len=8&#39;&#39;&#39;</span>
+                <span class="sd">&#39;&#39;&#39;Comprueba que la letra del dni corresponde con la de la tabla&#39;&#39;&#39;</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: modulo validar DNI&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Clientes.validoDni"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.validoDni">[documentos]</a>    <span class="k">def</span> <span class="nf">validoDni</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que según sea valido o no muestra imagen distinta</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        Si es falso--&gt; muestra cruz roja.</span>
+<span class="sd">        Si es true--&gt; muestra cruz verde.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">Clientes</span><span class="o">.</span><span class="n">validarDni</span><span class="p">(</span><span class="n">dni</span><span class="p">):</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValidar</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;QLabel {color:green;}&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValidar</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValidar</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;QLabel {color:red;}&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValidar</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+                <span class="n">mensaje</span> <span class="o">=</span> <span class="s1">&#39;Ese DNI es erróneo&#39;</span>
+                <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+                <span class="n">Clientes</span><span class="o">.</span><span class="n">limpiarDatos</span><span class="p">()</span>
+                <span class="c1">#dniOk=False</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: modulo valido DNI&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Clientes.selSexo"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.selSexo">[documentos]</a>    <span class="k">def</span> <span class="nf">selSexo</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que según checkeemos el rtb fem/masc carga el texto correspondiente de mujer o hombre a la variable</span>
+<span class="sd">        var.sex que luego se añade a la lista de los datos del cliente, a incluir en la base de datos</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">rbtFemenino</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;Mujer&#39;</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">rbtMasculino</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;Hombre&#39;</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: sexo: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.selPago"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.selPago">[documentos]</a>    <span class="k">def</span> <span class="nf">selPago</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que checkea que valores de pago se seleccionan el el checkbox y los añade a una variable lista var.pay</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        En QtDesigner se deben agrupar los checkbox en un buttongroup</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">grpBtnPay</span><span class="o">.</span><span class="n">buttons</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Efectivo&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Tarjeta&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Transferencia&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">pay</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: pago: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.selProv"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.selProv">[documentos]</a>    <span class="k">def</span> <span class="nf">selProv</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Al seleccionar una provincia en el combo de provincias llama al evento  cmbProv.activated</span>
+<span class="sd">        que devuelve la provincia</span>
+
+<span class="sd">        :param prov: provincia seleccionada</span>
+<span class="sd">        :type prov: string</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">global</span> <span class="n">vpro</span>
+            <span class="n">vpro</span> <span class="o">=</span> <span class="n">prov</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: sel prov: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.abrirCalendar"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.abrirCalendar">[documentos]</a>    <span class="k">def</span> <span class="nf">abrirCalendar</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que abre la ventana calendario</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgCalendar</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: cal: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.cargarFecha"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.cargarFecha">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarFecha</span><span class="p">(</span><span class="n">qDate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que carga la fecha marcada en el widget calendar</span>
+
+<span class="sd">        :param a: libreria python para formateo de fechas</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: formato de fechas en python</span>
+
+<span class="sd">        A partir de los eventos Calendar.clicked.connect, al clickar en una fecha, la captura y la carga en</span>
+<span class="sd">        el widget edit que almacena la fecha</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">/</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qDate</span><span class="o">.</span><span class="n">day</span><span class="p">(),</span> <span class="n">qDate</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="n">qDate</span><span class="o">.</span><span class="n">year</span><span class="p">()))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCliAlta</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgCalendar</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: cargar fecha: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.altaCliente"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.altaCliente">[documentos]</a>    <span class="k">def</span> <span class="nf">altaCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que carga los datos del cliente</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        Se crea una lista newcli que contendrá todos los datos del cliente que se introduczca en los widgets,</span>
+<span class="sd">        esta en la lista se pasa como argumento al modulo altaCli del módulo Conexión.</span>
+<span class="sd">        El módulo llama al módulo altaCli para dar de alta el cliente en la base de datos.</span>
+<span class="sd">        El módulo llama al módulo limpiarDatos para limpiar los datos de la ventana.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">newcli</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">clitab</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidos</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombre</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCliAlta</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDireccion</span><span class="p">]</span>
+            <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">client</span><span class="p">:</span>
+                <span class="n">newcli</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">clitab</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+                    <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">newcli</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vpro</span><span class="p">)</span>
+            <span class="n">newcli</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span>
+            <span class="n">edad</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinEdad</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+            <span class="n">newcli</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">pay2</span> <span class="o">=</span> <span class="n">Clientes</span><span class="o">.</span><span class="n">selPago</span><span class="p">()</span>
+            <span class="n">newcli</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">pay2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">newcli</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">insertRow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">registro</span> <span class="ow">in</span> <span class="n">clitab</span><span class="p">:</span>
+                    <span class="n">cell</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">registro</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+                    <span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaCli</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newcli</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Faltan datos&#39;</span><span class="p">)</span>
+            <span class="n">Clientes</span><span class="o">.</span><span class="n">limpiarDatos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: alta cli: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.limpiarDatos"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.limpiarDatos">[documentos]</a>    <span class="k">def</span> <span class="nf">limpiarDatos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que vacia los datos de la ventana cliente</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        los checkbox y radiobuttons los pone a false</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1">#client son todas las cajas de texto</span>
+            <span class="n">client</span>  <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidos</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombre</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCliAlta</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDireccion</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">client</span><span class="p">)):</span>
+                <span class="n">client</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">grpBtnSex</span><span class="o">.</span><span class="n">setExclusive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">rbtsex</span><span class="p">:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">chkpago</span><span class="p">:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">cmbProvincia</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValidar</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodCli</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinEdad</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: en limpiar datos : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.cargarCli"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.cargarCli">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarCli</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que se activa con el evento clicked.connected y setSelectionBehavior del widget TTablaCli</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        Al generarse el evento se llama al módulo de conexion.cargarCliente que devuelve los datos haciendo una llamada</span>
+<span class="sd">        a la base de datos</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fila</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">selectedItems</span><span class="p">()</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidos</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombre</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">fila</span><span class="p">:</span>
+                <span class="n">fila</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span> <span class="p">]</span>
+
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dato</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+                <span class="n">dato</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCliente</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarFacturasCli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: cargar datos: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.bajaCli"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.bajaCli">[documentos]</a>    <span class="k">def</span> <span class="nf">bajaCli</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que da de baja un cliente a partir del dni. Además recarga el widget TablaCli con los datos actualizados</span>
+<span class="sd">        desde la base de datos</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        Toma el dni cargado en el widget editDni, se lo pasa al módulo Conexion.bajaCliente y da de baja el cliente.</span>
+<span class="sd">        Limpia los datos del formulario y recarga tablaCli</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">mensaje</span><span class="o">=</span><span class="s1">&#39;¿Seguro que desea dar de baja a este cliente?&#39;</span>
+            <span class="n">borrar</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">borrar</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">bajaCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dni</span><span class="p">)</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="n">Clientes</span><span class="o">.</span><span class="n">limpiarDatos</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: cargar clientes: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.modCli"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.modCli">[documentos]</a>    <span class="k">def</span> <span class="nf">modCli</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo para modificar los datos de un cliente a partir del dni</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        A partir del código del cliente, lee los nuevos datos de los widgets que se han cargado y modificado,</span>
+<span class="sd">        llama al módulo moCliente para actualizar los datos pasandole una lista con los nuevos datos en la base de</span>
+<span class="sd">        datos. Vuelve a mostrar la tablaCli actualizada pero no limpia los datos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">newdata</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidos</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombre</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCliAlta</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDireccion</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">client</span><span class="p">:</span>
+                <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">cmbProvincia</span><span class="o">.</span><span class="n">currentText</span><span class="p">())</span>
+            <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span>
+            <span class="n">edad</span><span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinEdad</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+            <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="n">Clientes</span><span class="o">.</span><span class="n">selPago</span><span class="p">()</span>
+            <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="p">)</span>
+            <span class="n">cod</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodCli</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="s1">&#39;Seguro que desea modificar este cliente&#39;</span>
+            <span class="n">mod</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mod</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">modCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cod</span><span class="p">,</span> <span class="n">newdata</span><span class="p">)</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Clientes</span><span class="o">.</span><span class="n">limpiarDatos</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: modificar clientes: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.reloadCli"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.reloadCli">[documentos]</a>    <span class="k">def</span> <span class="nf">reloadCli</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Limpia datos del formulario y recarga la tabla de clientes</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Clientes</span><span class="o">.</span><span class="n">limpiarDatos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span>  <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: recargar clientes: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.buscarClie"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.buscarClie">[documentos]</a>    <span class="k">def</span> <span class="nf">buscarClie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Busca un cliente a partir de un dni que escribe el usuario</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        Toma el dni del widget editDni y llama a la función Conexion.buscaCliente a la que le pasa el dni</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">cliente</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">buscarCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dni</span><span class="p">)</span>
+        <span class="k">except</span>  <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: recargar clientes: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Clientes.valoresSpin"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.valoresSpin">[documentos]</a>    <span class="k">def</span> <span class="nf">valoresSpin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que se lanza con el programa cargando por defecto el valor 16</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinEdad</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: valores spin: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Proyecto Celia</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Celia Gomez Lange.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

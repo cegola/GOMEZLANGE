@@ -39,7 +39,6 @@ class Clientes():
             print('Error clients: modulo validar DNI')
             return None
 
-
     def validoDni():
         """
 
@@ -112,7 +111,6 @@ class Clientes():
         except Exception as error:
             print('Error clients: pago: %s' % str(error))
 
-
     def selProv(prov):
         """
 
@@ -129,7 +127,6 @@ class Clientes():
             vpro = prov
         except Exception as error:
             print('Error clients: sel prov: %s' % str(error))
-
 
     def abrirCalendar():
         """
@@ -239,7 +236,6 @@ class Clientes():
         except Exception as error:
                 print('Error clients: en limpiar datos : %s' % str(error))
 
-
     def cargarCli(self):
         """
 
@@ -265,7 +261,6 @@ class Clientes():
             conexion.Conexion.mostrarFacturasCli(self)
         except Exception as error:
                 print('Error clients: cargar datos: %s' % str(error))
-
 
     def bajaCli(self):
         """
@@ -324,7 +319,6 @@ class Clientes():
                 Clientes.limpiarDatos()
         except Exception as error:
             print('Error clients: modificar clientes: %s ' % str(error))
-
 
     def reloadCli(self):
         """

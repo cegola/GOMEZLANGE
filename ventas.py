@@ -88,7 +88,15 @@ class Ventas():
             print('Error ventas: Preparar tabla ventas %s' % str(error))
 
     def cargarFac(self):
-        '''modulo que carga los datos de la factura y cliente'''
+        """
+
+        Modulo que carga los datos de la factura y cliente
+
+        :return: None
+        :rtype: None
+        
+        """
+        ''''''
         try:
             var.subfac = 0.00
             var.fac = 0.00
@@ -106,6 +114,17 @@ class Ventas():
             print('Error ventas: cargar fac %s' % str(error))
 
     def borrarFac(self):
+        """
+
+        Módulo que borra una factua
+
+        :return: None
+        :rtype: None
+
+        Coge el código de la factura del widget lblCodFac y conecta con el módulo conexion.borrarFactura
+        Luego recarga la tablaVentas
+
+        """
         try:
             cod = var.ui.lblCodFac.text()
             conexion.Conexion.borrarFactura(self, cod)
@@ -113,19 +132,29 @@ class Ventas():
         except Exception as error:
             print('Error ventas: borrar fac %s' % str(error))
 
-
     def procesoVenta(self):
+        """
+
+        Módulo que procesa una venta de una factura
+
+        :return: None
+        :rtype: None
+
+        Recoge todos los datos de la venta y los mete en la variable var.venta. Da de alta la venta llamando al
+        módulo conexion.altaVenta. Calcula el subtotal de la factura, el iva y el total y lo muestra en los widgets
+        correspondientes.
+        Recarga la tabla ventas y la tabla productos.
+        Si falta algún dato en la factura o la venta, muestra mensaje en la barra de estado.
+
+        """
         try:
             var.subfac = 0.00
             var.venta = []
-            # insertamos en venta codFac, codPro, nombreArt, cantidad, precio, subtotal, row
             codFac = var.ui.lblCodFac.text()
-            #print(int(codFac))
             var.venta.append(int(codFac))
             articulo = var.cmbventa.currentText()
             dato = conexion.Conexion.obtenerCodPrecio(self, articulo)
-
-            var.venta.append(int(dato[0]))  # codigo del producto
+            var.venta.append(int(dato[0]))
             var.venta.append(articulo)
             row = var.ui.tabVenta.currentRow()
             cantidad = var.ui.tabVenta.item(row, 2).text()
@@ -136,10 +165,8 @@ class Ventas():
             subtotal = round(float(cantidad) * float(dato[1]), 2)
             var.venta.append(subtotal)
             var.venta.append(row)
-            #print(var.venta)
             if codFac != '' and articulo != '' and cantidad != '':
                 conexion.Conexion.altaVenta(self)
-                #print(var.venta)
                 var.subfac = round(float(subtotal) + float(var.subfac), 2)
                 var.ui.lblSubtotal.setText(str(var.subfac))
                 var.iva = round(float(var.subfac) * 0.21, 2)
@@ -153,8 +180,18 @@ class Ventas():
         except Exception as error:
             print('Error ventas: proceso venta fac %s' % str(error))
 
-
     def mostrarVentasFac(self):
+        """
+
+        Método que muestra las ventas de una factura
+
+        :return: None
+        :rtype:None
+
+        Carga el combo de ventas y recoge el codigo de la factura. Conecta con el método listadoVentasFacturas
+        pasandole el codigo y luego recarga el combo.
+
+        """
         try:
             var.cmbventa = QtWidgets.QComboBox()
             codfac = var.ui.lblCodFac.text()
@@ -164,6 +201,16 @@ class Ventas():
             print('Error ventas: mostrar ventas de facturas %s' % str(error))
 
     def anularVenta(self):
+        """
+
+        Módulo que borra una venta
+
+        :return: None
+        :rtype: None
+
+        Recoge el codigo de la venta y se lo pasa al módulo conexion.anularVenta que lo borrará de la base de datos
+
+        """
         try:
             fila = var.ui.tabVenta.selectedItems()
             if fila:

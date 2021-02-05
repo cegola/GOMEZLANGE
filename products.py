@@ -16,7 +16,6 @@ class Productos():
         que quiere continuar la operación.
 
         """
-        '''cargara los clientes en la tabla'''
         try:
             newpro = [] #donde están todos los datos
             protab = [] #sera lo que carguemos
@@ -54,7 +53,16 @@ class Productos():
             print('Error products: alta pro: %s' % str(error))
 
     def limpiarDatos(self):
-        '''limpia los datos del formulario'''
+        """
+
+        Módulo que limpia los datos
+
+        :return: None
+        :rtype: None
+
+        Limpia los widgets de la pantalla productos
+
+        """
         try:
             # client son todas las cajas de texto
             product = [var.ui.editNombrePro, var.ui.editPrecio, var.ui.editStock]
@@ -64,7 +72,18 @@ class Productos():
         except Exception as error:
             print('Error products: en limpiar datos : %s' % str(error))
 
-    def cargarPro():
+    def cargarPro(self):
+        """
+
+        Módulo que carga los productos en la tablaPro
+
+        :return: None
+        :rtype: None
+
+        Al generarse el evento se llama al módulo de conexion.cargarProducto que devuelve los datos haciendo una llamada
+        a la base de datos
+
+        """
         try:
             fila = var.ui.tablaPro.selectedItems()
             product = [var.ui.lblCodPro, var.ui.editNombrePro, var.ui.editPrecio]
@@ -80,6 +99,18 @@ class Productos():
             print('Error products: cargar datos producto: %s' % str(error))
 
     def bajaPro(self):
+        """
+
+        Módulo que da de baja un producto a partir del nombre del dni. Además recarga el widget tablaPro con los datos actualizados
+        desde la base de datos
+
+        :return: None
+        :rtype: None
+
+        Toma el nombre cargado en el widget editNombre, se lo pasa al módulo Conexion.bajaProducto y da de baja el producto.
+        Limpia los datos del formulario y recarga tablaPro
+
+        """
         try:
             nombre = var.ui.editNombrePro.text()
             mensaje='¿Seguro que desea dar de baja a este producto?'
@@ -92,6 +123,17 @@ class Productos():
             print('Error products: baja producto: %s ' % str(error))
 
     def modPro(self):
+        """
+
+        Módulo para modificar los datos de un producto a partir del codigo
+
+        :return: None
+        :rtype: None
+
+        A partir del código del producto, lee los nuevos datos de los widgets que se han cargado y modificado,
+        llama al módulo modProducto para actualizar los datos pasandole una lista con los nuevos datos en la base de
+        datos. Vuelve a mostrar la tablaCli actualizada pero no limpia los datos.
+        """
         try:
             newdata = []
             product = [var.ui.editNombrePro, var.ui.editPrecio, var.ui.editStock]

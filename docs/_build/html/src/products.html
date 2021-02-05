@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>products module &#8212; documentación de Proyecto Celia - v0.0.1</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-products">
+<span id="products-module"></span><h1>products module<a class="headerlink" href="#module-products" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="products.Productos">
+<em class="property">class </em><code class="sig-prename descclassname">products.</code><code class="sig-name descname">Productos</code><a class="reference internal" href="../_modules/products.html#Productos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#products.Productos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="products.Productos.altaProducto">
+<code class="sig-name descname">altaProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/products.html#Productos.altaProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#products.Productos.altaProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de alta un producto</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Recoge los datos de los widgets. Cuando conecta con el modúlo conexion.altaPro manda un mensaje para asegurar
+que quiere continuar la operación.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="products.Productos.bajaPro">
+<code class="sig-name descname">bajaPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/products.html#Productos.bajaPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#products.Productos.bajaPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de baja un producto a partir del nombre del dni. Además recarga el widget tablaPro con los datos actualizados
+desde la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Toma el nombre cargado en el widget editNombre, se lo pasa al módulo Conexion.bajaProducto y da de baja el producto.
+Limpia los datos del formulario y recarga tablaPro</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="products.Productos.cargarPro">
+<code class="sig-name descname">cargarPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/products.html#Productos.cargarPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#products.Productos.cargarPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga los productos en la tablaPro</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Al generarse el evento se llama al módulo de conexion.cargarProducto que devuelve los datos haciendo una llamada
+a la base de datos</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="products.Productos.limpiarDatos">
+<code class="sig-name descname">limpiarDatos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/products.html#Productos.limpiarDatos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#products.Productos.limpiarDatos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que limpia los datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Limpia los widgets de la pantalla productos</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="products.Productos.modPro">
+<code class="sig-name descname">modPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/products.html#Productos.modPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#products.Productos.modPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo para modificar los datos de un producto a partir del codigo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>A partir del código del producto, lee los nuevos datos de los widgets que se han cargado y modificado,
+llama al módulo modProducto para actualizar los datos pasandole una lista con los nuevos datos en la base de
+datos. Vuelve a mostrar la tablaCli actualizada pero no limpia los datos.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Proyecto Celia</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Celia Gomez Lange.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/products.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
