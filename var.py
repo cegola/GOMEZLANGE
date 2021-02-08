@@ -2,6 +2,7 @@ global ui
 #listas de rbtbutton y check
 global rbtsex #va a manejar los dos radio buttons
 global chkpago
+global chkfacpago
 #ventanas de dialogo
 global dlgAviso
 global dlgSalir
@@ -25,3 +26,6 @@ pay2 = []
 venta = []
 
 filebd= 'empresa.db'
+
+
+global facPagada

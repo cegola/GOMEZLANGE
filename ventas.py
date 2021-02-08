@@ -4,6 +4,26 @@ from ventana import *
 
 class Ventas():
 
+    def selFacPagada(self):
+        """
+
+        Módulo que checkea que valores de pago de factura se seleccionan el el checkbox y los añade a una variable
+        lista var.facpagada
+
+        :return: None
+        :rtype: None
+
+        En QtDesigner se deben agrupar los checkbox en un buttongroup
+
+        """
+        try:
+            if var.ui.chkFacPagada.isChecked():
+                var.facPagada= 'Pagada'
+            else:
+                var.facPagada = ''
+        except Exception as error:
+            print('Error clients: pago: %s' % str(error))
+
     def altaFactura(self):
         """
 
@@ -19,8 +39,9 @@ class Ventas():
             dni = var.ui.editDniFac.text()
             fecha = var.ui.editFechaFac.text()
             apel = var.ui.editApellidosFac.text()
+            estado = var.facPagada
             if dni != '' and fecha != '':
-                conexion.Conexion.altaFac(self, str(dni), str(fecha), str(apel))
+                conexion.Conexion.altaFac(self, str(dni), str(fecha), str(apel), str(estado))
             conexion.Conexion.mostrarFacturas(self)
             #conexion.Conexion.cargarFacturas(self)
             Ventas.tablaVentas(0)
@@ -131,6 +152,27 @@ class Ventas():
             Ventas.tablaVentas(0)
         except Exception as error:
             print('Error ventas: borrar fac %s' % str(error))
+
+    def actualizarFac(self):
+        """
+
+        Módulo que actualiza el estado (pagada o no) de una factua
+
+        :return: None
+        :rtype: None
+
+        Coge el código de la factura del widget lblCodFac y conecta con el módulo conexion.actualizarFactura
+        Luego recarga la tablaVentas
+
+        """
+        try:
+            cod = var.ui.lblCodFac.text()
+            estado = var.facPagada
+            conexion.Conexion.actualizarFactura(self, cod, estado)
+        except Exception as error:
+            print('Error ventas: borrar fac %s' % str(error))
+
+
 
     def procesoVenta(self):
         """

@@ -117,6 +117,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.rbtsex = (var.ui.rbtFemenino, var.ui.rbtMasculino)
         var.chkpago = (var.ui.chkEfectivo, var.ui.chkTarjeta, var.ui.chkTransferencia)
+        var.chkfacpago =var.ui.chkFacPagada
 
         '''
         
@@ -161,11 +162,15 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnRecargarCli.clicked.connect(conexion.Conexion.mostrarFacturas)
         var.ui.btnAceptarVenta.clicked.connect(ventas.Ventas.procesoVenta)
         var.ui.btnBorrarVenta.clicked.connect(ventas.Ventas.anularVenta)
+        var.ui.btnActualizar.clicked.connect(ventas.Ventas.actualizarFac)
 
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
         for i in var.chkpago:
             i.stateChanged.connect(clients.Clientes.selPago)
+        # for i in var.chkfacpago:
+        #     i.stateChanged.connect(ventas.Ventas.selFacPagada)
+        var.chkfacpago.stateChanged.connect(ventas.Ventas.selFacPagada)
 
         var.ui.cmbProvincia.activated[str].connect(clients.Clientes.selProv)
         var.ui.tablaCli.clicked.connect(clients.Clientes.cargarCli)

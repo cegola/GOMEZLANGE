@@ -5,6 +5,7 @@ import ventas
 
 
 class Conexion():
+
     def db_connect(self, filename):
         """
 
@@ -418,7 +419,7 @@ class Conexion():
             while query.next():
                 var.cmbventa.addItem(str(query.value(1)))
 
-    def altaFac(self, dni, fecha, apel):
+    def altaFac(self, dni, fecha, apel, estado):
         """
 
         Módulo que da de alta una factura de un cliente
@@ -440,10 +441,11 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        query.prepare('insert into facturas (dniCliente, fechaFactura, apellidos) VALUES (:dniCliente, :fechaFactura, :apellidos)')
+        query.prepare('insert into facturas (dniCliente, fechaFactura, apellidos, estado) VALUES (:dniCliente, :fechaFactura, :apellidos, :estado)')
         query.bindValue(':dniCliente', str(dni))
         query.bindValue(':fechaFactura', str(fecha))
         query.bindValue(':apellidos', str(apel))
+        query.bindValue(':estado', str(estado))
         if query.exec_():
             var.ui.lblstatus.setText('Factura creada')
         else:
@@ -537,6 +539,7 @@ class Conexion():
         datosFac = [var.ui.editDniFac, var.ui.editApellidosFac, var.ui.lblCodFac, var.ui.editFechaFac]
         for i, data in enumerate(datosFac):
             datosFac[i].setText('')
+        var.ui.chkFacPagada.setChecked(False)
 
     def cargarDatosClienteFactura(self, cod):
         """
@@ -553,17 +556,21 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        query.prepare('select dniCliente, apellidos from facturas where numFactura = :numFac')
+        query.prepare('select dniCliente, apellidos, estado from facturas where numFactura = :numFac')
         query.bindValue(':numFac', int(cod))
         if query.exec_():
             while query.next():
                 var.ui.editApellidosFac.setText(str(query.value(1)))
                 var.ui.editDniFac.setText(str(query.value(0)))
+                if str(query.value(2)) == 'Pagada':
+                    var.ui.chkFacPagada.setChecked(True)
+                else:
+                    var.ui.chkFacPagada.setChecked(False)
 
     def cargarFacturas(self):
         """
 
-        Módulo que carga todas las facturas
+        Módulo que carga todas las facturas (juraria que es inutil pero ahí está=)
 
         :return: None
         :rtype: None
@@ -572,13 +579,41 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        query.prepare('select numFac, dniCliente, fechaFactura, apellidos from facturas order by numFac desc LIMIT 1)')
+        query.prepare('select numFac, dniCliente, fechaFactura, apellidos, estado from facturas order by numFac desc LIMIT 1)')
         if query.exec_():
             while query.next():
                 var.ui.lblCodFac.setText(str(query.value(0)))
                 var.ui.editDniFac.setText(str(query.value(1)))
                 var.ui.editFechaFac.setText(str(query.value(2)))
                 var.ui.editApellidosFac.setText(query.value(3))
+                if str(query.value(2)) == 'Pagada':
+                    var.ui.chkFacPagada.setChecked(True)
+                else:
+                    var.ui.chkFacPagada.setChecked(False)
+
+    def actualizarFactura(self, cod, estado):
+        """
+
+        Módulo que borra una factura
+
+        :param cod: codigo de la factura
+        :type cod: int
+        :return: None
+        :rtype: None
+
+        Elimina de la base de datos la factura con ese código. Muestra un mensaje en la barra de estado.
+
+        """
+        query = QtSql.QSqlQuery()
+        # print(int(cod))
+        query.prepare('update facturas set estado=:estado where numFactura = :codfac')
+        query.bindValue(':estado',str(estado))
+        query.bindValue(':codfac', int(cod))
+        if query.exec_():
+            var.ui.lblstatus.setText('Factura actualizada')
+            Conexion.mostrarFacturas(self)
+        else:
+            print('Error conexion: borrar factura en borrarFactura ', query.lastError().text())
 
     def borrarFactura(self, cod):
         """
