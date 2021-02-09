@@ -38,6 +38,24 @@
 <em class="property">class </em><code class="sig-prename descclassname">conexion.</code><code class="sig-name descname">Conexion</code><a class="reference internal" href="../_modules/conexion.html#Conexion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
+<dt id="conexion.Conexion.actualizarFactura">
+<code class="sig-name descname">actualizarFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em>, <em class="sig-param"><span class="n">estado</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.actualizarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.actualizarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que borra una factura</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>cod</strong> (<em>int</em>) – codigo de la factura</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Elimina de la base de datos la factura con ese código. Muestra un mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="conexion.Conexion.altaCli">
 <code class="sig-name descname">altaCli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cliente</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de alta un cliente con los datos pasados por lista. Muestra mensaje de resultado en la statusbar.
@@ -57,7 +75,7 @@ Rescarga la tablaCli</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.altaFac">
-<code class="sig-name descname">altaFac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em>, <em class="sig-param"><span class="n">fecha</span></em>, <em class="sig-param"><span class="n">apel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="sig-name descname">altaFac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em>, <em class="sig-param"><span class="n">fecha</span></em>, <em class="sig-param"><span class="n">apel</span></em>, <em class="sig-param"><span class="n">estado</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de alta una factura de un cliente</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -275,7 +293,7 @@ widgets de datos de cliente de la pantalla facturacion.</p>
 <dl class="py method">
 <dt id="conexion.Conexion.cargarFacturas">
 <code class="sig-name descname">cargarFacturas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Módulo que carga todas las facturas</p>
+<dd><p>Módulo que carga todas las facturas (juraria que es inutil pero ahí está=)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
 <dd class="field-odd"><p>None</p>
@@ -500,6 +518,25 @@ Muestra mensaje en la barra de estado.</p>
 </dl>
 <p>Busca en la base de datos un articulo con el nombre pasado y devuelve una lista con el código y el precio de ese
 artículo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.totalPrecioFactura">
+<code class="sig-name descname">totalPrecioFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codfac</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.totalPrecioFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.totalPrecioFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que calcula el precio total de una factura</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>codFac</strong> (<em>int</em>) – codigo de la factura</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>total factura</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>lista</p>
+</dd>
+</dl>
+<p>Recibe el codigo de una factura. Busca sus ventas, las va recorriendo y sumando el total de estas.
+Devuelve el precio total de la factura.</p>
 </dd></dl>
 
 </dd></dl>

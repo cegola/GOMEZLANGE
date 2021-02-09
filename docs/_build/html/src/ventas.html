@@ -52,6 +52,22 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="ventas.Ventas.actualizarFac">
+<code class="sig-name descname">actualizarFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.actualizarFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.actualizarFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que actualiza el estado (pagada o no) de una factua</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coge el código de la factura del widget lblCodFac y conecta con el módulo conexion.actualizarFactura
+Luego recarga la tablaVentas</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="ventas.Ventas.altaFactura">
 <code class="sig-name descname">altaFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.altaFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.altaFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que graba una factura previa al proceso de ventas</p>
@@ -160,6 +176,22 @@ módulo conexion.altaVenta. Calcula el subtotal de la factura, el iva y el total
 correspondientes.
 Recarga la tabla ventas y la tabla productos.
 Si falta algún dato en la factura o la venta, muestra mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.selFacPagada">
+<code class="sig-name descname">selFacPagada</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.selFacPagada"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.selFacPagada" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que checkea que valores de pago de factura se seleccionan el el checkbox y los añade a una variable
+lista var.facpagada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>En QtDesigner se deben agrupar los checkbox en un buttongroup</p>
 </dd></dl>
 
 <dl class="py method">

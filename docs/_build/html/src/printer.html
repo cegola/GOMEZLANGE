@@ -66,6 +66,24 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="printer.Printer.cabeceraCliente">
+<code class="sig-name descname">cabeceraCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.cabeceraCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.cabeceraCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga la cabecera de página del informe de facturas de un cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>dni</strong> (<em>string</em>) – dni del cliente</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Toma datos de la tabla cliente</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="printer.Printer.cabeceraFac">
 <code class="sig-name descname">cabeceraFac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.cabeceraFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.cabeceraFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga la cabecera de página del informe de facturación</p>
@@ -117,12 +135,39 @@ la variable textlistado.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="printer.Printer.pieFacturasCli">
+<code class="sig-name descname">pieFacturasCli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subtotal</span></em>, <em class="sig-param"><span class="n">iva</span></em>, <em class="sig-param"><span class="n">total</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.pieFacturasCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.pieFacturasCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime el pie de página del informe de facturas de un cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subtotal</strong> (<em>float</em>) – subtotal de la factura</p></li>
+<li><p><strong>iva</strong> (<em>float</em>) – total del IVA de las facturas</p></li>
+<li><p><strong>total</strong> (<em>float</em>) – total de las facturas</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="printer.Printer.reportCli">
 <code class="sig-name descname">reportCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.reportCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que llama a la base de datos, captura datos de los clientes ordenados alfabéticamente y los va mostrando
 en el informe</p>
-<p>:return:None
-:rtype: None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 <p>La variable i representa los valores del eje X
 La variable j representa los valores del eje Y
 Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista
@@ -133,8 +178,14 @@ por defecto en el sistema</p>
 <dt id="printer.Printer.reportFac">
 <code class="sig-name descname">reportFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.reportFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga el cuerpo del informe de la factura</p>
-<p>:return:None
-:rtype: None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 <p>Selecciona todas las ventas de esa factura y las va anotando linea a linea.
 La variable i representa los valores del eje X
 La variable j representa los valores del eje Y
@@ -144,12 +195,39 @@ por defecto en el sistema</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="printer.Printer.reportFacturasCli">
+<code class="sig-name descname">reportFacturasCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportFacturasCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.reportFacturasCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga las facturas pagadas de un cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Selecciona todas las facturas pagasas de un cliente y las va escribiendo linea a linea.
+Llama a un módulo que devuelve el valor calculado del total de las ventas, es decir, el precio de la factura.
+La variable i representa los valores del eje X
+La variable j representa los valores del eje Y
+Además tiene un pie de informe para mostrar el total neto, el iva y el total de las facturas.
+Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista
+por defecto en el sistema</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="printer.Printer.reportPro">
 <code class="sig-name descname">reportPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#printer.Printer.reportPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que llama a la base de datos, captura datos de los productos ordenados alfabéticamente y los va mostrando
 en el informe</p>
-<p>:return:None
-:rtype: None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 <p>La variable i representa los valores del eje X
 La variable j representa los valores del eje Y
 Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista

@@ -38,6 +38,26 @@
 
 <div class="viewcode-block" id="Ventas"><a class="viewcode-back" href="../src/ventas.html#ventas.Ventas">[documentos]</a><span class="k">class</span> <span class="nc">Ventas</span><span class="p">():</span>
 
+<div class="viewcode-block" id="Ventas.selFacPagada"><a class="viewcode-back" href="../src/ventas.html#ventas.Ventas.selFacPagada">[documentos]</a>    <span class="k">def</span> <span class="nf">selFacPagada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que checkea que valores de pago de factura se seleccionan el el checkbox y los añade a una variable</span>
+<span class="sd">        lista var.facpagada</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        En QtDesigner se deben agrupar los checkbox en un buttongroup</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">chkFacPagada</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">facPagada</span><span class="o">=</span> <span class="s1">&#39;Pagada&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">facPagada</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error clients: pago: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="Ventas.altaFactura"><a class="viewcode-back" href="../src/ventas.html#ventas.Ventas.altaFactura">[documentos]</a>    <span class="k">def</span> <span class="nf">altaFactura</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -53,8 +73,9 @@
             <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDniFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
             <span class="n">fecha</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editFechaFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
             <span class="n">apel</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidosFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">estado</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">facPagada</span>
             <span class="k">if</span> <span class="n">dni</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">fecha</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaFac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dni</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">fecha</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">apel</span><span class="p">))</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaFac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dni</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">fecha</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">apel</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">estado</span><span class="p">))</span>
             <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarFacturas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="c1">#conexion.Conexion.cargarFacturas(self)</span>
             <span class="n">Ventas</span><span class="o">.</span><span class="n">tablaVentas</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -165,6 +186,27 @@
             <span class="n">Ventas</span><span class="o">.</span><span class="n">tablaVentas</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error ventas: borrar fac </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Ventas.actualizarFac"><a class="viewcode-back" href="../src/ventas.html#ventas.Ventas.actualizarFac">[documentos]</a>    <span class="k">def</span> <span class="nf">actualizarFac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que actualiza el estado (pagada o no) de una factua</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        Coge el código de la factura del widget lblCodFac y conecta con el módulo conexion.actualizarFactura</span>
+<span class="sd">        Luego recarga la tablaVentas</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cod</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">estado</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">facPagada</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">actualizarFactura</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cod</span><span class="p">,</span> <span class="n">estado</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error ventas: borrar fac </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+
 
 <div class="viewcode-block" id="Ventas.procesoVenta"><a class="viewcode-back" href="../src/ventas.html#ventas.Ventas.procesoVenta">[documentos]</a>    <span class="k">def</span> <span class="nf">procesoVenta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
