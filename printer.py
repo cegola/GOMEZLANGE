@@ -169,13 +169,78 @@ class Printer():
         except Exception as error:
             print('Error cabecera factura informe %s' % str(error))
 
+    def cabeceraCliente(self, dni):
+        """
+
+        Módulo que carga la cabecera de página del informe de facturas de un cliente
+
+        :param dni: dni del cliente
+        :type dni: string
+        :return: None
+        :rtype: None
+
+        Toma datos de la tabla cliente
+
+        """
+        try:
+            var.rep.setFont('Helvetica-Bold', size=11)
+            var.rep.drawString(55, 725, 'Cliente: ')
+            var.rep.setFont('Helvetica', size=10)
+            #var.rep.drawString(50, 650, 'Factura nº: %s' % str(cod))
+            var.rep.line(45, 665, 525, 665)
+            var.rep.line(45, 640, 525, 640)
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select apellidos, nombre, direccion, provincia, formasPago from clientes where dni = :dni')
+            query1.bindValue(':dni', str(dni))
+            if query1.exec_():
+                while query1.next():
+                    var.rep.drawString(55, 710, 'DNI: %s' % str(dni))
+                    var.rep.drawString(55, 695, str(query1.value(0)) + ', ' + str(query1.value(1)))
+                    var.rep.drawString(300, 695, 'Formas de Pago: ')
+                    var.rep.drawString(55, 680, str(query1.value(2)) + ' - ' + str(query1.value(3)))
+                    var.rep.drawString(300, 680, str(query1.value(4).strip('[]').replace('\'', '').replace(',', ' -')))
+                    # \ caracter escape indica que lo siguiente tiene un significado especial
+            else:
+                print("Error cabecera fac info ", query1.lastError().text())
+            var.rep.setFont('Helvetica-Bold', size=10)
+            temven = ['NºFac', 'Fecha factura', 'Valor neto(€)','Valor IVA' ,'Valor total(€)']
+            var.rep.drawString(50, 650, temven[0])
+            var.rep.drawString(130, 650, temven[1])
+            var.rep.drawString(250, 650, temven[2])
+            var.rep.drawString(365, 650, temven[3])
+            var.rep.drawString(465, 650, temven[4])
+
+
+        except Exception as error:
+            print('Error cabecera factura informe %s' % str(error))
+
+    def pieFacturasCli(self, subtotal, iva, total):
+        """
+
+        Módulo que imprime el pie de página del informe de facturas de un cliente
+
+        :param subtotal: subtotal de la factura
+        :type subtotal: float
+        :param iva: total del IVA de las facturas
+        :type iva: float
+        :param total: total de las facturas
+        :type total: float
+        :return: None
+        :rtype: None
+
+        """
+        var.rep.setFont('Helvetica-Bold', size=12)
+        var.rep.drawRightString(500, 160,'Subtotal:       ' + str("{0:.2f}".format(float(subtotal)) + ' €'))
+        var.rep.drawRightString(500, 140,'IVA:            ' + str("{0:.2f}".format(float(iva)) + ' €'))
+        var.rep.drawRightString(500, 115,'Total Facturas: ' + str("{0:.2f}".format(float(total)) + ' €'))
+
     def reportCli(self):
         """
 
         Módulo que llama a la base de datos, captura datos de los clientes ordenados alfabéticamente y los va mostrando
         en el informe
 
-        :return:None
+        :return: None
         :rtype: None
 
         La variable i representa los valores del eje X
@@ -230,7 +295,7 @@ class Printer():
         Módulo que llama a la base de datos, captura datos de los productos ordenados alfabéticamente y los va mostrando
         en el informe
 
-        :return:None
+        :return: None
         :rtype: None
 
         La variable i representa los valores del eje X
@@ -283,7 +348,7 @@ class Printer():
 
         Módulo que carga el cuerpo del informe de la factura
 
-        :return:None
+        :return: None
         :rtype: None
 
         Selecciona todas las ventas de esa factura y las va anotando linea a linea.
@@ -337,3 +402,72 @@ class Printer():
 
         except Exception as error:
             print('Error reporfac %s' % str(error))
+
+    def reportFacturasCli(self):
+        """
+
+        Módulo que carga las facturas pagadas de un cliente
+
+        :return: None
+        :rtype: None
+
+        Selecciona todas las facturas pagasas de un cliente y las va escribiendo linea a linea.
+        Llama a un módulo que devuelve el valor calculado del total de las ventas, es decir, el precio de la factura.
+        La variable i representa los valores del eje X
+        La variable j representa los valores del eje Y
+        Además tiene un pie de informe para mostrar el total neto, el iva y el total de las facturas.
+        Los informes se guardan en la carpeta informe y al mismo tiempo se muestran con el lector PDF que exista
+        por defecto en el sistema
+
+        """
+        try:
+            textlistado = 'FACTURAS PAGADAS'
+            cliente = var.ui.editDniFac.text()
+            nombrePdf = 'facturaCliente' + str(cliente) + '.pdf'
+            var.rep = canvas.Canvas('informes/' + nombrePdf, pagesize=A4)
+            Printer.cabecera(self)
+            Printer.pie(self, textlistado)
+            Printer.cabeceraCli
+            Printer.cabeceraCliente(self, cliente)
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'select numFactura, fechaFactura, apellidos, estado from facturas where dniCliente = :dniCliente and estado="Pagada"')
+            query.bindValue(':dniCliente', str(cliente))
+            if query.exec_():
+                i = 55
+                j = 625
+                subtotal = 0
+                iva = 0
+                total = 0
+                while query.next():
+                    if j <= 100:
+                        var.rep.drawString(440, 110, 'Página siguiente...')
+                        var.rep.showPage()
+                        Printer.cabecera(self)
+                        Printer.pie(self, textlistado)
+                        i = 50
+                        j = 600
+                    var.rep.setFont('Helvetica', size=10)
+                    var.rep.drawString(i, j, str(query.value(0)))
+                    var.rep.drawString(i + 82, j, str(query.value(1)))
+                    precioFac = conexion.Conexion.totalPrecioFactura(self, int(query.value(0)))
+                    var.rep.drawRightString(i + 250, j, "{0:.2f}".format(float(precioFac[0])) + ' €')
+                    var.rep.drawRightString(i + 355, j, "{0:.2f}".format(float(precioFac[1])) + ' €')
+                    var.rep.drawRightString(i + 465, j, "{0:.2f}".format(float(precioFac[2])) + ' €')
+
+                    subtotal = float(subtotal) + float(precioFac[0])
+                    iva = float(iva) + float(precioFac[1])
+                    total = float(total) + float(precioFac[2])
+                    j = j - 20
+
+            Printer.pieFacturasCli(self,subtotal, iva, total)
+            var.rep.save()
+            rootPath = ".\\informes"
+            cont = 0
+            for file in os.listdir(rootPath):
+                if file.endswith(nombrePdf):
+                    os.startfile("%s/%s" % (rootPath, file))
+                cont = cont + 1
+
+        except Exception as error:
+            print('Error reporfaccli %s' % str(error))

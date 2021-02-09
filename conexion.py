@@ -296,7 +296,7 @@ class Conexion():
                 var.ui.tablaPro.setRowCount(index + 1)  # crea la fila y a continuacion mete los datos
                 var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                 var.ui.tablaPro.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
-                var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio))+' €'))
+                var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio)) + ' €'))
 
                 var.ui.tablaPro.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                 var.ui.tablaPro.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
@@ -441,7 +441,8 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        query.prepare('insert into facturas (dniCliente, fechaFactura, apellidos, estado) VALUES (:dniCliente, :fechaFactura, :apellidos, :estado)')
+        query.prepare(
+            'insert into facturas (dniCliente, fechaFactura, apellidos, estado) VALUES (:dniCliente, :fechaFactura, :apellidos, :estado)')
         query.bindValue(':dniCliente', str(dni))
         query.bindValue(':fechaFactura', str(fecha))
         query.bindValue(':apellidos', str(apel))
@@ -506,7 +507,8 @@ class Conexion():
         var.ui.tabFactura.clearContents()
         dni = var.ui.editDniFac.text()
         query = QtSql.QSqlQuery()
-        query.prepare('select numFactura, fechaFactura from facturas where dniCliente = :dni order by fechaFactura desc')
+        query.prepare(
+            'select numFactura, fechaFactura from facturas where dniCliente = :dni order by fechaFactura desc')
         query.bindValue(':dni', str(dni))
         if query.exec_():
             while query.next():
@@ -521,7 +523,7 @@ class Conexion():
                 var.ui.tabFactura.selectRow(0)
                 var.ui.lblstatus.setText('Cliente sin facturas')
             else:
-                var.ui.lblstatus.setText('Facturas del cliente con dni '+str(dni)+' cargadas en la tabla')
+                var.ui.lblstatus.setText('Facturas del cliente con dni ' + str(dni) + ' cargadas en la tabla')
         else:
             print("Error conexion: mostrar facturas cliente: ", query.lastError().text())
 
@@ -579,7 +581,8 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        query.prepare('select numFac, dniCliente, fechaFactura, apellidos, estado from facturas order by numFac desc LIMIT 1)')
+        query.prepare(
+            'select numFac, dniCliente, fechaFactura, apellidos, estado from facturas order by numFac desc LIMIT 1)')
         if query.exec_():
             while query.next():
                 var.ui.lblCodFac.setText(str(query.value(0)))
@@ -607,7 +610,7 @@ class Conexion():
         query = QtSql.QSqlQuery()
         # print(int(cod))
         query.prepare('update facturas set estado=:estado where numFactura = :codfac')
-        query.bindValue(':estado',str(estado))
+        query.bindValue(':estado', str(estado))
         query.bindValue(':codfac', int(cod))
         if query.exec_():
             var.ui.lblstatus.setText('Factura actualizada')
@@ -629,7 +632,7 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        #print(int(cod))
+        # print(int(cod))
         query.prepare('delete from facturas where numFactura = :codfac')
         query.bindValue(':codfac', int(cod))
         if query.exec_():
@@ -750,13 +753,14 @@ class Conexion():
                             var.ui.tabVenta.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
                             var.ui.tabVenta.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
                             subtotal = round(float(cantidad) * float(precio), 2)
-                            var.ui.tabVenta.setItem(index, 3, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio))+' €'))
-                            var.ui.tabVenta.setItem(index, 4, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(subtotal))+' €'))
+                            var.ui.tabVenta.setItem(index, 3,
+                                                    QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio)) + ' €'))
+                            var.ui.tabVenta.setItem(index, 4, QtWidgets.QTableWidgetItem(
+                                "{0:.2f}".format(float(subtotal)) + ' €'))
                             var.ui.tabVenta.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                             var.ui.tabVenta.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
                             var.ui.tabVenta.item(index, 3).setTextAlignment(QtCore.Qt.AlignRight)
                             var.ui.tabVenta.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
-
 
                     index += 1
                     var.subfac = round(float(subtotal) + float(var.subfac), 2)
@@ -764,7 +768,7 @@ class Conexion():
             if int(index) > 0:
                 ventas.Ventas.tablaVentas(index)
             else:
-                #print(index)
+                # print(index)
                 var.ui.tabVenta.setRowCount(0)
                 ventas.Ventas.tablaVentas(0)
             var.ui.lblSubtotal.setText(str(var.subfac))
@@ -795,6 +799,39 @@ class Conexion():
             var.ui.lblstatus.setText('Venta Anulada')
         else:
             print("Error conexion: baja venta: ", query.lastError().text())
+
+    def totalPrecioFactura(self, codfac):
+        """
+
+        Módulo que calcula el precio total de una factura
+
+        :param codFac: codigo de la factura
+        :type codFac: int
+        :return: total factura
+        :rtype: lista
+
+        Recibe el codigo de una factura. Busca sus ventas, las va recorriendo y sumando el total de estas.
+        Devuelve el precio total de la factura.
+
+        """
+        try:
+            venta = 0
+            subtotal = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select cantidad, precio from ventas where codFacVenta = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                while query.next():
+                    venta = round(float(query.value(0)) * float(query.value(1)), 2)
+                    subtotal = float(subtotal) + float(venta)
+
+                iva = round(float(subtotal) * 0.21, 2)
+                total= round(float(iva) + float(subtotal), 2)
+
+                precio = [float(subtotal), float(iva), float(total)]
+                return precio
+        except Exception as error:
+            print('Error conexion calculo precio total : %s ' % str(error))
 
 # class Conexion():
 #     HOST =  'localhost'

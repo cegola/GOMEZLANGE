@@ -163,6 +163,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnAceptarVenta.clicked.connect(ventas.Ventas.procesoVenta)
         var.ui.btnBorrarVenta.clicked.connect(ventas.Ventas.anularVenta)
         var.ui.btnActualizar.clicked.connect(ventas.Ventas.actualizarFac)
+        var.ui.btnImprimirFac.clicked.connect(printer.Printer.reportFac)
 
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
@@ -203,6 +204,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionListado_clientes.triggered.connect(printer.Printer.reportCli)
         var.ui.actionListado_productos.triggered.connect(printer.Printer.reportPro)
         var.ui.actionImprimir_factura.triggered.connect(printer.Printer.reportFac)
+        var.ui.actionFacturasCli.triggered.connect(printer.Printer.reportFacturasCli)
 
         '''
         
