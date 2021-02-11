@@ -2126,8 +2126,18 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
     <addaction name="separator"/>
     <addaction name="actionFacturasCli"/>
    </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="actionImportar_datos"/>
+    <addaction name="separator"/>
+    <addaction name="actionCrear_backup"/>
+    <addaction name="actionCargar_backup"/>
+   </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuInformes"/>
+   <addaction name="menuHerramientas"/>
    <addaction name="menuAcerca_De"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -2262,6 +2272,21 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
   <action name="actionFacturasCli">
    <property name="text">
     <string>Facturas por cliente</string>
+   </property>
+  </action>
+  <action name="actionImportar_datos">
+   <property name="text">
+    <string>Importar datos</string>
+   </property>
+  </action>
+  <action name="actionCrear_backup">
+   <property name="text">
+    <string>Crear backup</string>
+   </property>
+  </action>
+  <action name="actionCargar_backup">
+   <property name="text">
+    <string>Cargar backup</string>
    </property>
   </action>
  </widget>

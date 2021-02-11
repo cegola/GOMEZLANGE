@@ -130,11 +130,13 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actiontoolBarSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionCrear_backup.triggered.connect(events.Eventos.Backup)
         var.ui.toolBarAbrirCarpeta.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.toolBarImpresora.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionRestaurarBD.triggered.connect(events.Eventos.restaurarBD)
+        var.ui.actionCargar_backup.triggered.connect(events.Eventos.restaurarBD)
 
         var.ui.actionAbout.triggered.connect(events.Eventos.AbrirAcercaDe)
 

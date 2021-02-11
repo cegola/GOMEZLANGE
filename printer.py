@@ -230,9 +230,9 @@ class Printer():
 
         """
         var.rep.setFont('Helvetica-Bold', size=12)
-        var.rep.drawRightString(500, 160,'Subtotal:       ' + str("{0:.2f}".format(float(subtotal)) + ' €'))
-        var.rep.drawRightString(500, 140,'IVA:            ' + str("{0:.2f}".format(float(iva)) + ' €'))
-        var.rep.drawRightString(500, 115,'Total Facturas: ' + str("{0:.2f}".format(float(total)) + ' €'))
+        var.rep.drawRightString(500, 110,'Subtotal:       ' + str("{0:.2f}".format(float(subtotal)) + ' €'))
+        var.rep.drawRightString(500, 90,'IVA:            ' + str("{0:.2f}".format(float(iva)) + ' €'))
+        var.rep.drawRightString(500, 70,'Total Facturas: ' + str("{0:.2f}".format(float(total)) + ' €'))
 
     def reportCli(self):
         """
@@ -440,7 +440,7 @@ class Printer():
                 iva = 0
                 total = 0
                 while query.next():
-                    if j <= 100:
+                    if j <= 130:
                         var.rep.drawString(440, 110, 'Página siguiente...')
                         var.rep.showPage()
                         Printer.cabecera(self)
