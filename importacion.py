@@ -1,20 +1,55 @@
 import xlrd
+from PyQt5 import QtWidgets
+import var, events, conexion
 import xlwt
 
 class Importar():
+
+    def dirImportar(self):
+        """
+
+        Módulo que busca un archivo xls para importar datos
+
+        :return: None
+        :rtype: None
+
+        Abre una ventana para elegir el archivo tipo xls donde están los datos.
+        Muestra una ventana de aviso preguntando si esta seguro que quiere importar datos.
+        Recarga los datos llamando al método conexio.cargarDatos.
+        Muestra un mensaje en la barra de estado.
+
+        """
+        try:
+            mensaje = '¿Seguro que desea importar datos de productos?'
+            option = QtWidgets.QFileDialog.Options()
+            filename = var.filedlgAbrir.getOpenFileName(None, 'Importar datos', '', '*.xls',
+                                                        options=option)
+            imp = events.Eventos.AbrirAviso(mensaje)
+            if var.filedlgAbrir.Accepted and filename != '' and imp:
+                print(str(filename[0]))
+                Importar.importar(self, filename[0])
+            var.ui.lblstatus.setText('Datos de productos importados')
+
+        except Exception as error:
+            print('Error importar datos %s' % str(error))
 
     def importar(self, doc):
         documento=xlrd.open_workbook(str(doc))
 
         frutas = documento.sheet_by_index(0)
-        lacteos = documento.sheet_by_index(1)
+        fila = frutas.nrows
+        col = frutas.ncols
 
-        filas_fruta = frutas.nrows
-        col_fruta = frutas.ncols
-        print("Frutas tiene "+str(filas_fruta)+" filas y "+str(col_fruta)+ " columnas")
+        for i in range(1, fila):  # froitas.ncols é o número columnas
+            producto = []
+            for j in range(col):
+                producto.append(frutas.cell_value(i,j))
+            producto[1]=str(producto[1])
+            aux = conexion.Conexion.existeProducto(self, producto[0])
+            if aux == None:
+                conexion.Conexion.altaPro(self, producto)
+            else:
+                conexion.Conexion.modProducto(self, aux[0], producto)
+                conexion.Conexion.mostrarProductos(self)
 
-        # Gardamos a información de la celda (0,1) da folla de lacteos
-        # Os tipos de celda son: 0-Vacia, 1-Texto, 2-Numero, 3-Data, 4-Booleano, 5-Erro
-
-        tipo_celda = frutas.cell_type(0,1)
-        print
+        conexion.Conexion.mostrarProductos

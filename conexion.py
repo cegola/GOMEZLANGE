@@ -272,7 +272,6 @@ class Conexion():
             Conexion.mostrarProductos(None)
             var.ui.lblstatus.setText(
                 'Producto con nombre ' + str(producto[0]) + ' dado de alta, dia ' + time.strftime("%x"))
-            print('Insercion correcta')
         else:
             print("Error conexion: alta producto: ", query.lastError().text())
 
@@ -302,7 +301,7 @@ class Conexion():
                 var.ui.tablaPro.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
                 index += 1
         else:
-            print('Error conexion: mostrar producto: ' + query.lastError().text())
+            print('Error conexion mostrar producto: ' + query.lastError().text())
 
     def cargarProducto(self):
         """
@@ -344,6 +343,34 @@ class Conexion():
                 nombre = query.value(0)
                 return str(nombre)
 
+    def existeProducto(self, nombre):
+        """
+
+        Módulo que busca si existe un producto por su nombre
+
+        :param nombre: nombre del producto
+        :type nombre: string
+        :return: lista con datos del producto
+        :rtype: lista
+
+        Busca en la bd si existe el producto. Si existe devuelve una lista con todos los datos de este.
+        Si no existe devuelve una lista vacia
+
+        """
+        producto = []
+        query = QtSql.QSqlQuery()
+        query.prepare('select codigo, precio, stock from articulos where nombre = :nombre')
+        query.bindValue(':nombre', str(nombre))
+        if query.exec_():
+            while query.next():
+                producto.append(query.value(0))
+                producto.append(nombre)
+                producto.append(query.value(1))
+                producto.append(query.value(2))
+                return producto
+        else:
+            return False
+
     def bajaProducto(self, nombre):
         """
 
@@ -381,18 +408,15 @@ class Conexion():
         hay en los widgets. Muestra mensaje en la barra de estado.
 
         """
-        print(newdata)
         query = QtSql.QSqlQuery()
         codigo = int(codigo)
-        print(codigo, newdata)
         query.prepare('update articulos set nombre=:nombre, precio=:precio, stock=:stock where codigo=:codigo')
         query.bindValue(':codigo', int(codigo))
         query.bindValue(':nombre', str(newdata[0]))
-        newdata[1] = newdata[1].replace(',', '.')
+        newdata[1] = str(newdata[1]).replace(',', '.')
         query.bindValue(':precio', round(float(newdata[1]), 2))
         query.bindValue(':stock', int(newdata[2]))
         if query.exec_():
-            print('Producto modificado')
             var.ui.lblstatus.setText(
                 'Producto con nombre ' + str(newdata[0]) + ' modificado, dia ' + time.strftime("%x"))
         else:

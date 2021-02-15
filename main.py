@@ -4,7 +4,7 @@ from venCalendar import *
 from venAviso import *
 from venAcercaDe import *
 from PyQt5.QtPrintSupport import QPrintDialog
-import sys, var, events, clients, conexion, products, printer, ventas
+import sys, var, events, clients, conexion, products, printer, ventas, importacion
 from datetime import datetime, date
 import locale
 
@@ -137,6 +137,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionRestaurarBD.triggered.connect(events.Eventos.restaurarBD)
         var.ui.actionCargar_backup.triggered.connect(events.Eventos.restaurarBD)
+        var.ui.actionImportar_datos.triggered.connect(importacion.Importar.dirImportar)
 
         var.ui.actionAbout.triggered.connect(events.Eventos.AbrirAcercaDe)
 
