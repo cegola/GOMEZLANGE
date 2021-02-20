@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ventas module &#8212; documentación de Proyecto Celia - v0.0.1</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ventas">
+<span id="ventas-module"></span><h1>ventas module<a class="headerlink" href="#module-ventas" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="ventas.Ventas">
+<em class="property">class </em><code class="sig-prename descclassname">ventas.</code><code class="sig-name descname">Ventas</code><a class="reference internal" href="../_modules/ventas.html#Ventas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="ventas.Ventas.abrirCalendar">
+<code class="sig-name descname">abrirCalendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.abrirCalendar"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.abrirCalendar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que abre la ventana calendario para cargar la fecha</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.actualizarFac">
+<code class="sig-name descname">actualizarFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.actualizarFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.actualizarFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que actualiza el estado (pagada o no) de una factua</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coge el código de la factura del widget lblCodFac y conecta con el módulo conexion.actualizarFactura
+Luego recarga la tablaVentas</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.altaFactura">
+<code class="sig-name descname">altaFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.altaFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.altaFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que graba una factura previa al proceso de ventas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Una vez grabada prepara la tabla factura y recarga la tabla ventas</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.anularVenta">
+<code class="sig-name descname">anularVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.anularVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.anularVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que borra una venta</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Recoge el codigo de la venta y se lo pasa al módulo conexion.anularVenta que lo borrará de la base de datos</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.borrarFac">
+<code class="sig-name descname">borrarFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.borrarFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.borrarFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que borra una factua</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coge el código de la factura del widget lblCodFac y conecta con el módulo conexion.borrarFactura
+Luego recarga la tablaVentas</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.cargarFac">
+<code class="sig-name descname">cargarFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.cargarFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.cargarFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo que carga los datos de la factura y cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.cargarFecha">
+<code class="sig-name descname">cargarFecha</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.cargarFecha"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.cargarFecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que se ejecuta cuando clickamos en un dia en el calendat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>qDate</strong> (<em>QtCore.QDate</em>) – fecha de la factura</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Cuando clickamos en el calendario carga la fecha en el editFechaFac</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.mostrarVentasFac">
+<code class="sig-name descname">mostrarVentasFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.mostrarVentasFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.mostrarVentasFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Método que muestra las ventas de una factura</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>:rtype:None</p>
+<p>Carga el combo de ventas y recoge el codigo de la factura. Conecta con el método listadoVentasFacturas
+pasandole el codigo y luego recarga el combo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.procesoVenta">
+<code class="sig-name descname">procesoVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.procesoVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.procesoVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que procesa una venta de una factura</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Recoge todos los datos de la venta y los mete en la variable var.venta. Da de alta la venta llamando al
+módulo conexion.altaVenta. Calcula el subtotal de la factura, el iva y el total y lo muestra en los widgets
+correspondientes.
+Recarga la tabla ventas y la tabla productos.
+Si falta algún dato en la factura o la venta, muestra mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.selFacPagada">
+<code class="sig-name descname">selFacPagada</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.selFacPagada"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.selFacPagada" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que checkea que valores de pago de factura se seleccionan el el checkbox y los añade a una variable
+lista var.facpagada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>En QtDesigner se deben agrupar los checkbox en un buttongroup</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ventas.Ventas.tablaVentas">
+<code class="sig-name descname">tablaVentas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#Ventas.tablaVentas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.Ventas.tablaVentas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo prepara la tabla ventas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>entero</em>) – fila de la tabla en la que insertar</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Carga la venta en la venta</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Proyecto Celia</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Celia Gomez Lange.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/ventas.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
