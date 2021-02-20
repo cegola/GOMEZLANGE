@@ -34,6 +34,19 @@ class Importar():
             print('Error importar datos %s' % str(error))
 
     def importar(self, doc):
+        """
+
+        Módulo que importa datos desde un archivo xls
+
+        :param doc: nombre del archivo
+        :type doc: string
+        :return: None
+        :rtype: None
+
+        Recibe el archivo y, linea a linea, lee los productos del archivo. Si existe ese producto, lo actualiza.
+        Si no existe, lo crea.
+
+        """
         documento=xlrd.open_workbook(str(doc))
 
         frutas = documento.sheet_by_index(0)
@@ -49,6 +62,7 @@ class Importar():
             if aux == None:
                 conexion.Conexion.altaPro(self, producto)
             else:
+                producto[2]=int(producto[2])+int(aux[3])
                 conexion.Conexion.modProducto(self, aux[0], producto)
                 conexion.Conexion.mostrarProductos(self)
 

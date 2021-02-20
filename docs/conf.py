@@ -12,7 +12,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('C:\Users\a19celiagl\PycharmProjects\GOMEZLANGE'))
+sys.path.insert(0, os.path.abspath('C:\Users\Administrador\PycharmProjects\GOMEZLANGE'))
+#sys.path.insert(0, os.path.abspath('C:\Users\a19celiagl\PycharmProjects\GOMEZLANGE'))
 
 
 # -- Project information -----------------------------------------------------
@@ -32,6 +33,7 @@ release = 'v0.0.1'
 # ones.
 extensions = ['sphinx.ext.autodoc',
                 'sphinx.ext.intersphinx',
+                'sphinx.ext.ifconfig',
                 'sphinx.ext.viewcode',
                 'sphinx.ext.githubpages',
 ]

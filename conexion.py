@@ -399,7 +399,7 @@ class Conexion():
 
         :param codigo: codigo del producto a modificar
         :type codigo: int
-        :param newdata: datos actualizados del producto
+        :param newdata: datos actualizados del producto (nombre, precio, stock)
         :type newdata: lista
         :return: None
         :rtype: None
