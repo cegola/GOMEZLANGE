@@ -1,19 +1,23 @@
-import sys, var, shutil
+import os
+import shutil
+import sys
+import var
+import zipfile
 from datetime import datetime
+
 from PyQt5 import QtWidgets
-import os, zipfile
 
 import conexion
 
 
-class Eventos():
-    def Salir(event):
+class Eventos:
+    def Salir(self):
         """
 
         Método que cierra el programa
 
-        :param event: evento salir
-        :type event: event
+        :param self: evento salir
+        :type self: event
         :return: None
         :rtype: None
 
@@ -22,17 +26,17 @@ class Eventos():
         """
 
         try:
-            # var.dlgSalir.show()
             var.dlgSalir.show()
             if var.dlgSalir.exec_():
                 sys.exit()
             else:
                 var.dlgSalir.close()
-                event.ignore()
+                self.ignore()
         except Exception as error:
             print('Error salir %s' % str(error))
 
-    def closeSalir(event):
+    @staticmethod
+    def closeSalir():
         """
 
         Módulo que cierra la ventana salir
@@ -47,7 +51,8 @@ class Eventos():
         except Exception as error:
             print('Error salir %s' % str(error))
 
-    def Backup(self):
+    @staticmethod
+    def backup():
         """
 
         Módulo que realiza una copia de seguridad de la base de datos
@@ -77,7 +82,8 @@ class Eventos():
         except Exception as error:
             print('Error backup %s' % str(error))
 
-    def restaurarBD(self):
+    @staticmethod
+    def restaurarBD():
         """
 
         Módulo que restaura una copia de seguridad de la base de datos
@@ -99,13 +105,14 @@ class Eventos():
                 bd = zipfile.ZipFile(str(filename[0]), 'r')
                 bd.extractall()
                 bd.close()
-            conexion.Conexion.cargarDatos(self)
+            conexion.Conexion.cargarDatos()
             var.ui.lblstatus.setText('Copia de seguridad restaurada')
 
         except Exception as error:
             print('Error restaurar BD %s' % str(error))
 
-    def AbrirDir(self):
+    @staticmethod
+    def AbrirDir():
         try:
             var.filedlgAbrir.setWindowTitle('Abrir archivo')
             var.filedlgAbrir.setModal(True)
@@ -113,6 +120,7 @@ class Eventos():
         except Exception as error:
             print('Error abrir dir: %d' % str(error))
 
+    @staticmethod
     def AbrirAviso(mensaje):
         """
 
@@ -133,13 +141,12 @@ class Eventos():
         except Exception as error:
             print('Error salir %s' % str(error))
 
-    def AbrirAcercaDe(self):
+    @staticmethod
+    def AbrirAcercaDe():
         """
 
         Módulo que abre una ventana de aviso
 
-        :param mensaje: mensaje que muestra la ventana
-        :type mensaje: string
         :return: bool
         :rtype: True/False
 
@@ -154,7 +161,8 @@ class Eventos():
         except Exception as error:
             print('Error acerca de %s' % str(error))
 
-    def Imprimir(self):
+    @staticmethod
+    def Imprimir():
         """
 
         Método que abre una ventada de Acerca De
@@ -169,7 +177,8 @@ class Eventos():
         except Exception as error:
             print('Error abrir dir: %d' % str(error))
 
-    def cargarProv(self):
+    @staticmethod
+    def cargarProv():
         """
 
         Módulo que carga las provincias al iniciar el programa

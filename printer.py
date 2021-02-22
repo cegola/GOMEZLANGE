@@ -1,14 +1,17 @@
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
+import os
+import var
 from datetime import datetime
+
 from PyQt5 import QtSql
-import os, var
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
 
 import conexion
 
 
-class Printer():
-    def cabecera(self):
+class Printer:
+    @staticmethod
+    def cabecera():
         """
 
         Módulo que carga la cabecera de todos los informes de la empresa
@@ -36,7 +39,8 @@ class Printer():
         except Exception as error:
             print('error en el cabecera de informe: %s' % str(error))
 
-    def pie(self, textlistado):
+    @staticmethod
+    def pie(textlistado):
         """
 
         Módulo que carga el pie. Igual para todos excepto el nombre del informe, que se pasa por
@@ -59,7 +63,8 @@ class Printer():
         except Exception as error:
             print('error en el pie de informe: %s' % str(error))
 
-    def cabeceraCli(self):
+    @staticmethod
+    def cabeceraCli():
         """
 
         Módulo que carga la cabecera de página del informe del cliente
@@ -83,7 +88,8 @@ class Printer():
         except Exception as error:
             print('error en el cabecera cli de informe: %s' % str(error))
 
-    def cabeceraPro(self):
+    @staticmethod
+    def cabeceraPro():
         """
 
         Módulo que carga la cabecera de página del informe de productos
@@ -106,7 +112,8 @@ class Printer():
         except Exception as error:
             print('error en el cabecera pro de informe: %s' % str(error))
 
-    def cabeceraFac(self, cod):
+    @staticmethod
+    def cabeceraFac(cod):
         """
 
         Módulo que carga la cabecera de página del informe de facturación
@@ -121,6 +128,7 @@ class Printer():
 
         """
         try:
+            dni = ''
             var.rep.setFont('Helvetica-Bold', size=11)
             var.rep.drawString(55, 725, 'Cliente: ')
             var.rep.setFont('Helvetica', size=10)
@@ -169,7 +177,8 @@ class Printer():
         except Exception as error:
             print('Error cabecera factura informe %s' % str(error))
 
-    def cabeceraCliente(self, dni):
+    @staticmethod
+    def cabeceraCliente(dni):
         """
 
         Módulo que carga la cabecera de página del informe de facturas de un cliente
@@ -186,7 +195,6 @@ class Printer():
             var.rep.setFont('Helvetica-Bold', size=11)
             var.rep.drawString(55, 725, 'Cliente: ')
             var.rep.setFont('Helvetica', size=10)
-            #var.rep.drawString(50, 650, 'Factura nº: %s' % str(cod))
             var.rep.line(45, 665, 525, 665)
             var.rep.line(45, 640, 525, 640)
             query1 = QtSql.QSqlQuery()
@@ -203,18 +211,18 @@ class Printer():
             else:
                 print("Error cabecera fac info ", query1.lastError().text())
             var.rep.setFont('Helvetica-Bold', size=10)
-            temven = ['NºFac', 'Fecha factura', 'Valor neto(€)','Valor IVA' ,'Valor total(€)']
+            temven = ['NºFac', 'Fecha factura', 'Valor neto(€)', 'Valor IVA', 'Valor total(€)']
             var.rep.drawString(50, 650, temven[0])
             var.rep.drawString(130, 650, temven[1])
             var.rep.drawString(250, 650, temven[2])
             var.rep.drawString(365, 650, temven[3])
             var.rep.drawString(465, 650, temven[4])
 
-
         except Exception as error:
             print('Error cabecera factura informe %s' % str(error))
 
-    def pieFacturasCli(self, subtotal, iva, total):
+    @staticmethod
+    def pieFacturasCli(subtotal, iva, total):
         """
 
         Módulo que imprime el pie de página del informe de facturas de un cliente
@@ -230,11 +238,12 @@ class Printer():
 
         """
         var.rep.setFont('Helvetica-Bold', size=12)
-        var.rep.drawRightString(500, 110,'Subtotal:       ' + str("{0:.2f}".format(float(subtotal)) + ' €'))
-        var.rep.drawRightString(500, 90,'IVA:            ' + str("{0:.2f}".format(float(iva)) + ' €'))
-        var.rep.drawRightString(500, 70,'Total Facturas: ' + str("{0:.2f}".format(float(total)) + ' €'))
+        var.rep.drawRightString(500, 110, 'Subtotal:       ' + str("{0:.2f}".format(float(subtotal)) + ' €'))
+        var.rep.drawRightString(500, 90, 'IVA:            ' + str("{0:.2f}".format(float(iva)) + ' €'))
+        var.rep.drawRightString(500, 70, 'Total Facturas: ' + str("{0:.2f}".format(float(total)) + ' €'))
 
-    def reportCli(self):
+    @staticmethod
+    def reportCli():
         """
 
         Módulo que llama a la base de datos, captura datos de los clientes ordenados alfabéticamente y los va mostrando
@@ -252,9 +261,9 @@ class Printer():
         try:
             textlistado = 'LISTADO DE CLIENTES'
             var.rep = canvas.Canvas('informes/listadoClientes.pdf')
-            Printer.cabecera(self)
-            Printer.cabeceraCli(self)
-            Printer.pie(self, textlistado)
+            Printer.cabecera()
+            Printer.cabeceraCli()
+            Printer.pie(textlistado)
             query = QtSql.QSqlQuery()
             query.prepare('select codigo, dni, apellidos, nombre, fechaAlta from clientes order by apellidos, nombre')
             var.rep.setFont('Helvetica', size=10)
@@ -265,9 +274,9 @@ class Printer():
                     if j <= 80:
                         var.rep.drawString(440, 70, 'Página siguiente...')
                         var.rep.showPage()
-                        Printer.cabecera(self)
-                        Printer.pie(self, textlistado)
-                        Printer.cabeceraCli(self)
+                        Printer.cabecera()
+                        Printer.pie(textlistado)
+                        Printer.cabeceraCli()
                         i = 50
                         j = 690
                     var.rep.setFont('Helvetica', size=10)
@@ -289,7 +298,8 @@ class Printer():
         except Exception as error:
             print('Error reportcli %s' % str(error))
 
-    def reportPro(self):
+    @staticmethod
+    def reportPro():
         """
 
         Módulo que llama a la base de datos, captura datos de los productos ordenados alfabéticamente y los va mostrando
@@ -307,9 +317,9 @@ class Printer():
         try:
             textlistado = 'LISTADO DE PRODUCTOS'
             var.rep = canvas.Canvas('informes/listadoProductos.pdf')
-            Printer.cabecera(self)
-            Printer.cabeceraPro(self)
-            Printer.pie(self, textlistado)
+            Printer.cabecera()
+            Printer.cabeceraPro()
+            Printer.pie(textlistado)
             query = QtSql.QSqlQuery()
             query.prepare('select codigo, nombre, precio, stock from articulos order by nombre')
             var.rep.setFont('Helvetica', size=10)
@@ -320,9 +330,9 @@ class Printer():
                     if j <= 80:
                         var.rep.drawString(440, 70, 'Página siguiente...')
                         var.rep.showPage()
-                        Printer.cabecera(self)
-                        Printer.pie(self, textlistado)
-                        Printer.cabeceraPro(self)
+                        Printer.cabecera()
+                        Printer.pie(textlistado)
+                        Printer.cabeceraPro()
                         i = 50
                         j = 690
                     var.rep.setFont('Helvetica', size=10)
@@ -343,7 +353,8 @@ class Printer():
         except Exception as error:
             print('Error reportpro %s' % str(error))
 
-    def reportFac(self):
+    @staticmethod
+    def reportFac():
         """
 
         Módulo que carga el cuerpo del informe de la factura
@@ -362,10 +373,10 @@ class Printer():
         try:
             textlistado = 'FACTURA'
             var.rep = canvas.Canvas('informes/factura.pdf', pagesize=A4)
-            Printer.cabecera(self)
-            Printer.pie(self, textlistado)
+            Printer.cabecera()
+            Printer.pie(textlistado)
             codfac = var.ui.lblCodFac.text()
-            Printer.cabeceraFac(self, codfac)
+            Printer.cabeceraFac(codfac)
             query = QtSql.QSqlQuery()
             query.prepare('select codVenta, codArtVenta, cantidad, precio from ventas where codFacVenta = :codfac')
             query.bindValue(':codfac', int(codfac))
@@ -376,15 +387,15 @@ class Printer():
                     if j <= 100:
                         var.rep.drawString(440, 110, 'Página siguiente...')
                         var.rep.showPage()
-                        Printer.cabecera(self)
-                        Printer.pie(self, textlistado)
-                        Printer.cabeceraFac(self)
+                        Printer.cabecera()
+                        Printer.pie(textlistado)
+                        Printer.cabeceraFac()
                         i = 50
                         j = 600
                     var.rep.setFont('Helvetica', size=10)
                     var.rep.drawString(i, j, str(query.value(0)))
                     codArt = query.value(1)
-                    nombreArticulo = conexion.Conexion.nombreProducto(self, int(codArt))
+                    nombreArticulo = conexion.Conexion.nombreProducto(int(codArt))
                     var.rep.drawString(i + 87, j, str(nombreArticulo))
                     var.rep.drawRightString(i + 245, j, str(query.value(2)))
                     var.rep.drawRightString(i + 365, j, "{0:.2f}".format(float(query.value(3))) + ' €')
@@ -403,7 +414,8 @@ class Printer():
         except Exception as error:
             print('Error reporfac %s' % str(error))
 
-    def reportFacturasCli(self):
+    @staticmethod
+    def reportFacturasCli():
         """
 
         Módulo que carga las facturas pagadas de un cliente
@@ -421,36 +433,37 @@ class Printer():
 
         """
         try:
+            subtotal = 0
+            iva = 0
+            total = 0
             textlistado = 'FACTURAS PAGADAS'
             cliente = var.ui.editDniFac.text()
             nombrePdf = 'facturaCliente' + str(cliente) + '.pdf'
             var.rep = canvas.Canvas('informes/' + nombrePdf, pagesize=A4)
-            Printer.cabecera(self)
-            Printer.pie(self, textlistado)
-            Printer.cabeceraCli
-            Printer.cabeceraCliente(self, cliente)
+            Printer.cabecera()
+            Printer.pie(textlistado)
+            Printer.cabeceraCli()
+            Printer.cabeceraCliente(cliente)
             query = QtSql.QSqlQuery()
             query.prepare(
-                'select numFactura, fechaFactura, apellidos, estado from facturas where dniCliente = :dniCliente and estado="Pagada"')
+                'select numFactura, fechaFactura, apellidos, estado from facturas '
+                'where dniCliente = :dniCliente and estado="Pagada"')
             query.bindValue(':dniCliente', str(cliente))
             if query.exec_():
                 i = 55
                 j = 625
-                subtotal = 0
-                iva = 0
-                total = 0
                 while query.next():
                     if j <= 130:
                         var.rep.drawString(440, 110, 'Página siguiente...')
                         var.rep.showPage()
-                        Printer.cabecera(self)
-                        Printer.pie(self, textlistado)
+                        Printer.cabecera()
+                        Printer.pie(textlistado)
                         i = 50
                         j = 600
                     var.rep.setFont('Helvetica', size=10)
                     var.rep.drawString(i, j, str(query.value(0)))
                     var.rep.drawString(i + 82, j, str(query.value(1)))
-                    precioFac = conexion.Conexion.totalPrecioFactura(self, int(query.value(0)))
+                    precioFac = conexion.Conexion.totalPrecioFactura(int(query.value(0)))
                     var.rep.drawRightString(i + 250, j, "{0:.2f}".format(float(precioFac[0])) + ' €')
                     var.rep.drawRightString(i + 355, j, "{0:.2f}".format(float(precioFac[1])) + ' €')
                     var.rep.drawRightString(i + 465, j, "{0:.2f}".format(float(precioFac[2])) + ' €')
@@ -460,7 +473,7 @@ class Printer():
                     total = float(total) + float(precioFac[2])
                     j = j - 20
 
-            Printer.pieFacturasCli(self,subtotal, iva, total)
+            Printer.pieFacturasCli(subtotal, iva, total)
             var.rep.save()
             rootPath = ".\\informes"
             cont = 0

@@ -1,10 +1,12 @@
-
-import var, conexion, events
-from PyQt5 import QtWidgets
+import conexion
+import events
+import var
 from ventana import *
 
-class Clientes():
 
+class Clientes:
+
+    @staticmethod
     def validarDni(dni):
         """
 
@@ -23,22 +25,22 @@ class Clientes():
         try:
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'
             dig_ext = 'XYZ'
-            reemp_dig_ext ={'X':'0', 'Y':'1', 'Z':'2'}
+            reemp_dig_ext = {'X': '0', 'Y': '1', 'Z': '2'}
             numeros = '0123456789'
-            dni=dni.upper()
+            dni = dni.upper()
             if len(dni) == 9:
                 dig_control = dni[8]
                 dni = dni[:8]
                 if dni[0] in dig_ext:
                     dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
                 return len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control
-                '''Va construyendo una lista, almacena el dato en ella si es un numero, al final comprueba que la lista creada tenga len=8'''
-                '''Comprueba que la letra del dni corresponde con la de la tabla'''
             return False
-        except:
-            print('Error clients: modulo validar DNI')
+
+        except Exception as error:
+            print('Error clients modulo validar DNI %s' % str(error))
             return None
 
+    @staticmethod
     def validoDni():
         """
 
@@ -64,11 +66,11 @@ class Clientes():
                 mensaje = 'Ese DNI es erróneo'
                 events.Eventos.AbrirAviso(mensaje)
                 Clientes.limpiarDatos()
-                #dniOk=False
-        except:
-            print('Error clients: modulo valido DNI')
+        except Exception as error:
+            print('Error clients: modulo valido DNI%s' % str(error))
             return None
 
+    @staticmethod
     def selSexo():
         """
 
@@ -87,6 +89,7 @@ class Clientes():
         except Exception as error:
             print('Error clients: sexo: %s' % str(error))
 
+    @staticmethod
     def selPago():
         """
 
@@ -111,6 +114,7 @@ class Clientes():
         except Exception as error:
             print('Error clients: pago: %s' % str(error))
 
+    @staticmethod
     def selProv(prov):
         """
 
@@ -128,6 +132,7 @@ class Clientes():
         except Exception as error:
             print('Error clients: sel prov: %s' % str(error))
 
+    @staticmethod
     def abrirCalendar():
         """
 
@@ -142,12 +147,13 @@ class Clientes():
         except Exception as error:
             print('Error clients: cal: %s' % str(error))
 
+    @staticmethod
     def cargarFecha(qDate):
         """
 
         Módulo que carga la fecha marcada en el widget calendar
 
-        :param a: libreria python para formateo de fechas
+        :param qDate: libreria python para formateo de fechas
         :return: None
         :rtype: formato de fechas en python
 
@@ -162,7 +168,8 @@ class Clientes():
         except Exception as error:
             print('Error clients: cargar fecha: %s' % str(error))
 
-    def altaCliente(self):
+    @staticmethod
+    def altaCliente():
         """
 
         Módulo que carga los datos del cliente
@@ -180,7 +187,7 @@ class Clientes():
             newcli = []
             clitab = []
             client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editCliAlta, var.ui.editDireccion]
-            k=0
+            k = 0
             for i in client:
                 newcli.append(i.text())
                 if k < 3:
@@ -200,14 +207,15 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(registro)
                     var.ui.tablaCli.setItem(row, column, cell)
                     column += 1
-                conexion.Conexion.altaCli(self,newcli)
+                conexion.Conexion.altaCli(newcli)
             else:
                 print('Faltan datos')
-            Clientes.limpiarDatos(self)
+            Clientes.limpiarDatos()
         except Exception as error:
             print('Error clients: alta cli: %s' % str(error))
 
-    def limpiarDatos(self):
+    @staticmethod
+    def limpiarDatos():
         """
 
         Módulo que vacia los datos de la ventana cliente
@@ -219,8 +227,7 @@ class Clientes():
 
         """
         try:
-            #client son todas las cajas de texto
-            client  = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editCliAlta, var.ui.editDireccion]
+            client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre, var.ui.editCliAlta, var.ui.editDireccion]
             for i in range(len(client)):
                 client[i].setText('')
             var.ui.grpBtnSex.setExclusive(False)
@@ -234,9 +241,10 @@ class Clientes():
             var.ui.spinEdad.setValue(18)
 
         except Exception as error:
-                print('Error clients: en limpiar datos : %s' % str(error))
+            print('Error clients: en limpiar datos : %s' % str(error))
 
-    def cargarCli(self):
+    @staticmethod
+    def cargarCli():
         """
 
         Módulo que se activa con el evento clicked.connected y setSelectionBehavior del widget TTablaCli
@@ -252,17 +260,18 @@ class Clientes():
             fila = var.ui.tablaCli.selectedItems()
             client = [var.ui.editDni, var.ui.editApellidos, var.ui.editNombre]
             if fila:
-                fila = [dato.text() for dato in fila ]
+                fila = [dato.text() for dato in fila]
 
             i = 0
             for i, dato in enumerate(client):
                 dato.setText(fila[i])
-            conexion.Conexion.cargarCliente(None)
-            conexion.Conexion.mostrarFacturasCli(self)
+            conexion.Conexion.cargarCliente()
+            conexion.Conexion.mostrarFacturasCli()
         except Exception as error:
-                print('Error clients: cargar datos: %s' % str(error))
+            print('Error clients: cargar datos: %s' % str(error))
 
-    def bajaCli(self):
+    @staticmethod
+    def bajaCli():
         """
 
         Módulo que da de baja un cliente a partir del dni. Además recarga el widget TablaCli con los datos actualizados
@@ -277,16 +286,17 @@ class Clientes():
         """
         try:
             dni = var.ui.editDni.text()
-            mensaje='¿Seguro que desea dar de baja a este cliente?'
+            mensaje = '¿Seguro que desea dar de baja a este cliente?'
             borrar = events.Eventos.AbrirAviso(mensaje)
-            if borrar == True:
-                conexion.Conexion.bajaCliente(self, dni)
-                conexion.Conexion.mostrarClientes(self)
+            if borrar:
+                conexion.Conexion.bajaCliente(dni)
+                conexion.Conexion.mostrarClientes()
                 Clientes.limpiarDatos()
         except Exception as error:
             print('Error clients: cargar clientes: %s ' % str(error))
 
-    def modCli(self):
+    @staticmethod
+    def modCli():
         """
 
         Módulo para modificar los datos de un cliente a partir del dni
@@ -305,22 +315,23 @@ class Clientes():
                 newdata.append(i.text())
             newdata.append(var.ui.cmbProvincia.currentText())
             newdata.append(var.sex)
-            edad= var.ui.spinEdad.value()
+            edad = var.ui.spinEdad.value()
             newdata.append(edad)
             var.pay = Clientes.selPago()
             newdata.append(var.pay)
             cod = var.ui.lblCodCli.text()
             mensaje = 'Seguro que desea modificar este cliente'
             mod = events.Eventos.AbrirAviso(mensaje)
-            if mod == True:
-                conexion.Conexion.modCliente(self, cod, newdata)
-                conexion.Conexion.mostrarClientes(self)
+            if mod:
+                conexion.Conexion.modCliente(cod, newdata)
+                conexion.Conexion.mostrarClientes()
             else:
                 Clientes.limpiarDatos()
         except Exception as error:
             print('Error clients: modificar clientes: %s ' % str(error))
 
-    def reloadCli(self):
+    @staticmethod
+    def reloadCli():
         """
         Limpia datos del formulario y recarga la tabla de clientes
 
@@ -328,12 +339,13 @@ class Clientes():
         :rtype: None
         """
         try:
-            Clientes.limpiarDatos(self)
-            conexion.Conexion.mostrarClientes(self)
-        except  Exception as error:
+            Clientes.limpiarDatos()
+            conexion.Conexion.mostrarClientes()
+        except Exception as error:
             print('Error clients: recargar clientes: %s ' % str(error))
 
-    def buscarClie(self):
+    @staticmethod
+    def buscarCli():
         """
 
         Busca un cliente a partir de un dni que escribe el usuario
@@ -346,11 +358,12 @@ class Clientes():
         """
         try:
             dni = var.ui.editDni.text()
-            cliente = conexion.Conexion.buscarCliente(self, dni)
+            conexion.Conexion.buscarCliente(dni)
         except  Exception as error:
             print('Error clients: recargar clientes: %s ' % str(error))
 
-    def valoresSpin(self):
+    @staticmethod
+    def valoresSpin():
         """
 
         Módulo que se lanza con el programa cargando por defecto el valor 16

@@ -1,10 +1,13 @@
-import var, conexion, events
-from PyQt5 import QtWidgets
+import conexion
+import events
+import var
 from ventana import *
 
-class Productos():
 
-    def altaProducto(self):
+class Productos:
+
+    @staticmethod
+    def altaProducto():
         """
 
         Módulo que da de alta un producto
@@ -17,13 +20,12 @@ class Productos():
 
         """
         try:
-            newpro = [] #donde están todos los datos
-            protab = [] #sera lo que carguemos
+            newpro = []
+            protab = []
             product = [var.ui.editNombrePro, var.ui.editPrecio, var.ui.editStock]
-            #protab y newpro contienen lo mismo, pero lo dejamos asi por si en el futuro le añadimos mas items
-            k=0
+            k = 0
             for i in product:
-                newpro.append(i.text()) #cargamos los valores que hay en los edits
+                newpro.append(i.text())
                 if k < 3:
                     protab.append(i.text())
                     k += 1
@@ -32,8 +34,7 @@ class Productos():
             print(protab)
             mensaje = 'Seguro que desea añadir este producto'
             mod = events.Eventos.AbrirAviso(mensaje)
-            if mod == True:
-                #como trabajar con la tableWidget
+            if mod:
                 if newpro:
                     row = 0
                     column = 0
@@ -43,16 +44,16 @@ class Productos():
                         var.ui.tablaPro.setItem(row, column, cell)
                         column += 1
                     print(newpro)
-                    conexion.Conexion.altaPro(self, newpro)
+                    conexion.Conexion.altaPro(newpro)
 
                 else:
                     print('Faltan datos')
-                '''limpiamos los datos'''
-                Productos.limpiarDatos(self)
+                Productos.limpiarDatos()
         except Exception as error:
             print('Error products: alta pro: %s' % str(error))
 
-    def limpiarDatos(self):
+    @staticmethod
+    def limpiarDatos():
         """
 
         Módulo que limpia los datos
@@ -72,7 +73,8 @@ class Productos():
         except Exception as error:
             print('Error products: en limpiar datos : %s' % str(error))
 
-    def cargarPro(self):
+    @staticmethod
+    def cargarPro():
         """
 
         Módulo que carga los productos en la tablaPro
@@ -94,35 +96,38 @@ class Productos():
             i = 0
             for i, dato in enumerate(product):
                 dato.setText(fila[i])
-            conexion.Conexion.cargarProducto(None)
+            conexion.Conexion.cargarProducto()
         except Exception as error:
             print('Error products: cargar datos producto: %s' % str(error))
 
-    def bajaPro(self):
+    @staticmethod
+    def bajaPro():
         """
 
-        Módulo que da de baja un producto a partir del nombre del dni. Además recarga el widget tablaPro con los datos actualizados
-        desde la base de datos
+        Módulo que da de baja un producto a partir del nombre del dni. Además recarga el widget tablaPro con los
+        datos actualizados desde la base de datos
 
         :return: None
         :rtype: None
 
-        Toma el nombre cargado en el widget editNombre, se lo pasa al módulo Conexion.bajaProducto y da de baja el producto.
+        Toma el nombre cargado en el widget editNombre, se lo pasa al módulo Conexion.bajaProducto y da de baja
+        el producto.
         Limpia los datos del formulario y recarga tablaPro
 
         """
         try:
             nombre = var.ui.editNombrePro.text()
-            mensaje='¿Seguro que desea dar de baja a este producto?'
+            mensaje = '¿Seguro que desea dar de baja a este producto?'
             borrar = events.Eventos.AbrirAviso(mensaje)
-            if borrar == True:
-                conexion.Conexion.bajaProducto(self, nombre)
-                conexion.Conexion.mostrarProductos(self)
+            if borrar:
+                conexion.Conexion.bajaProducto(nombre)
+                conexion.Conexion.mostrarProductos()
                 Productos.limpiarDatos()
         except Exception as error:
             print('Error products: baja producto: %s ' % str(error))
 
-    def modPro(self):
+    @staticmethod
+    def modPro():
         """
 
         Módulo para modificar los datos de un producto a partir del codigo
@@ -142,9 +147,9 @@ class Productos():
             cod = var.ui.lblCodPro.text()
             mensaje = 'Seguro que desea modificar este producto'
             mod = events.Eventos.AbrirAviso(mensaje)
-            if mod == True:
-                conexion.Conexion.modProducto(self, cod, newdata)
-                conexion.Conexion.mostrarProductos(self)
+            if mod:
+                conexion.Conexion.modProducto(cod, newdata)
+                conexion.Conexion.mostrarProductos()
             else:
                 Productos.limpiarDatos()
         except Exception as error:

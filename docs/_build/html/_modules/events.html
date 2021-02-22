@@ -41,13 +41,13 @@
 
 
 <div class="viewcode-block" id="Eventos"><a class="viewcode-back" href="../src/events.html#events.Eventos">[documentos]</a><span class="k">class</span> <span class="nc">Eventos</span><span class="p">():</span>
-<div class="viewcode-block" id="Eventos.Salir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Salir">[documentos]</a>    <span class="k">def</span> <span class="nf">Salir</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.Salir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Salir">[documentos]</a>    <span class="k">def</span> <span class="nf">Salir</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Método que cierra el programa</span>
 
-<span class="sd">        :param event: evento salir</span>
-<span class="sd">        :type event: event</span>
+<span class="sd">        :param self: evento salir</span>
+<span class="sd">        :type self: self</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        :rtype: None</span>
 
@@ -62,11 +62,11 @@
                 <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">var</span><span class="o">.</span><span class="n">dlgSalir</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
+                <span class="n">self</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.closeSalir"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeSalir">[documentos]</a>    <span class="k">def</span> <span class="nf">closeSalir</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.closeSalir"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeSalir">[documentos]</a>    <span class="k">def</span> <span class="nf">closeSalir</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que cierra la ventana salir</span>

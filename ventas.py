@@ -1,10 +1,12 @@
-import var, conexion
+import conexion
+import var
 from ventana import *
 
 
-class Ventas():
+class Ventas:
 
-    def selFacPagada(self):
+    @staticmethod
+    def selFacPagada():
         """
 
         Módulo que checkea que valores de pago de factura se seleccionan el el checkbox y los añade a una variable
@@ -18,13 +20,14 @@ class Ventas():
         """
         try:
             if var.ui.chkFacPagada.isChecked():
-                var.facPagada= 'Pagada'
+                var.facPagada = 'Pagada'
             else:
                 var.facPagada = ''
         except Exception as error:
             print('Error clients: pago: %s' % str(error))
 
-    def altaFactura(self):
+    @staticmethod
+    def altaFactura():
         """
 
         Módulo que graba una factura previa al proceso de ventas
@@ -41,15 +44,15 @@ class Ventas():
             apel = var.ui.editApellidosFac.text()
             estado = var.facPagada
             if dni != '' and fecha != '':
-                conexion.Conexion.altaFac(self, str(dni), str(fecha), str(apel), str(estado))
-            conexion.Conexion.mostrarFacturas(self)
-            #conexion.Conexion.cargarFacturas(self)
+                conexion.Conexion.altaFac(str(dni), str(fecha), str(apel), str(estado))
+            conexion.Conexion.mostrarFacturas()
             Ventas.tablaVentas(0)
 
         except Exception as error:
             print('Error ventas: alta factura 333: %s' % str(error))
 
-    def abrirCalendar(self):
+    @staticmethod
+    def abrirCalendar():
         """
 
         Módulo que abre la ventana calendario para cargar la fecha
@@ -63,6 +66,7 @@ class Ventas():
         except Exception as error:
             print('Error cal: %s' % str(error))
 
+    @staticmethod
     def cargarFecha(qDate):
         """
 
@@ -83,6 +87,7 @@ class Ventas():
         except Exception as error:
             print('Error ventas: cargar fecha factura: %s' % str(error))
 
+    @staticmethod
     def tablaVentas(index):
         """
 
@@ -98,7 +103,7 @@ class Ventas():
         """
         try:
             var.cmbventa = QtWidgets.QComboBox()
-            conexion.Conexion.cargarCmbVentas(var.cmbventa)
+            conexion.Conexion.cargarCmbVentas()
             var.ui.tabVenta.setRowCount(index + 1)
             var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem())
             var.ui.tabVenta.setCellWidget(index, 1, var.cmbventa)
@@ -108,7 +113,8 @@ class Ventas():
         except Exception as error:
             print('Error ventas: Preparar tabla ventas %s' % str(error))
 
-    def cargarFac(self):
+    @staticmethod
+    def cargarFac():
         """
 
         Modulo que carga los datos de la factura y cliente
@@ -127,14 +133,15 @@ class Ventas():
                 fila = [dato.text() for dato in fila]
             var.ui.lblCodFac.setText(str(fila[0]))
             var.ui.editFechaFac.setText(str(fila[1]))
-            conexion.Conexion.cargarDatosClienteFactura(self, str(fila[0]))
-            Ventas.mostrarVentasFac(self)
-            conexion.Conexion.mostrarProductos(self)
+            conexion.Conexion.cargarDatosClienteFactura(int(fila[0]))
+            Ventas.mostrarVentasFac()
+            conexion.Conexion.mostrarProductos()
 
         except Exception as error:
             print('Error ventas: cargar fac %s' % str(error))
 
-    def borrarFac(self):
+    @staticmethod
+    def borrarFac():
         """
 
         Módulo que borra una factua
@@ -148,12 +155,13 @@ class Ventas():
         """
         try:
             cod = var.ui.lblCodFac.text()
-            conexion.Conexion.borrarFactura(self, cod)
+            conexion.Conexion.borrarFactura(cod)
             Ventas.tablaVentas(0)
         except Exception as error:
             print('Error ventas: borrar fac %s' % str(error))
 
-    def actualizarFac(self):
+    @staticmethod
+    def actualizarFac():
         """
 
         Módulo que actualiza el estado (pagada o no) de una factua
@@ -168,13 +176,12 @@ class Ventas():
         try:
             cod = var.ui.lblCodFac.text()
             estado = var.facPagada
-            conexion.Conexion.actualizarFactura(self, cod, estado)
+            conexion.Conexion.actualizarFactura(cod, estado)
         except Exception as error:
             print('Error ventas: borrar fac %s' % str(error))
 
-
-
-    def procesoVenta(self):
+    @staticmethod
+    def procesoVenta():
         """
 
         Módulo que procesa una venta de una factura
@@ -195,7 +202,7 @@ class Ventas():
             codFac = var.ui.lblCodFac.text()
             var.venta.append(int(codFac))
             articulo = var.cmbventa.currentText()
-            dato = conexion.Conexion.obtenerCodPrecio(self, articulo)
+            dato = conexion.Conexion.obtenerCodPrecio(articulo)
             var.venta.append(int(dato[0]))
             var.venta.append(articulo)
             row = var.ui.tabVenta.currentRow()
@@ -208,21 +215,22 @@ class Ventas():
             var.venta.append(subtotal)
             var.venta.append(row)
             if codFac != '' and articulo != '' and cantidad != '':
-                conexion.Conexion.altaVenta(self)
+                conexion.Conexion.altaVenta()
                 var.subfac = round(float(subtotal) + float(var.subfac), 2)
                 var.ui.lblSubtotal.setText(str(var.subfac))
                 var.iva = round(float(var.subfac) * 0.21, 2)
                 var.ui.lblIva.setText(str(var.iva))
                 var.fac = round(float(var.iva) + float(var.subfac), 2)
                 var.ui.lblTotal.setText(str(var.fac))
-                Ventas.mostrarVentasFac(self)
-                conexion.Conexion.mostrarProductos(self)
+                Ventas.mostrarVentasFac()
+                conexion.Conexion.mostrarProductos()
             else:
-               var.ui.lblstatus.setText('Faltan Datos de la Factura')
+                var.ui.lblstatus.setText('Faltan Datos de la Factura')
         except Exception as error:
             print('Error ventas: proceso venta fac %s' % str(error))
 
-    def mostrarVentasFac(self):
+    @staticmethod
+    def mostrarVentasFac():
         """
 
         Método que muestra las ventas de una factura
@@ -237,12 +245,13 @@ class Ventas():
         try:
             var.cmbventa = QtWidgets.QComboBox()
             codfac = var.ui.lblCodFac.text()
-            conexion.Conexion.listadoVentasFacturas(self, int(codfac))
-            conexion.Conexion.cargarCmbVentas(var.cmbventa)
+            conexion.Conexion.listadoVentasFacturas(int(codfac))
+            conexion.Conexion.cargarCmbVentas()
         except Exception as error:
             print('Error ventas: mostrar ventas de facturas %s' % str(error))
 
-    def anularVenta(self):
+    @staticmethod
+    def anularVenta():
         """
 
         Módulo que borra una venta
@@ -258,8 +267,8 @@ class Ventas():
             if fila:
                 fila = [dato.text() for dato in fila]
             codventa = int(fila[0])
-            conexion.Conexion.anulaVenta(self, codventa)
-            Ventas.mostrarVentasFac(self)
+            conexion.Conexion.anulaVenta(codventa)
+            Ventas.mostrarVentasFac()
 
         except Exception as error:
             print('Error ventas: proceso anular venta de una factura: %s' % str(error))

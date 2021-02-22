@@ -1,12 +1,21 @@
-from ventana import *
-from venSalir import *
-from venCalendar import *
-from venAviso import *
-from venAcercaDe import *
-from PyQt5.QtPrintSupport import QPrintDialog
-import sys, var, events, clients, conexion, products, printer, ventas, importacion
-from datetime import datetime, date
+import clients
+import conexion
+import events
+import importacion
 import locale
+import printer
+import products
+import sys
+import ventas
+from datetime import datetime, date
+
+from PyQt5.QtPrintSupport import QPrintDialog
+
+from venAcercaDe import *
+from venAviso import *
+from venCalendar import *
+from venSalir import *
+from ventana import *
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
@@ -24,6 +33,7 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgSalir.btnAceptar.clicked.connect(events.Eventos.Salir)
         var.dlgSalir.btnCancelar.clicked.connect(events.Eventos.closeSalir)
 
+
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
         """
@@ -34,6 +44,7 @@ class DialogAviso(QtWidgets.QDialog):
         super(DialogAviso, self).__init__()
         var.dlgAviso = Ui_venAviso()
         var.dlgAviso.setupUi(self)
+
 
 class DialogAcercaDe(QtWidgets.QDialog):
     def __init__(self):
@@ -46,6 +57,7 @@ class DialogAcercaDe(QtWidgets.QDialog):
         var.dlgAcercaDe = Ui_venAcercaDe()
         var.dlgAcercaDe.setupUi(self)
         var.dlgAcercaDe.btnSalir.clicked.connect(events.Eventos.AbrirAcercaDe)
+
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -64,6 +76,7 @@ class DialogCalendar(QtWidgets.QDialog):
         var.dlgCalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
         var.dlgCalendar.Calendar.clicked.connect(ventas.Ventas.cargarFecha)
 
+
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         """
@@ -73,6 +86,7 @@ class FileDialogAbrir(QtWidgets.QFileDialog):
         """
         super(FileDialogAbrir, self).__init__()
 
+
 class DialogImprimir(QPrintDialog):
     def __init__(self):
         """
@@ -81,6 +95,7 @@ class DialogImprimir(QPrintDialog):
 
         """
         super(DialogImprimir, self).__init__()
+
 
 class Main(QtWidgets.QMainWindow):
 
@@ -117,7 +132,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.rbtsex = (var.ui.rbtFemenino, var.ui.rbtMasculino)
         var.chkpago = (var.ui.chkEfectivo, var.ui.chkTarjeta, var.ui.chkTransferencia)
-        var.chkfacpago =var.ui.chkFacPagada
+        var.chkfacpago = var.ui.chkFacPagada
 
         '''
         
@@ -129,8 +144,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnSalirPro.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actiontoolBarSalir.triggered.connect(events.Eventos.Salir)
-        var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
-        var.ui.actionCrear_backup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionBackup.triggered.connect(events.Eventos.backup)
+        var.ui.actionCrear_backup.triggered.connect(events.Eventos.backup)
         var.ui.toolBarAbrirCarpeta.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.toolBarImpresora.triggered.connect(events.Eventos.Imprimir)
@@ -146,23 +161,25 @@ class Main(QtWidgets.QMainWindow):
         '''botones Cli'''
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
         var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
-        var.ui.btnAltaPro.clicked.connect(products.Productos.altaProducto)
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
-        var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
-        var.ui.btnBuscar.clicked.connect(clients.Clientes.buscarClie)
-        '''Botones Pro'''
-        var.ui.btnBajaPro.clicked.connect(products.Productos.bajaPro)
-        var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
-        var.ui.btnLimpiarPro.clicked.connect(products.Productos.limpiarDatos)
         var.ui.btnModCli.clicked.connect(clients.Clientes.modCli)
+        var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarDatos)
+        var.ui.btnRecargar.clicked.connect(clients.Clientes.reloadCli)
+        var.ui.btnBuscar.clicked.connect(clients.Clientes.buscarCli)
+        clients.Clientes.valoresSpin()
+        '''Botones Pro'''
+        var.ui.btnAltaPro.clicked.connect(products.Productos.altaProducto)
+        var.ui.btnBajaPro.clicked.connect(products.Productos.bajaPro)
+        var.ui.btnLimpiarPro.clicked.connect(products.Productos.limpiarDatos)
         var.ui.btnModPro.clicked.connect(products.Productos.modPro)
-        clients.Clientes.valoresSpin(self)
         '''Botones Fac'''
         var.ui.btnFacturar.clicked.connect(ventas.Ventas.altaFactura)
         var.ui.btnCalendarFac.clicked.connect(ventas.Ventas.abrirCalendar)
         var.ui.btnAnular.clicked.connect(ventas.Ventas.borrarFac)
+
         var.ui.btnBuscarCli.clicked.connect(conexion.Conexion.mostrarFacturasCli)
         var.ui.btnRecargarCli.clicked.connect(conexion.Conexion.mostrarFacturas)
+
         var.ui.btnAceptarVenta.clicked.connect(ventas.Ventas.procesoVenta)
         var.ui.btnBorrarVenta.clicked.connect(ventas.Ventas.anularVenta)
         var.ui.btnActualizar.clicked.connect(ventas.Ventas.actualizarFac)
@@ -190,7 +207,7 @@ class Main(QtWidgets.QMainWindow):
         Llamada a modulos iniciales
         
         '''
-        events.Eventos.cargarProv(self)
+        events.Eventos.cargarProv()
 
         var.ui.statusbar.addPermanentWidget(var.ui.lblstatus, 5)
         var.ui.statusbar.addPermanentWidget(var.ui.lblfecha, 1)
@@ -214,7 +231,7 @@ class Main(QtWidgets.QMainWindow):
         modulos del principal
         
         '''
-        conexion.Conexion.cargarDatos(self)
+        conexion.Conexion.cargarDatos()
 
     def closeEvent(self, event):
         if event:

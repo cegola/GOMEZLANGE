@@ -1,11 +1,15 @@
 import xlrd
 from PyQt5 import QtWidgets
-import var, events, conexion
-import xlwt
 
-class Importar():
+import conexion
+import events
+import var
 
-    def dirImportar(self):
+
+class Importar:
+
+    @staticmethod
+    def dirImportar():
         """
 
         Módulo que busca un archivo xls para importar datos
@@ -27,13 +31,14 @@ class Importar():
             imp = events.Eventos.AbrirAviso(mensaje)
             if var.filedlgAbrir.Accepted and filename != '' and imp:
                 print(str(filename[0]))
-                Importar.importar(self, filename[0])
+                Importar.importar(filename[0])
             var.ui.lblstatus.setText('Datos de productos importados')
 
         except Exception as error:
             print('Error importar datos %s' % str(error))
 
-    def importar(self, doc):
+    @staticmethod
+    def importar(doc):
         """
 
         Módulo que importa datos desde un archivo xls
@@ -47,7 +52,7 @@ class Importar():
         Si no existe, lo crea.
 
         """
-        documento=xlrd.open_workbook(str(doc))
+        documento = xlrd.open_workbook(str(doc))
 
         frutas = documento.sheet_by_index(0)
         fila = frutas.nrows
@@ -56,14 +61,14 @@ class Importar():
         for i in range(1, fila):  # froitas.ncols é o número columnas
             producto = []
             for j in range(col):
-                producto.append(frutas.cell_value(i,j))
-            producto[1]=str(producto[1])
-            aux = conexion.Conexion.existeProducto(self, producto[0])
-            if aux == None:
-                conexion.Conexion.altaPro(self, producto)
+                producto.append(frutas.cell_value(i, j))
+            producto[1] = str(producto[1])
+            aux = conexion.Conexion.existeProducto(producto[0])
+            if aux is None:
+                conexion.Conexion.altaPro(producto)
             else:
-                producto[2]=int(producto[2])+int(aux[3])
-                conexion.Conexion.modProducto(self, aux[0], producto)
-                conexion.Conexion.mostrarProductos(self)
+                producto[2] = int(producto[2]) + int(aux[3])
+                conexion.Conexion.modProducto(aux[0], producto)
+                conexion.Conexion.mostrarProductos()
 
-        conexion.Conexion.mostrarProductos
+        conexion.Conexion.mostrarProductos()

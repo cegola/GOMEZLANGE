@@ -1,12 +1,15 @@
 from PyQt5 import QtWidgets, QtSql, QtCore
+
 # import  pymongo
-import var, time
+import time
+import var
 import ventas
 
 
-class Conexion():
+class Conexion:
 
-    def db_connect(self, filename):
+    @staticmethod
+    def db_connect(filename):
         """
 
         Módulo que realiza la conexion de la aplicacion con la bd
@@ -30,7 +33,8 @@ class Conexion():
             print('Conexion establecida')
         return True
 
-    def altaCli(self, cliente):
+    @staticmethod
+    def altaCli(cliente):
         """
 
         Módulo que da de alta un cliente con los datos pasados por lista. Muestra mensaje de resultado en la statusbar.
@@ -56,13 +60,14 @@ class Conexion():
         query.bindValue(':edad', str(cliente[7]))
         query.bindValue(':formasPago', str(cliente[8]))
         if query.exec_():
-            Conexion.mostrarClientes(None)
+            Conexion.mostrarClientes()
             var.ui.lblstatus.setText('Cliente con dni ' + str(cliente[0]) + ' dado de alta, dia ' + time.strftime("%x"))
             print('Insercion correcta')
         else:
             print("Error conexion: alta: ", query.lastError().text())
 
-    def cargarDatos(self):
+    @staticmethod
+    def cargarDatos():
         """
 
         Carga los datos iniciales del programa
@@ -71,12 +76,13 @@ class Conexion():
         :rtype: None
 
         """
-        Conexion.db_connect(self, var.filebd)
-        Conexion.mostrarClientes(self)
-        Conexion.mostrarProductos(self)
-        Conexion.mostrarFacturas(self)
+        Conexion.db_connect(var.filebd)
+        Conexion.mostrarClientes()
+        Conexion.mostrarProductos()
+        Conexion.mostrarFacturas()
 
-    def mostrarClientes(self):
+    @staticmethod
+    def mostrarClientes():
         """
 
         Carga los clientes de la base de datos en la tablaCli
@@ -101,7 +107,8 @@ class Conexion():
         else:
             print('Error conexion: mostrar clientes: ' + query.lastError().text())
 
-    def cargarCliente(self):
+    @staticmethod
+    def cargarCliente():
         """
 
         Carga los datos de un cliente cuando se clicka en la tabla
@@ -138,7 +145,8 @@ class Conexion():
                     var.chkpago[2].setChecked(True)
                 var.ui.spinEdad.setValue(int(query.value(8)))
 
-    def bajaCliente(self, dni):
+    @staticmethod
+    def bajaCliente(dni):
         """
 
         Módulo que da de baja a un cliente.
@@ -160,7 +168,8 @@ class Conexion():
         else:
             print("Error conexion: mostrar clientes: ", query.lastError().text())
 
-    def modCliente(self, codigo, newdata):
+    @staticmethod
+    def modCliente(codigo, newdata):
         """
 
         Modulo que modifica los datos del cliente
@@ -181,7 +190,8 @@ class Conexion():
         codigo = int(codigo)
         print(codigo, newdata)
         query.prepare('update clientes set dni=:dni, apellidos=:apellidos, nombre=:nombre, fechaAlta=:fechaAlta,'
-                      'direccion=:direccion, provincia=:provincia, sexo=:sexo, edad=:edad, formasPago=:formasPago where codigo=:codigo')
+                      'direccion=:direccion, provincia=:provincia, sexo=:sexo, edad=:edad, formasPago=:formasPago '
+                      'where codigo=:codigo')
         query.bindValue(':codigo', int(codigo))
         query.bindValue(':dni', str(newdata[0]))
         query.bindValue(':apellidos', str(newdata[1]))
@@ -198,7 +208,8 @@ class Conexion():
         else:
             print('Error conexion: modificar cliente: ', query.lastError().text())
 
-    def buscarCliente(self, dni):
+    @staticmethod
+    def buscarCliente(dni):
         """
 
         Módulo que busca cliente y carga sus datos en la pantalla cliente.
@@ -246,7 +257,8 @@ class Conexion():
 
     """PRODUCTOS"""
 
-    def altaPro(self, producto):
+    @staticmethod
+    def altaPro(producto):
         """
 
         Módulo que da de alta un producto.
@@ -269,13 +281,14 @@ class Conexion():
         query.bindValue(':precio', round(float(producto[1]), 2))
         query.bindValue(':stock', int(producto[2]))
         if query.exec_():
-            Conexion.mostrarProductos(None)
+            Conexion.mostrarProductos()
             var.ui.lblstatus.setText(
                 'Producto con nombre ' + str(producto[0]) + ' dado de alta, dia ' + time.strftime("%x"))
         else:
             print("Error conexion: alta producto: ", query.lastError().text())
 
-    def mostrarProductos(self):
+    @staticmethod
+    def mostrarProductos():
         """
 
         Módulo que carga los productos en la tablaPro
@@ -303,7 +316,8 @@ class Conexion():
         else:
             print('Error conexion mostrar producto: ' + query.lastError().text())
 
-    def cargarProducto(self):
+    @staticmethod
+    def cargarProducto():
         """
 
         Módulo carga los datos de un producto
@@ -324,7 +338,8 @@ class Conexion():
                 var.ui.editPrecio.setText(str(query.value(1)))
                 var.ui.editStock.setText(str(query.value(2)))
 
-    def nombreProducto(self, cod):
+    @staticmethod
+    def nombreProducto(cod):
         """
 
         Módulo que devuelve el nombre de un producto
@@ -343,7 +358,8 @@ class Conexion():
                 nombre = query.value(0)
                 return str(nombre)
 
-    def existeProducto(self, nombre):
+    @staticmethod
+    def existeProducto(nombre):
         """
 
         Módulo que busca si existe un producto por su nombre
@@ -371,7 +387,8 @@ class Conexion():
         else:
             return False
 
-    def bajaProducto(self, nombre):
+    @staticmethod
+    def bajaProducto(nombre):
         """
 
         Módulo que da de baja un producto
@@ -392,7 +409,8 @@ class Conexion():
         else:
             print("Error conexion: eliminar producto: ", query.lastError().text())
 
-    def modProducto(self, codigo, newdata):
+    @staticmethod
+    def modProducto(codigo, newdata):
         """
 
         Módulo que modifica un producto.
@@ -404,8 +422,8 @@ class Conexion():
         :return: None
         :rtype: None
 
-        Se actualizan los datos pasados en la lista del producto con el codigo dado. En realidad coge todos los datos que
-        hay en los widgets. Muestra mensaje en la barra de estado.
+        Se actualizan los datos pasados en la lista del producto con el codigo dado. En realidad coge todos los
+        datos que hay en los widgets. Muestra mensaje en la barra de estado.
 
         """
         query = QtSql.QSqlQuery()
@@ -424,7 +442,8 @@ class Conexion():
 
     '''FACTURACION/VENTA'''
 
-    def cargarCmbVentas(self):
+    @staticmethod
+    def cargarCmbVentas():
         """
 
         Módulo que carga los productos en el combo de ventas de la pantalla facturación
@@ -443,7 +462,8 @@ class Conexion():
             while query.next():
                 var.cmbventa.addItem(str(query.value(1)))
 
-    def altaFac(self, dni, fecha, apel, estado):
+    @staticmethod
+    def altaFac(dni, fecha, apel, estado):
         """
 
         Módulo que da de alta una factura de un cliente
@@ -454,6 +474,8 @@ class Conexion():
         :type fecha: string
         :param apel: apellidos del cliente
         :type apel: string
+        :param estado: estado de la factura (pagada/no pagada)
+        :type estado: string
         :return: None
         :rtype: None
 
@@ -466,7 +488,8 @@ class Conexion():
         """
         query = QtSql.QSqlQuery()
         query.prepare(
-            'insert into facturas (dniCliente, fechaFactura, apellidos, estado) VALUES (:dniCliente, :fechaFactura, :apellidos, :estado)')
+            'insert into facturas (dniCliente, fechaFactura, apellidos, estado) '
+            'VALUES (:dniCliente, :fechaFactura, :apellidos, :estado)')
         query.bindValue(':dniCliente', str(dni))
         query.bindValue(':fechaFactura', str(fecha))
         query.bindValue(':apellidos', str(apel))
@@ -484,7 +507,8 @@ class Conexion():
         else:
             print("Error conexion: alta facturas codFac ", query.lastError().text())
 
-    def mostrarFacturas(self):
+    @staticmethod
+    def mostrarFacturas():
         """
 
         Módulo que carga las facturas en la tabFactura
@@ -505,7 +529,7 @@ class Conexion():
                 var.ui.tabFactura.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
                 var.ui.tabFactura.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
                 index += 1
-            Conexion.limpiarFac(self)
+            Conexion.limpiarFac()
             var.ui.tabFactura.selectRow(0)
             var.ui.tabFactura.setFocus()
         else:
@@ -513,7 +537,8 @@ class Conexion():
         if index == 0:
             var.ui.tabFactura.clearContents()
 
-    def mostrarFacturasCli(self):
+    @staticmethod
+    def mostrarFacturasCli():
         """
 
         Módulo que muestra las facturas de un cliente
@@ -551,7 +576,8 @@ class Conexion():
         else:
             print("Error conexion: mostrar facturas cliente: ", query.lastError().text())
 
-    def limpiarFac(self):
+    @staticmethod
+    def limpiarFac():
         """
 
         Módulo que limpia datos de factura
@@ -567,7 +593,8 @@ class Conexion():
             datosFac[i].setText('')
         var.ui.chkFacPagada.setChecked(False)
 
-    def cargarDatosClienteFactura(self, cod):
+    @staticmethod
+    def cargarDatosClienteFactura(cod):
         """
 
         Módulo que carga los datos del cliente con factura
@@ -593,7 +620,8 @@ class Conexion():
                 else:
                     var.ui.chkFacPagada.setChecked(False)
 
-    def cargarFacturas(self):
+    @staticmethod
+    def cargarFacturas():
         """
 
         Módulo que carga todas las facturas (juraria que es inutil pero ahí está=)
@@ -618,13 +646,16 @@ class Conexion():
                 else:
                     var.ui.chkFacPagada.setChecked(False)
 
-    def actualizarFactura(self, cod, estado):
+    @staticmethod
+    def actualizarFactura(cod, estado):
         """
 
         Módulo que borra una factura
 
         :param cod: codigo de la factura
         :type cod: int
+        :param estado: estado de la factura (pagada/no pagada)
+        :type estado: string
         :return: None
         :rtype: None
 
@@ -632,17 +663,17 @@ class Conexion():
 
         """
         query = QtSql.QSqlQuery()
-        # print(int(cod))
         query.prepare('update facturas set estado=:estado where numFactura = :codfac')
         query.bindValue(':estado', str(estado))
         query.bindValue(':codfac', int(cod))
         if query.exec_():
             var.ui.lblstatus.setText('Factura actualizada')
-            Conexion.mostrarFacturas(self)
+            Conexion.mostrarFacturas()
         else:
             print('Error conexion: borrar factura en borrarFactura ', query.lastError().text())
 
-    def borrarFactura(self, cod):
+    @staticmethod
+    def borrarFactura(cod):
         """
 
         Módulo que borra una factura
@@ -661,7 +692,7 @@ class Conexion():
         query.bindValue(':codfac', int(cod))
         if query.exec_():
             var.ui.lblstatus.setText('Factura anulada')
-            Conexion.mostrarFacturas(self)
+            Conexion.mostrarFacturas()
         else:
             print('Error conexion: borrar factura en borrarFactura ', query.lastError().text())
 
@@ -671,7 +702,8 @@ class Conexion():
         if query1.exec_():
             var.ui.lblstatus.setText('Factura anulada')
 
-    def obtenerCodPrecio(self, articulo):
+    @staticmethod
+    def obtenerCodPrecio(articulo):
         """
 
         Módulo que devuelve informacion de un producto
@@ -694,7 +726,8 @@ class Conexion():
                 dato = [str(query.value(0)), str(query.value(1))]
         return dato
 
-    def altaVenta(self):
+    @staticmethod
+    def altaVenta():
         """
 
         Módulo que da de alta una venta
@@ -727,11 +760,12 @@ class Conexion():
             var.ui.tabVenta.insertRow(row)
             var.ui.tabVenta.setCellWidget(row, 1, var.cmbventa)
             var.ui.tabVenta.scrollToBottom()
-            Conexion.cargarCmbVentas(self)
+            Conexion.cargarCmbVentas()
         else:
             print('Error conexion: alta venta: ', query.lastError().text())
 
-    def listadoVentasFacturas(self, codFac):
+    @staticmethod
+    def listadoVentasFacturas(codFac):
         """
 
         Modulo que lista ventas contenidas en una factura
@@ -744,7 +778,8 @@ class Conexion():
         Recibe el código de la factura para seleccionar los datos de las ventas cargadas a esta.
         De la BB.DD toma el nombre del producto y su precio para cada línea de venta.
         El precio lo multiplica por las unidades y se obtiene el subtotal de cada línea.
-        Después en cada línea de la tabla irá el código de la venta, el nombre del producto, las unidades y dicho subotal.
+        Después en cada línea de la tabla irá el código de la venta, el nombre del producto, las unidades y
+        dicho subotal.
         Finalmente, va sumando el subfact, que es la suma de todas las ventas de esa factura, le aplica el IVA y
         el importe total de la factura.
         Los tres valores, subfact, iva y fac los muestra en los label asignados.
@@ -753,6 +788,7 @@ class Conexion():
 
         """
         try:
+            index = 0
             var.ui.tabVenta.clearContents()
             var.subfac = 0.00
             subtotal = 0.00
@@ -761,7 +797,6 @@ class Conexion():
             query.prepare('select codVenta, codArtVenta, cantidad from ventas where codFacVenta = :codFac')
             query.bindValue(':codFac', int(codFac))
             if query.exec_():
-                index = 0
                 while query.next():
                     codVenta = query.value(0)
                     codArtVenta = query.value(1)
@@ -803,7 +838,8 @@ class Conexion():
         except Exception as error:
             print('Error conexion: Listado de la tabla de ventas: %s ' % str(error))
 
-    def anulaVenta(self, codVenta):
+    @staticmethod
+    def anulaVenta(codVenta):
         """
 
         Módulo que borra una venta
@@ -824,13 +860,14 @@ class Conexion():
         else:
             print("Error conexion: baja venta: ", query.lastError().text())
 
-    def totalPrecioFactura(self, codfac):
+    @staticmethod
+    def totalPrecioFactura(codfac):
         """
 
         Módulo que calcula el precio total de una factura
 
-        :param codFac: codigo de la factura
-        :type codFac: int
+        :param codfac: codigo de la factura
+        :type codfac: int
         :return: total factura
         :rtype: lista
 
@@ -839,7 +876,6 @@ class Conexion():
 
         """
         try:
-            venta = 0
             subtotal = 0
             query = QtSql.QSqlQuery()
             query.prepare('select cantidad, precio from ventas where codFacVenta = :codfac')
@@ -850,7 +886,7 @@ class Conexion():
                     subtotal = float(subtotal) + float(venta)
 
                 iva = round(float(subtotal) * 0.21, 2)
-                total= round(float(iva) + float(subtotal), 2)
+                total = round(float(iva) + float(subtotal), 2)
 
                 precio = [float(subtotal), float(iva), float(total)]
                 return precio
