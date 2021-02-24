@@ -20,8 +20,9 @@ class MyTestCase(unittest.TestCase):
     def test_factura(self):
         valor = 5.32
         codFac = 50
+        msg = 'Prueba factura errónea, calculos incorrectos'
+
         try:
-            msg = 'Prueba factura errónea, calculos incorrectos'
             var.subfac = 0.00
             subtotal = 0.00
             query = QtSql.QSqlQuery()
@@ -29,7 +30,6 @@ class MyTestCase(unittest.TestCase):
             query.prepare('select codVenta, codArtVenta, cantidad from ventas where codFacVenta = :codFac')
             query.bindValue(':codFac', int(codFac))
             if query.exec_():
-                index = 0
                 while query.next():
                     codArtVenta = query.value(1)
                     cantidad = query.value(2)

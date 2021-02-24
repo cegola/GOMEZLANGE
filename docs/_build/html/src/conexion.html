@@ -39,11 +39,14 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt id="conexion.Conexion.actualizarFactura">
-<code class="sig-name descname">actualizarFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em>, <em class="sig-param"><span class="n">estado</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.actualizarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.actualizarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">actualizarFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em>, <em class="sig-param"><span class="n">estado</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.actualizarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.actualizarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que borra una factura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
-<dd class="field-odd"><p><strong>cod</strong> (<em>int</em>) – codigo de la factura</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cod</strong> (<em>int</em>) – codigo de la factura</p></li>
+<li><p><strong>estado</strong> (<em>string</em>) – estado de la factura (pagada/no pagada)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Devuelve</dt>
 <dd class="field-even"><p>None</p>
@@ -57,7 +60,7 @@
 
 <dl class="py method">
 <dt id="conexion.Conexion.altaCli">
-<code class="sig-name descname">altaCli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cliente</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">altaCli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cliente</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de alta un cliente con los datos pasados por lista. Muestra mensaje de resultado en la statusbar.
 Rescarga la tablaCli</p>
 <dl class="field-list simple">
@@ -75,7 +78,7 @@ Rescarga la tablaCli</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.altaFac">
-<code class="sig-name descname">altaFac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em>, <em class="sig-param"><span class="n">fecha</span></em>, <em class="sig-param"><span class="n">apel</span></em>, <em class="sig-param"><span class="n">estado</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">altaFac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em>, <em class="sig-param"><span class="n">fecha</span></em>, <em class="sig-param"><span class="n">apel</span></em>, <em class="sig-param"><span class="n">estado</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de alta una factura de un cliente</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -83,6 +86,7 @@ Rescarga la tablaCli</p>
 <li><p><strong>dni</strong> (<em>string</em>) – dni del cliente</p></li>
 <li><p><strong>fecha</strong> (<em>string</em>) – fecha de alta</p></li>
 <li><p><strong>apel</strong> (<em>string</em>) – apellidos del cliente</p></li>
+<li><p><strong>estado</strong> (<em>string</em>) – estado de la factura (pagada/no pagada)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Devuelve</dt>
@@ -100,7 +104,7 @@ código de la factura.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.altaPro">
-<code class="sig-name descname">altaPro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">producto</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">altaPro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">producto</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de alta un producto.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -119,7 +123,7 @@ Rescarga la tablaPro</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.altaVenta">
-<code class="sig-name descname">altaVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">altaVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de alta una venta</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -139,7 +143,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.anulaVenta">
-<code class="sig-name descname">anulaVenta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codVenta</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.anulaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.anulaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">anulaVenta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codVenta</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.anulaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.anulaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que borra una venta</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -157,7 +161,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.bajaCliente">
-<code class="sig-name descname">bajaCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">bajaCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de baja a un cliente.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -176,7 +180,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.bajaProducto">
-<code class="sig-name descname">bajaProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nombre</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">bajaProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nombre</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que da de baja un producto</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -194,7 +198,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.borrarFactura">
-<code class="sig-name descname">borrarFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.borrarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.borrarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">borrarFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.borrarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.borrarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que borra una factura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -212,7 +216,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.buscarCliente">
-<code class="sig-name descname">buscarCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.buscarCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.buscarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">buscarCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dni</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.buscarCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.buscarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que busca cliente y carga sus datos en la pantalla cliente.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -230,7 +234,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarCliente">
-<code class="sig-name descname">cargarCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Carga los datos de un cliente cuando se clicka en la tabla</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -244,7 +248,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarCmbVentas">
-<code class="sig-name descname">cargarCmbVentas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCmbVentas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCmbVentas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarCmbVentas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCmbVentas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCmbVentas" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga los productos en el combo de ventas de la pantalla facturación</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -259,7 +263,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarDatos">
-<code class="sig-name descname">cargarDatos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarDatos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarDatos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarDatos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarDatos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarDatos" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Carga los datos iniciales del programa</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -273,7 +277,7 @@ Luego carga los datos en la tabVentas y carga el cmbVentas llamando al método c
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarDatosClienteFactura">
-<code class="sig-name descname">cargarDatosClienteFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarDatosClienteFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarDatosClienteFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarDatosClienteFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarDatosClienteFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarDatosClienteFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga los datos del cliente con factura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -292,7 +296,7 @@ widgets de datos de cliente de la pantalla facturacion.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarFacturas">
-<code class="sig-name descname">cargarFacturas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarFacturas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga todas las facturas (juraria que es inutil pero ahí está=)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -307,7 +311,7 @@ widgets de datos de cliente de la pantalla facturacion.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarProducto">
-<code class="sig-name descname">cargarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo carga los datos de un producto</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -321,7 +325,7 @@ widgets de datos de cliente de la pantalla facturacion.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.db_connect">
-<code class="sig-name descname">db_connect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.db_connect"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.db_connect" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">db_connect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.db_connect"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.db_connect" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que realiza la conexion de la aplicacion con la bd</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -339,7 +343,7 @@ widgets de datos de cliente de la pantalla facturacion.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.existeProducto">
-<code class="sig-name descname">existeProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nombre</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.existeProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.existeProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">existeProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nombre</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.existeProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.existeProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que busca si existe un producto por su nombre</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -358,7 +362,7 @@ Si no existe devuelve una lista vacia</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.limpiarFac">
-<code class="sig-name descname">limpiarFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.limpiarFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.limpiarFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">limpiarFac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.limpiarFac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.limpiarFac" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que limpia datos de factura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -373,7 +377,7 @@ Si no existe devuelve una lista vacia</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.listadoVentasFacturas">
-<code class="sig-name descname">listadoVentasFacturas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codFac</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listadoVentasFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.listadoVentasFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">listadoVentasFacturas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codFac</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listadoVentasFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.listadoVentasFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Modulo que lista ventas contenidas en una factura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -389,7 +393,8 @@ Si no existe devuelve una lista vacia</p>
 <p>Recibe el código de la factura para seleccionar los datos de las ventas cargadas a esta.
 De la BB.DD toma el nombre del producto y su precio para cada línea de venta.
 El precio lo multiplica por las unidades y se obtiene el subtotal de cada línea.
-Después en cada línea de la tabla irá el código de la venta, el nombre del producto, las unidades y dicho subotal.
+Después en cada línea de la tabla irá el código de la venta, el nombre del producto, las unidades y
+dicho subotal.
 Finalmente, va sumando el subfact, que es la suma de todas las ventas de esa factura, le aplica el IVA y
 el importe total de la factura.
 Los tres valores, subfact, iva y fac los muestra en los label asignados.</p>
@@ -398,7 +403,7 @@ Los tres valores, subfact, iva y fac los muestra en los label asignados.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.modCliente">
-<code class="sig-name descname">modCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codigo</span></em>, <em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">modCliente</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codigo</span></em>, <em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Modulo que modifica los datos del cliente</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -422,7 +427,7 @@ Los tres valores, subfact, iva y fac los muestra en los label asignados.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.modProducto">
-<code class="sig-name descname">modProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codigo</span></em>, <em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">modProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codigo</span></em>, <em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que modifica un producto.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -438,13 +443,13 @@ Los tres valores, subfact, iva y fac los muestra en los label asignados.</p>
 <dd class="field-odd"><p>None</p>
 </dd>
 </dl>
-<p>Se actualizan los datos pasados en la lista del producto con el codigo dado. En realidad coge todos los datos que
-hay en los widgets. Muestra mensaje en la barra de estado.</p>
+<p>Se actualizan los datos pasados en la lista del producto con el codigo dado. En realidad coge todos los
+datos que hay en los widgets. Muestra mensaje en la barra de estado.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.mostrarClientes">
-<code class="sig-name descname">mostrarClientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarClientes"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarClientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">mostrarClientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarClientes"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarClientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Carga los clientes de la base de datos en la tablaCli</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -458,7 +463,7 @@ hay en los widgets. Muestra mensaje en la barra de estado.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.mostrarFacturas">
-<code class="sig-name descname">mostrarFacturas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">mostrarFacturas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga las facturas en la tabFactura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -474,7 +479,7 @@ en la primera factura de la tabla.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.mostrarFacturasCli">
-<code class="sig-name descname">mostrarFacturasCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarFacturasCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarFacturasCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">mostrarFacturasCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarFacturasCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarFacturasCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que muestra las facturas de un cliente</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -491,7 +496,7 @@ Muestra mensaje en la barra de estado.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.mostrarProductos">
-<code class="sig-name descname">mostrarProductos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarProductos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarProductos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">mostrarProductos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarProductos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarProductos" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga los productos en la tablaPro</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -505,7 +510,7 @@ Muestra mensaje en la barra de estado.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.nombreProducto">
-<code class="sig-name descname">nombreProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.nombreProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.nombreProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">nombreProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cod</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.nombreProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.nombreProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que devuelve el nombre de un producto</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -522,7 +527,7 @@ Muestra mensaje en la barra de estado.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.obtenerCodPrecio">
-<code class="sig-name descname">obtenerCodPrecio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">articulo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.obtenerCodPrecio"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.obtenerCodPrecio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">obtenerCodPrecio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">articulo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.obtenerCodPrecio"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.obtenerCodPrecio" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que devuelve informacion de un producto</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
@@ -541,11 +546,11 @@ artículo.</p>
 
 <dl class="py method">
 <dt id="conexion.Conexion.totalPrecioFactura">
-<code class="sig-name descname">totalPrecioFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codfac</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.totalPrecioFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.totalPrecioFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">totalPrecioFactura</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codfac</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.totalPrecioFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.totalPrecioFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que calcula el precio total de una factura</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
-<dd class="field-odd"><p><strong>codFac</strong> (<em>int</em>) – codigo de la factura</p>
+<dd class="field-odd"><p><strong>codfac</strong> (<em>int</em>) – codigo de la factura</p>
 </dd>
 <dt class="field-even">Devuelve</dt>
 <dd class="field-even"><p>total factura</p>

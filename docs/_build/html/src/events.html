@@ -39,17 +39,14 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt id="events.Eventos.AbrirAcercaDe">
-<code class="sig-name descname">AbrirAcercaDe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirAcercaDe"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirAcercaDe" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">AbrirAcercaDe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirAcercaDe"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirAcercaDe" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que abre una ventana de aviso</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parámetros</dt>
-<dd class="field-odd"><p><strong>mensaje</strong> (<em>string</em>) – mensaje que muestra la ventana</p>
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Devuelve</dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-<dt class="field-odd">Tipo del valor devuelto</dt>
-<dd class="field-odd"><p>True/False</p>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>True/False</p>
 </dd>
 </dl>
 <p>Abre una ventada de aviso con el mensaje pasado por parámetro. Devuelve un booleano dependiendo de si se ejecuta
@@ -58,7 +55,7 @@ o no.</p>
 
 <dl class="py method">
 <dt id="events.Eventos.AbrirAviso">
-<code class="sig-name descname">AbrirAviso</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirAviso"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirAviso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">AbrirAviso</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mensaje</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirAviso"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirAviso" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que abre una ventana para elegir directorio</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -72,28 +69,12 @@ o no.</p>
 
 <dl class="py method">
 <dt id="events.Eventos.AbrirDir">
-<code class="sig-name descname">AbrirDir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirDir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirDir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">AbrirDir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirDir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirDir" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="events.Eventos.Backup">
-<code class="sig-name descname">Backup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.Backup"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.Backup" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Módulo que realiza una copia de seguridad de la base de datos</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-<dt class="field-even">Tipo del valor devuelto</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<p>Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
-en un archivo zip. Muestra un mensaje en la barra de estado.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="events.Eventos.Imprimir">
-<code class="sig-name descname">Imprimir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.Imprimir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.Imprimir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">Imprimir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.Imprimir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.Imprimir" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Método que abre una ventada de Acerca De</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -111,7 +92,7 @@ en un archivo zip. Muestra un mensaje en la barra de estado.</p>
 <dd><p>Método que cierra el programa</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
-<dd class="field-odd"><p><strong>self</strong> (<em>self</em>) – evento salir</p>
+<dd class="field-odd"><p><strong>self</strong> (<em>event</em>) – evento salir</p>
 </dd>
 <dt class="field-even">Devuelve</dt>
 <dd class="field-even"><p>None</p>
@@ -124,8 +105,24 @@ en un archivo zip. Muestra un mensaje en la barra de estado.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="events.Eventos.backup">
+<em class="property">static </em><code class="sig-name descname">backup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.backup"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.backup" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que realiza una copia de seguridad de la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
+en un archivo zip. Muestra un mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="events.Eventos.cargarProv">
-<code class="sig-name descname">cargarProv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.cargarProv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.cargarProv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">cargarProv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.cargarProv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.cargarProv" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que carga las provincias al iniciar el programa</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -140,7 +137,7 @@ en un archivo zip. Muestra un mensaje en la barra de estado.</p>
 
 <dl class="py method">
 <dt id="events.Eventos.closeSalir">
-<code class="sig-name descname">closeSalir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.closeSalir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.closeSalir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">closeSalir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.closeSalir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.closeSalir" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que cierra la ventana salir</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>
@@ -154,7 +151,7 @@ en un archivo zip. Muestra un mensaje en la barra de estado.</p>
 
 <dl class="py method">
 <dt id="events.Eventos.restaurarBD">
-<code class="sig-name descname">restaurarBD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.restaurarBD"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.restaurarBD" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">restaurarBD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.restaurarBD"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.restaurarBD" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Módulo que restaura una copia de seguridad de la base de datos</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve</dt>

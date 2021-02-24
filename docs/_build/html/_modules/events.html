@@ -32,22 +32,26 @@
           <div class="body" role="main">
             
   <h1>Código fuente para events</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">var</span><span class="o">,</span> <span class="nn">shutil</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">var</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
 <span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">zipfile</span>
 
 <span class="kn">import</span> <span class="nn">conexion</span>
 
 
-<div class="viewcode-block" id="Eventos"><a class="viewcode-back" href="../src/events.html#events.Eventos">[documentos]</a><span class="k">class</span> <span class="nc">Eventos</span><span class="p">():</span>
-<div class="viewcode-block" id="Eventos.Salir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Salir">[documentos]</a>    <span class="k">def</span> <span class="nf">Salir</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos"><a class="viewcode-back" href="../src/events.html#events.Eventos">[documentos]</a><span class="k">class</span> <span class="nc">Eventos</span><span class="p">:</span>
+<div class="viewcode-block" id="Eventos.Salir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Salir">[documentos]</a>    <span class="k">def</span> <span class="nf">Salir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Método que cierra el programa</span>
 
 <span class="sd">        :param self: evento salir</span>
-<span class="sd">        :type self: self</span>
+<span class="sd">        :type self: event</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        :rtype: None</span>
 
@@ -56,17 +60,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># var.dlgSalir.show()</span>
             <span class="n">var</span><span class="o">.</span><span class="n">dlgSalir</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgSalir</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">var</span><span class="o">.</span><span class="n">dlgSalir</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">self</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.closeSalir"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeSalir">[documentos]</a>    <span class="k">def</span> <span class="nf">closeSalir</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.closeSalir"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeSalir">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">closeSalir</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que cierra la ventana salir</span>
@@ -81,7 +85,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.Backup"><a class="viewcode-back" href="../src/events.html#events.Eventos.Backup">[documentos]</a>    <span class="k">def</span> <span class="nf">Backup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.backup"><a class="viewcode-back" href="../src/events.html#events.Eventos.backup">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">backup</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que realiza una copia de seguridad de la base de datos</span>
@@ -111,7 +116,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error backup </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.restaurarBD"><a class="viewcode-back" href="../src/events.html#events.Eventos.restaurarBD">[documentos]</a>    <span class="k">def</span> <span class="nf">restaurarBD</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.restaurarBD"><a class="viewcode-back" href="../src/events.html#events.Eventos.restaurarBD">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">restaurarBD</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que restaura una copia de seguridad de la base de datos</span>
@@ -133,13 +139,14 @@
                 <span class="n">bd</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
                 <span class="n">bd</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
                 <span class="n">bd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarDatos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarDatos</span><span class="p">()</span>
             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Copia de seguridad restaurada&#39;</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error restaurar BD </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.AbrirDir"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirDir">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirDir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.AbrirDir"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirDir">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">AbrirDir</span><span class="p">():</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">var</span><span class="o">.</span><span class="n">filedlgAbrir</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;Abrir archivo&#39;</span><span class="p">)</span>
             <span class="n">var</span><span class="o">.</span><span class="n">filedlgAbrir</span><span class="o">.</span><span class="n">setModal</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -147,7 +154,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error abrir dir: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.AbrirAviso"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirAviso">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.AbrirAviso"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirAviso">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que abre una ventana para elegir directorio</span>
@@ -167,13 +175,12 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.AbrirAcercaDe"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirAcercaDe">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirAcercaDe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.AbrirAcercaDe"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirAcercaDe">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">AbrirAcercaDe</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que abre una ventana de aviso</span>
 
-<span class="sd">        :param mensaje: mensaje que muestra la ventana</span>
-<span class="sd">        :type mensaje: string</span>
 <span class="sd">        :return: bool</span>
 <span class="sd">        :rtype: True/False</span>
 
@@ -188,7 +195,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error acerca de </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.Imprimir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Imprimir">[documentos]</a>    <span class="k">def</span> <span class="nf">Imprimir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.Imprimir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Imprimir">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Imprimir</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Método que abre una ventada de Acerca De</span>
@@ -203,7 +211,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error abrir dir: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.cargarProv"><a class="viewcode-back" href="../src/events.html#events.Eventos.cargarProv">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarProv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Eventos.cargarProv"><a class="viewcode-back" href="../src/events.html#events.Eventos.cargarProv">[documentos]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cargarProv</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que carga las provincias al iniciar el programa</span>
