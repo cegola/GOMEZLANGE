@@ -4,9 +4,16 @@ from PyQt5 import QtWidgets, QtSql, QtCore
 import time
 import var
 import ventas
+import os
+import sys
 
 
 class Conexion:
+
+    def resolver_ruta(ruta_relativa):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, ruta_relativa)
+        return os.path.join(os.path.abspath('.'), ruta_relativa)
 
     @staticmethod
     def db_connect(filename):
@@ -76,7 +83,8 @@ class Conexion:
         :rtype: None
 
         """
-        Conexion.db_connect(var.filebd)
+        db = Conexion.resolver_ruta(var.filebd)
+        Conexion.db_connect(db)
         Conexion.mostrarClientes()
         Conexion.mostrarProductos()
         Conexion.mostrarFacturas()
