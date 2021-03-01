@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\Administrador\\PycharmProjects\\GOMEZLANGE'],
+             pathex=['C:\\Users\\a19celiagl\\PycharmProjects\\GOMEZLANGE'],
              binaries=[],
              datas=[('empresa.db', '.')],
              hiddenimports=[],
